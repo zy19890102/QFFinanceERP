@@ -1,0 +1,1413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A0C4B121CA5876E00A1780E /* ZYViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A0C4B111CA5876E00A1780E /* ZYViewModel.m */; };
+		2A1BA4901CB0164900FEF53E /* ZYCalculatorValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A1BA48E1CB0164900FEF53E /* ZYCalculatorValueModel.m */; };
+		2A53FE7B1CAB76E60007E6CD /* ZYCalculatorSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A53FE7A1CAB76E60007E6CD /* ZYCalculatorSelectCell.m */; };
+		2A53FE7E1CAB77030007E6CD /* ZYCalculatorInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A53FE7D1CAB77030007E6CD /* ZYCalculatorInputCell.m */; };
+		2A53FE801CAB77140007E6CD /* ZYCalculatorSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A53FE7F1CAB77140007E6CD /* ZYCalculatorSelectCell.xib */; };
+		2A53FE821CAB78AF0007E6CD /* ZYCalculatorInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A53FE811CAB78AF0007E6CD /* ZYCalculatorInputCell.xib */; };
+		2AA4A92E1CA67D4C00E74835 /* ZYHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4A92C1CA67D4C00E74835 /* ZYHomePageViewController.m */; };
+		2AA4A9321CA67DF600E74835 /* ZYHomePageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AA4A9311CA67DF600E74835 /* ZYHomePageViewModel.m */; };
+		2AA4A9351CA6864600E74835 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AA4A9341CA6864600E74835 /* Main.storyboard */; };
+		2AB208731CC73A5700DE1EB0 /* ZYForeclosureHouseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208721CC73A5700DE1EB0 /* ZYForeclosureHouseController.m */; };
+		2AB208761CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208751CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.m */; };
+		2AB2087C1CC7452000DE1EB0 /* ZYSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB2087B1CC7452000DE1EB0 /* ZYSegmentedCell.m */; };
+		2AB2087F1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB2087E1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m */; };
+		2AB208821CC74A4900DE1EB0 /* ZYSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208811CC74A4900DE1EB0 /* ZYSections.m */; };
+		2AB208851CC7505D00DE1EB0 /* ZYBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208841CC7505D00DE1EB0 /* ZYBankModel.m */; };
+		2AB2088A1CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208871CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.m */; };
+		2AB2088B1CC750AF00DE1EB0 /* ZYIntermediaryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208891CC750AF00DE1EB0 /* ZYIntermediaryModel.m */; };
+		2AB208901CC7539200DE1EB0 /* ZYDoubleButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB2088D1CC7539200DE1EB0 /* ZYDoubleButtonCell.m */; };
+		2AB208911CC7539200DE1EB0 /* ZYSingleButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB2088F1CC7539200DE1EB0 /* ZYSingleButtonCell.m */; };
+		2AB2089A1CC76E7B00DE1EB0 /* ZYApplyInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208971CC76E7B00DE1EB0 /* ZYApplyInfoSections.m */; };
+		2AB2089B1CC76E7B00DE1EB0 /* ZYBussinessInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208991CC76E7B00DE1EB0 /* ZYBussinessInfoSections.m */; };
+		2AB2089E1CC76FBC00DE1EB0 /* ZYBorrowerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB2089D1CC76FBC00DE1EB0 /* ZYBorrowerModel.m */; };
+		2AB208A11CC7702900DE1EB0 /* ZYHousePropertyInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208A01CC7702900DE1EB0 /* ZYHousePropertyInfoSections.m */; };
+		2AB208A41CC770B800DE1EB0 /* ZYBothSideInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208A31CC770B800DE1EB0 /* ZYBothSideInfoSections.m */; };
+		2AB208A71CC7711000DE1EB0 /* ZYOriginalBankSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208A61CC7711000DE1EB0 /* ZYOriginalBankSections.m */; };
+		2AB208AA1CC771D900DE1EB0 /* ZYCurrentBankSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208A91CC771D900DE1EB0 /* ZYCurrentBankSections.m */; };
+		2AB208AD1CC7731100DE1EB0 /* ZYOrderInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208AC1CC7731100DE1EB0 /* ZYOrderInfoSections.m */; };
+		2AB208B41CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208AF1CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.m */; };
+		2AB208B51CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208B11CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.m */; };
+		2AB208B61CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208B31CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.m */; };
+		2AB208B91CC7751100DE1EB0 /* ZYApplicationSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208B81CC7751100DE1EB0 /* ZYApplicationSections.m */; };
+		2AB208BC1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208BB1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.m */; };
+		2AB208BF1CC776A700DE1EB0 /* ZYCostInfoSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208BE1CC776A700DE1EB0 /* ZYCostInfoSections.m */; };
+		2AB208C21CC77CF600DE1EB0 /* ZYStepView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208C11CC77CF600DE1EB0 /* ZYStepView.m */; };
+		2AB208C51CC788C200DE1EB0 /* ZYTopTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208C41CC788C200DE1EB0 /* ZYTopTabBar.m */; };
+		2AB208CC1CC7968700DE1EB0 /* ZYCalculatorSections.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208CB1CC7968700DE1EB0 /* ZYCalculatorSections.m */; };
+		2AC6B7481CABB79A00C9EB9B /* ZYCalculatorSliderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B7471CABB79A00C9EB9B /* ZYCalculatorSliderBar.m */; };
+		2AC6B74C1CABC17800C9EB9B /* ZYCalculatorButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B74B1CABC17800C9EB9B /* ZYCalculatorButtonCell.m */; };
+		2AC6B7501CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B74F1CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib */; };
+		2AC6B7D61CAD1C4E00C9EB9B /* ZYCalculatorViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B7D51CAD1C4E00C9EB9B /* ZYCalculatorViewModel.m */; };
+		2AC6B7E11CAE22FF00C9EB9B /* ZYTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B7E01CAE22FF00C9EB9B /* ZYTableViewController.m */; };
+		2AC6B7F51CAE916A00C9EB9B /* NSString+tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B7F41CAE916A00C9EB9B /* NSString+tools.m */; };
+		2AC6B8261CB5F44700C9EB9B /* ZYStoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8251CB5F44700C9EB9B /* ZYStoreModel.m */; };
+		2AC6B82B1CB6095D00C9EB9B /* ZYCalculatorResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B82A1CB6095D00C9EB9B /* ZYCalculatorResultViewController.m */; };
+		2AC6B82E1CB60FC200C9EB9B /* ZYCalculatorResultHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B82D1CB60FC200C9EB9B /* ZYCalculatorResultHeader.m */; };
+		2AC6B8301CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B82F1CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib */; };
+		2AC6B8331CB6177F00C9EB9B /* ZYCalculatorResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8321CB6177F00C9EB9B /* ZYCalculatorResultCell.m */; };
+		2AC6B8351CB6179100C9EB9B /* ZYCalculatorResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B8341CB6179100C9EB9B /* ZYCalculatorResultCell.xib */; };
+		2AC6B8381CB62FB600C9EB9B /* ZYCalculatorResultViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8371CB62FB600C9EB9B /* ZYCalculatorResultViewModel.m */; };
+		2AC6B83B1CB6525000C9EB9B /* NSNumber+tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B83A1CB6525000C9EB9B /* NSNumber+tools.m */; };
+		2AC6B8511CB6956F00C9EB9B /* ZYCaclulatorResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8501CB6956F00C9EB9B /* ZYCaclulatorResultModel.m */; };
+		2AC6B85F1CB77C8600C9EB9B /* ZYBusinessApplyListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B85E1CB77C8600C9EB9B /* ZYBusinessApplyListController.m */; };
+		2AC6B8621CB77DB000C9EB9B /* ZYBusinessApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8611CB77DB000C9EB9B /* ZYBusinessApplyListCell.m */; };
+		2AC6B8671CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8661CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.m */; };
+		2AC6B8B91CB7AAFC00C9EB9B /* ZYSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8B81CB7AAFC00C9EB9B /* ZYSelectCell.m */; };
+		2AC6B8BE1CB7ABA200C9EB9B /* ZYInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B8BD1CB7ABA200C9EB9B /* ZYInputCell.m */; };
+		2AC6B8EE1CBC921000C9EB9B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B8ED1CBC921000C9EB9B /* LaunchScreen.storyboard */; };
+		2AC6B8F71CBC937B00C9EB9B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B8F91CBC937B00C9EB9B /* InfoPlist.strings */; };
+		2AC6B9031CBCCDE100C9EB9B /* ZYFadeTransion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B9021CBCCDE100C9EB9B /* ZYFadeTransion.m */; };
+		2AC6B90B1CBCCEEC00C9EB9B /* ZYSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B9091CBCCEEC00C9EB9B /* ZYSearchViewController.m */; };
+		2AC6B90E1CBCD07E00C9EB9B /* ZYSearchViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B90D1CBCD07E00C9EB9B /* ZYSearchViewModel.m */; };
+		2AC6B92A1CBCF0E800C9EB9B /* QFDB.db in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B9291CBCF0E800C9EB9B /* QFDB.db */; };
+		2AC6B9351CBDDBAE00C9EB9B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B9341CBDDBAE00C9EB9B /* Info.plist */; };
+		2AD07ABA1CA559F700A869AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AB91CA559F700A869AE /* main.m */; };
+		2AD07ABD1CA559F700A869AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07ABC1CA559F700A869AE /* AppDelegate.m */; };
+		2AD07AC51CA559F700A869AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AD07AC41CA559F700A869AE /* Assets.xcassets */; };
+		2AD07ADA1CA55DBC00A869AE /* ZYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AD91CA55DBC00A869AE /* ZYViewController.m */; };
+		2AD07AE41CA8C92200A869AE /* ZYSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AE31CA8C92200A869AE /* ZYSection.m */; };
+		2AD07AE71CA8C94100A869AE /* ZYTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AE61CA8C94100A869AE /* ZYTableViewCell.m */; };
+		2AD07AF81CA8DC0300A869AE /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AF71CA8DC0300A869AE /* UIColor+Hex.m */; };
+		2AD07AFD1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07AFB1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.m */; };
+		2AD07B021CA8E07300A869AE /* ZYBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD07B011CA8E07300A869AE /* ZYBannerView.m */; };
+		2AD2E4F01CA929EB00908FB8 /* ZYHomePageCheckInCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E4EF1CA929EB00908FB8 /* ZYHomePageCheckInCell.m */; };
+		2AD2E4F51CA92B6D00908FB8 /* UIButton+custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E4F41CA92B6D00908FB8 /* UIButton+custom.m */; };
+		2AD2E4F81CA9306900908FB8 /* UIView+custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E4F71CA9306900908FB8 /* UIView+custom.m */; };
+		2AD2E4FC1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E4FB1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.m */; };
+		2AD2E5021CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5011CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.m */; };
+		2AD2E5071CA9436200908FB8 /* ZYWarningEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5061CA9436200908FB8 /* ZYWarningEvent.m */; };
+		2AD2E50A1CA9471000908FB8 /* ZYHomePageEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5091CA9471000908FB8 /* ZYHomePageEventCell.m */; };
+		2AD2E50F1CA9504800908FB8 /* ZYHomePageEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E50E1CA9504800908FB8 /* ZYHomePageEventView.m */; };
+		2AD2E5131CA95C1300908FB8 /* ZYTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5121CA95C1300908FB8 /* ZYTabBar.m */; };
+		2AD2E5161CA95E5300908FB8 /* ZYTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5151CA95E5300908FB8 /* ZYTabBarController.m */; };
+		2AD2E51E1CAA19B500908FB8 /* ZYSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E51D1CAA19B500908FB8 /* ZYSliderViewController.m */; };
+		2AD2E5261CAA221300908FB8 /* ZYFinanceToolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5251CAA221300908FB8 /* ZYFinanceToolsViewController.m */; };
+		2AD2E5291CAA293800908FB8 /* ZYFinanceToolsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5281CAA293800908FB8 /* ZYFinanceToolsViewModel.m */; };
+		2AD2E5391CAA367100908FB8 /* ZYUserCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5381CAA367100908FB8 /* ZYUserCenterViewController.m */; };
+		2AD2E53C1CAA369300908FB8 /* ZYUserCenterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E53B1CAA369300908FB8 /* ZYUserCenterViewModel.m */; };
+		2AD2E5401CAA380E00908FB8 /* ZYUserCenterUserInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E53F1CAA380E00908FB8 /* ZYUserCenterUserInfoCell.m */; };
+		2AD2E5421CAA383500908FB8 /* ZYUserCenterUserInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AD2E5411CAA383500908FB8 /* ZYUserCenterUserInfoCell.xib */; };
+		2AD2E5471CAA4C5900908FB8 /* ZYUserCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5461CAA4C5900908FB8 /* ZYUserCenterCell.m */; };
+		2AD2E5491CAA4C7B00908FB8 /* ZYUserCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AD2E5481CAA4C7B00908FB8 /* ZYUserCenterCell.xib */; };
+		2AD2E54D1CAA529F00908FB8 /* ZYUserCenterLogoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E54C1CAA529F00908FB8 /* ZYUserCenterLogoutCell.m */; };
+		2AD2E54F1CAA52B100908FB8 /* ZYUserCenterLogoutCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AD2E54E1CAA52B100908FB8 /* ZYUserCenterLogoutCell.xib */; };
+		2AD2E5521CAA57E100908FB8 /* ZYUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E5511CAA57E100908FB8 /* ZYUser.m */; };
+		2AD2E55D1CAA630C00908FB8 /* ZYCalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD2E55C1CAA630C00908FB8 /* ZYCalculatorViewController.m */; };
+		7D077CE4D786B3D4072CF264 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0486DE8B95D3F886CC90AEEA /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0486DE8B95D3F886CC90AEEA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C07CC9D3E98833F34BF7902 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2A0C4B101CA5876E00A1780E /* ZYViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYViewModel.h; sourceTree = "<group>"; };
+		2A0C4B111CA5876E00A1780E /* ZYViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYViewModel.m; sourceTree = "<group>"; };
+		2A1BA48D1CB0164900FEF53E /* ZYCalculatorValueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorValueModel.h; sourceTree = "<group>"; };
+		2A1BA48E1CB0164900FEF53E /* ZYCalculatorValueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorValueModel.m; sourceTree = "<group>"; };
+		2A53FE791CAB76E60007E6CD /* ZYCalculatorSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorSelectCell.h; sourceTree = "<group>"; };
+		2A53FE7A1CAB76E60007E6CD /* ZYCalculatorSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorSelectCell.m; sourceTree = "<group>"; };
+		2A53FE7C1CAB77030007E6CD /* ZYCalculatorInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorInputCell.h; sourceTree = "<group>"; };
+		2A53FE7D1CAB77030007E6CD /* ZYCalculatorInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorInputCell.m; sourceTree = "<group>"; };
+		2A53FE7F1CAB77140007E6CD /* ZYCalculatorSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYCalculatorSelectCell.xib; sourceTree = "<group>"; };
+		2A53FE811CAB78AF0007E6CD /* ZYCalculatorInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYCalculatorInputCell.xib; sourceTree = "<group>"; };
+		2AA4A92B1CA67D4C00E74835 /* ZYHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageViewController.h; sourceTree = "<group>"; };
+		2AA4A92C1CA67D4C00E74835 /* ZYHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageViewController.m; sourceTree = "<group>"; };
+		2AA4A9301CA67DF600E74835 /* ZYHomePageViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageViewModel.h; sourceTree = "<group>"; };
+		2AA4A9311CA67DF600E74835 /* ZYHomePageViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageViewModel.m; sourceTree = "<group>"; };
+		2AA4A9341CA6864600E74835 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2AB208711CC73A5700DE1EB0 /* ZYForeclosureHouseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseController.h; sourceTree = "<group>"; };
+		2AB208721CC73A5700DE1EB0 /* ZYForeclosureHouseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseController.m; sourceTree = "<group>"; };
+		2AB208741CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseViewModel.h; sourceTree = "<group>"; };
+		2AB208751CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseViewModel.m; sourceTree = "<group>"; };
+		2AB2087A1CC7452000DE1EB0 /* ZYSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSegmentedCell.h; sourceTree = "<group>"; };
+		2AB2087B1CC7452000DE1EB0 /* ZYSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSegmentedCell.m; sourceTree = "<group>"; };
+		2AB2087D1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseValueModel.h; sourceTree = "<group>"; };
+		2AB2087E1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseValueModel.m; sourceTree = "<group>"; };
+		2AB208801CC74A4900DE1EB0 /* ZYSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSections.h; sourceTree = "<group>"; };
+		2AB208811CC74A4900DE1EB0 /* ZYSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSections.m; sourceTree = "<group>"; };
+		2AB208831CC7505D00DE1EB0 /* ZYBankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBankModel.h; sourceTree = "<group>"; };
+		2AB208841CC7505D00DE1EB0 /* ZYBankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBankModel.m; sourceTree = "<group>"; };
+		2AB208861CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCooperativeOrganizationModel.h; sourceTree = "<group>"; };
+		2AB208871CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCooperativeOrganizationModel.m; sourceTree = "<group>"; };
+		2AB208881CC750AF00DE1EB0 /* ZYIntermediaryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYIntermediaryModel.h; sourceTree = "<group>"; };
+		2AB208891CC750AF00DE1EB0 /* ZYIntermediaryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYIntermediaryModel.m; sourceTree = "<group>"; };
+		2AB2088C1CC7539200DE1EB0 /* ZYDoubleButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYDoubleButtonCell.h; sourceTree = "<group>"; };
+		2AB2088D1CC7539200DE1EB0 /* ZYDoubleButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYDoubleButtonCell.m; sourceTree = "<group>"; };
+		2AB2088E1CC7539200DE1EB0 /* ZYSingleButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSingleButtonCell.h; sourceTree = "<group>"; };
+		2AB2088F1CC7539200DE1EB0 /* ZYSingleButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSingleButtonCell.m; sourceTree = "<group>"; };
+		2AB208961CC76E7B00DE1EB0 /* ZYApplyInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYApplyInfoSections.h; sourceTree = "<group>"; };
+		2AB208971CC76E7B00DE1EB0 /* ZYApplyInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYApplyInfoSections.m; sourceTree = "<group>"; };
+		2AB208981CC76E7B00DE1EB0 /* ZYBussinessInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBussinessInfoSections.h; sourceTree = "<group>"; };
+		2AB208991CC76E7B00DE1EB0 /* ZYBussinessInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBussinessInfoSections.m; sourceTree = "<group>"; };
+		2AB2089C1CC76FBC00DE1EB0 /* ZYBorrowerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBorrowerModel.h; sourceTree = "<group>"; };
+		2AB2089D1CC76FBC00DE1EB0 /* ZYBorrowerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBorrowerModel.m; sourceTree = "<group>"; };
+		2AB2089F1CC7702900DE1EB0 /* ZYHousePropertyInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHousePropertyInfoSections.h; sourceTree = "<group>"; };
+		2AB208A01CC7702900DE1EB0 /* ZYHousePropertyInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHousePropertyInfoSections.m; sourceTree = "<group>"; };
+		2AB208A21CC770B800DE1EB0 /* ZYBothSideInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBothSideInfoSections.h; sourceTree = "<group>"; };
+		2AB208A31CC770B800DE1EB0 /* ZYBothSideInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBothSideInfoSections.m; sourceTree = "<group>"; };
+		2AB208A51CC7711000DE1EB0 /* ZYOriginalBankSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYOriginalBankSections.h; sourceTree = "<group>"; };
+		2AB208A61CC7711000DE1EB0 /* ZYOriginalBankSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYOriginalBankSections.m; sourceTree = "<group>"; };
+		2AB208A81CC771D900DE1EB0 /* ZYCurrentBankSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCurrentBankSections.h; sourceTree = "<group>"; };
+		2AB208A91CC771D900DE1EB0 /* ZYCurrentBankSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCurrentBankSections.m; sourceTree = "<group>"; };
+		2AB208AB1CC7731100DE1EB0 /* ZYOrderInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYOrderInfoSections.h; sourceTree = "<group>"; };
+		2AB208AC1CC7731100DE1EB0 /* ZYOrderInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYOrderInfoSections.m; sourceTree = "<group>"; };
+		2AB208AE1CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseOrderInfoCell.h; sourceTree = "<group>"; };
+		2AB208AF1CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseOrderInfoCell.m; sourceTree = "<group>"; };
+		2AB208B01CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseOrderInfoHeader.h; sourceTree = "<group>"; };
+		2AB208B11CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseOrderInfoHeader.m; sourceTree = "<group>"; };
+		2AB208B21CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseOrderInfoTextCell.h; sourceTree = "<group>"; };
+		2AB208B31CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseOrderInfoTextCell.m; sourceTree = "<group>"; };
+		2AB208B71CC7751100DE1EB0 /* ZYApplicationSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYApplicationSections.h; sourceTree = "<group>"; };
+		2AB208B81CC7751100DE1EB0 /* ZYApplicationSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYApplicationSections.m; sourceTree = "<group>"; };
+		2AB208BA1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYForeclosureHouseApplicationContentCell.h; sourceTree = "<group>"; };
+		2AB208BB1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYForeclosureHouseApplicationContentCell.m; sourceTree = "<group>"; };
+		2AB208BD1CC776A700DE1EB0 /* ZYCostInfoSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCostInfoSections.h; sourceTree = "<group>"; };
+		2AB208BE1CC776A700DE1EB0 /* ZYCostInfoSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCostInfoSections.m; sourceTree = "<group>"; };
+		2AB208C01CC77CF600DE1EB0 /* ZYStepView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYStepView.h; sourceTree = "<group>"; };
+		2AB208C11CC77CF600DE1EB0 /* ZYStepView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYStepView.m; sourceTree = "<group>"; };
+		2AB208C31CC788C200DE1EB0 /* ZYTopTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTopTabBar.h; sourceTree = "<group>"; };
+		2AB208C41CC788C200DE1EB0 /* ZYTopTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYTopTabBar.m; sourceTree = "<group>"; };
+		2AB208CA1CC7968700DE1EB0 /* ZYCalculatorSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorSections.h; sourceTree = "<group>"; };
+		2AB208CB1CC7968700DE1EB0 /* ZYCalculatorSections.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorSections.m; sourceTree = "<group>"; };
+		2AC6B7461CABB79A00C9EB9B /* ZYCalculatorSliderBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorSliderBar.h; sourceTree = "<group>"; };
+		2AC6B7471CABB79A00C9EB9B /* ZYCalculatorSliderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorSliderBar.m; sourceTree = "<group>"; };
+		2AC6B74A1CABC17800C9EB9B /* ZYCalculatorButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorButtonCell.h; sourceTree = "<group>"; };
+		2AC6B74B1CABC17800C9EB9B /* ZYCalculatorButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorButtonCell.m; sourceTree = "<group>"; };
+		2AC6B74F1CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYCalculatorButtonCell.xib; sourceTree = "<group>"; };
+		2AC6B7D41CAD1C4E00C9EB9B /* ZYCalculatorViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorViewModel.h; sourceTree = "<group>"; };
+		2AC6B7D51CAD1C4E00C9EB9B /* ZYCalculatorViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorViewModel.m; sourceTree = "<group>"; };
+		2AC6B7DF1CAE22FF00C9EB9B /* ZYTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTableViewController.h; sourceTree = "<group>"; };
+		2AC6B7E01CAE22FF00C9EB9B /* ZYTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYTableViewController.m; sourceTree = "<group>"; };
+		2AC6B7F31CAE916A00C9EB9B /* NSString+tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+tools.h"; sourceTree = "<group>"; };
+		2AC6B7F41CAE916A00C9EB9B /* NSString+tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+tools.m"; sourceTree = "<group>"; };
+		2AC6B8241CB5F44700C9EB9B /* ZYStoreModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYStoreModel.h; sourceTree = "<group>"; };
+		2AC6B8251CB5F44700C9EB9B /* ZYStoreModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYStoreModel.m; sourceTree = "<group>"; };
+		2AC6B8291CB6095D00C9EB9B /* ZYCalculatorResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorResultViewController.h; sourceTree = "<group>"; };
+		2AC6B82A1CB6095D00C9EB9B /* ZYCalculatorResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorResultViewController.m; sourceTree = "<group>"; };
+		2AC6B82C1CB60FC200C9EB9B /* ZYCalculatorResultHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorResultHeader.h; sourceTree = "<group>"; };
+		2AC6B82D1CB60FC200C9EB9B /* ZYCalculatorResultHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorResultHeader.m; sourceTree = "<group>"; };
+		2AC6B82F1CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYCalculatorResultHeader.xib; sourceTree = "<group>"; };
+		2AC6B8311CB6177E00C9EB9B /* ZYCalculatorResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorResultCell.h; sourceTree = "<group>"; };
+		2AC6B8321CB6177F00C9EB9B /* ZYCalculatorResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorResultCell.m; sourceTree = "<group>"; };
+		2AC6B8341CB6179100C9EB9B /* ZYCalculatorResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYCalculatorResultCell.xib; sourceTree = "<group>"; };
+		2AC6B8361CB62FB600C9EB9B /* ZYCalculatorResultViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorResultViewModel.h; sourceTree = "<group>"; };
+		2AC6B8371CB62FB600C9EB9B /* ZYCalculatorResultViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorResultViewModel.m; sourceTree = "<group>"; };
+		2AC6B8391CB6525000C9EB9B /* NSNumber+tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+tools.h"; sourceTree = "<group>"; };
+		2AC6B83A1CB6525000C9EB9B /* NSNumber+tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+tools.m"; sourceTree = "<group>"; };
+		2AC6B84F1CB6956F00C9EB9B /* ZYCaclulatorResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCaclulatorResultModel.h; sourceTree = "<group>"; };
+		2AC6B8501CB6956F00C9EB9B /* ZYCaclulatorResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCaclulatorResultModel.m; sourceTree = "<group>"; };
+		2AC6B85D1CB77C8600C9EB9B /* ZYBusinessApplyListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBusinessApplyListController.h; sourceTree = "<group>"; };
+		2AC6B85E1CB77C8600C9EB9B /* ZYBusinessApplyListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBusinessApplyListController.m; sourceTree = "<group>"; };
+		2AC6B8601CB77DB000C9EB9B /* ZYBusinessApplyListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBusinessApplyListCell.h; sourceTree = "<group>"; };
+		2AC6B8611CB77DB000C9EB9B /* ZYBusinessApplyListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBusinessApplyListCell.m; sourceTree = "<group>"; };
+		2AC6B8651CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBusinessApplyListViewModel.h; sourceTree = "<group>"; };
+		2AC6B8661CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBusinessApplyListViewModel.m; sourceTree = "<group>"; };
+		2AC6B8B71CB7AAFC00C9EB9B /* ZYSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSelectCell.h; sourceTree = "<group>"; };
+		2AC6B8B81CB7AAFC00C9EB9B /* ZYSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSelectCell.m; sourceTree = "<group>"; };
+		2AC6B8BC1CB7ABA200C9EB9B /* ZYInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYInputCell.h; sourceTree = "<group>"; };
+		2AC6B8BD1CB7ABA200C9EB9B /* ZYInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYInputCell.m; sourceTree = "<group>"; };
+		2AC6B8ED1CBC921000C9EB9B /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2AC6B8F81CBC937B00C9EB9B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		2AC6B9011CBCCDE100C9EB9B /* ZYFadeTransion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFadeTransion.h; sourceTree = "<group>"; };
+		2AC6B9021CBCCDE100C9EB9B /* ZYFadeTransion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFadeTransion.m; sourceTree = "<group>"; };
+		2AC6B9081CBCCEEC00C9EB9B /* ZYSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSearchViewController.h; sourceTree = "<group>"; };
+		2AC6B9091CBCCEEC00C9EB9B /* ZYSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSearchViewController.m; sourceTree = "<group>"; };
+		2AC6B90C1CBCD07E00C9EB9B /* ZYSearchViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSearchViewModel.h; sourceTree = "<group>"; };
+		2AC6B90D1CBCD07E00C9EB9B /* ZYSearchViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSearchViewModel.m; sourceTree = "<group>"; };
+		2AC6B9291CBCF0E800C9EB9B /* QFDB.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = QFDB.db; sourceTree = "<group>"; };
+		2AC6B9341CBDDBAE00C9EB9B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AD07AB51CA559F700A869AE /* FinanceERP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinanceERP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AD07AB91CA559F700A869AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2AD07ABB1CA559F700A869AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2AD07ABC1CA559F700A869AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2AD07AC41CA559F700A869AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2AD07AD81CA55DBC00A869AE /* ZYViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYViewController.h; sourceTree = "<group>"; };
+		2AD07AD91CA55DBC00A869AE /* ZYViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYViewController.m; sourceTree = "<group>"; };
+		2AD07AE21CA8C92200A869AE /* ZYSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSection.h; sourceTree = "<group>"; };
+		2AD07AE31CA8C92200A869AE /* ZYSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSection.m; sourceTree = "<group>"; };
+		2AD07AE51CA8C94100A869AE /* ZYTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTableViewCell.h; sourceTree = "<group>"; };
+		2AD07AE61CA8C94100A869AE /* ZYTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYTableViewCell.m; sourceTree = "<group>"; };
+		2AD07AF61CA8DC0300A869AE /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		2AD07AF71CA8DC0300A869AE /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		2AD07AFA1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageScrollAdCell.h; sourceTree = "<group>"; };
+		2AD07AFB1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageScrollAdCell.m; sourceTree = "<group>"; };
+		2AD07B001CA8E07300A869AE /* ZYBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBannerView.h; sourceTree = "<group>"; };
+		2AD07B011CA8E07300A869AE /* ZYBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBannerView.m; sourceTree = "<group>"; };
+		2AD07B041CA8E26600A869AE /* ZYMacroDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZYMacroDefinition.h; sourceTree = "<group>"; };
+		2AD2E4E91CA90B4700908FB8 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		2AD2E4EE1CA929EB00908FB8 /* ZYHomePageCheckInCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageCheckInCell.h; sourceTree = "<group>"; };
+		2AD2E4EF1CA929EB00908FB8 /* ZYHomePageCheckInCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageCheckInCell.m; sourceTree = "<group>"; };
+		2AD2E4F31CA92B6D00908FB8 /* UIButton+custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+custom.h"; sourceTree = "<group>"; };
+		2AD2E4F41CA92B6D00908FB8 /* UIButton+custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+custom.m"; sourceTree = "<group>"; };
+		2AD2E4F61CA9306900908FB8 /* UIView+custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+custom.h"; sourceTree = "<group>"; };
+		2AD2E4F71CA9306900908FB8 /* UIView+custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+custom.m"; sourceTree = "<group>"; };
+		2AD2E4FA1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageFunctionButtonCell.h; sourceTree = "<group>"; };
+		2AD2E4FB1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageFunctionButtonCell.m; sourceTree = "<group>"; };
+		2AD2E5001CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageWarningEventTitleCell.h; sourceTree = "<group>"; };
+		2AD2E5011CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageWarningEventTitleCell.m; sourceTree = "<group>"; };
+		2AD2E5051CA9436200908FB8 /* ZYWarningEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYWarningEvent.h; sourceTree = "<group>"; };
+		2AD2E5061CA9436200908FB8 /* ZYWarningEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYWarningEvent.m; sourceTree = "<group>"; };
+		2AD2E5081CA9471000908FB8 /* ZYHomePageEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageEventCell.h; sourceTree = "<group>"; };
+		2AD2E5091CA9471000908FB8 /* ZYHomePageEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageEventCell.m; sourceTree = "<group>"; };
+		2AD2E50D1CA9504800908FB8 /* ZYHomePageEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYHomePageEventView.h; sourceTree = "<group>"; };
+		2AD2E50E1CA9504800908FB8 /* ZYHomePageEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYHomePageEventView.m; sourceTree = "<group>"; };
+		2AD2E5111CA95C1300908FB8 /* ZYTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTabBar.h; sourceTree = "<group>"; };
+		2AD2E5121CA95C1300908FB8 /* ZYTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYTabBar.m; sourceTree = "<group>"; };
+		2AD2E5141CA95E5300908FB8 /* ZYTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYTabBarController.h; sourceTree = "<group>"; };
+		2AD2E5151CA95E5300908FB8 /* ZYTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYTabBarController.m; sourceTree = "<group>"; };
+		2AD2E51C1CAA19B500908FB8 /* ZYSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSliderViewController.h; sourceTree = "<group>"; };
+		2AD2E51D1CAA19B500908FB8 /* ZYSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSliderViewController.m; sourceTree = "<group>"; };
+		2AD2E5241CAA221300908FB8 /* ZYFinanceToolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFinanceToolsViewController.h; sourceTree = "<group>"; };
+		2AD2E5251CAA221300908FB8 /* ZYFinanceToolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFinanceToolsViewController.m; sourceTree = "<group>"; };
+		2AD2E5271CAA293800908FB8 /* ZYFinanceToolsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFinanceToolsViewModel.h; sourceTree = "<group>"; };
+		2AD2E5281CAA293800908FB8 /* ZYFinanceToolsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFinanceToolsViewModel.m; sourceTree = "<group>"; };
+		2AD2E5371CAA367100908FB8 /* ZYUserCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUserCenterViewController.h; sourceTree = "<group>"; };
+		2AD2E5381CAA367100908FB8 /* ZYUserCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUserCenterViewController.m; sourceTree = "<group>"; };
+		2AD2E53A1CAA369300908FB8 /* ZYUserCenterViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUserCenterViewModel.h; sourceTree = "<group>"; };
+		2AD2E53B1CAA369300908FB8 /* ZYUserCenterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUserCenterViewModel.m; sourceTree = "<group>"; };
+		2AD2E53E1CAA380E00908FB8 /* ZYUserCenterUserInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUserCenterUserInfoCell.h; sourceTree = "<group>"; };
+		2AD2E53F1CAA380E00908FB8 /* ZYUserCenterUserInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUserCenterUserInfoCell.m; sourceTree = "<group>"; };
+		2AD2E5411CAA383500908FB8 /* ZYUserCenterUserInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYUserCenterUserInfoCell.xib; sourceTree = "<group>"; };
+		2AD2E5451CAA4C5900908FB8 /* ZYUserCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUserCenterCell.h; sourceTree = "<group>"; };
+		2AD2E5461CAA4C5900908FB8 /* ZYUserCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUserCenterCell.m; sourceTree = "<group>"; };
+		2AD2E5481CAA4C7B00908FB8 /* ZYUserCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYUserCenterCell.xib; sourceTree = "<group>"; };
+		2AD2E54B1CAA529F00908FB8 /* ZYUserCenterLogoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUserCenterLogoutCell.h; sourceTree = "<group>"; };
+		2AD2E54C1CAA529F00908FB8 /* ZYUserCenterLogoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUserCenterLogoutCell.m; sourceTree = "<group>"; };
+		2AD2E54E1CAA52B100908FB8 /* ZYUserCenterLogoutCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYUserCenterLogoutCell.xib; sourceTree = "<group>"; };
+		2AD2E5501CAA57E100908FB8 /* ZYUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYUser.h; sourceTree = "<group>"; };
+		2AD2E5511CAA57E100908FB8 /* ZYUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYUser.m; sourceTree = "<group>"; };
+		2AD2E55B1CAA630C00908FB8 /* ZYCalculatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorViewController.h; sourceTree = "<group>"; };
+		2AD2E55C1CAA630C00908FB8 /* ZYCalculatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorViewController.m; sourceTree = "<group>"; };
+		FBFCC5FDD2A6B18C67790EC1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2AD07AB21CA559F700A869AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7D077CE4D786B3D4072CF264 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2A0C4B0F1CA5874E00A1780E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2A0C4B101CA5876E00A1780E /* ZYViewModel.h */,
+				2A0C4B111CA5876E00A1780E /* ZYViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2A1BA4801CB007DE00FEF53E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8241CB5F44700C9EB9B /* ZYStoreModel.h */,
+				2AC6B8251CB5F44700C9EB9B /* ZYStoreModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2A1BA48A1CB0160B00FEF53E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2A1BA48D1CB0164900FEF53E /* ZYCalculatorValueModel.h */,
+				2A1BA48E1CB0164900FEF53E /* ZYCalculatorValueModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2A53FE781CAB76930007E6CD /* CalculatorCell */ = {
+			isa = PBXGroup;
+			children = (
+				2A53FE791CAB76E60007E6CD /* ZYCalculatorSelectCell.h */,
+				2A53FE7A1CAB76E60007E6CD /* ZYCalculatorSelectCell.m */,
+				2A53FE7F1CAB77140007E6CD /* ZYCalculatorSelectCell.xib */,
+				2A53FE7C1CAB77030007E6CD /* ZYCalculatorInputCell.h */,
+				2A53FE7D1CAB77030007E6CD /* ZYCalculatorInputCell.m */,
+				2A53FE811CAB78AF0007E6CD /* ZYCalculatorInputCell.xib */,
+			);
+			path = CalculatorCell;
+			sourceTree = "<group>";
+		};
+		2AA4A9271CA67D3200E74835 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AE81CA8CF2600A869AE /* View */,
+				2AA4A9281CA67D3200E74835 /* Model */,
+				2AA4A9291CA67D3200E74835 /* ViewController */,
+				2AA4A92A1CA67D3200E74835 /* ViewModel */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		2AA4A9281CA67D3200E74835 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5051CA9436200908FB8 /* ZYWarningEvent.h */,
+				2AD2E5061CA9436200908FB8 /* ZYWarningEvent.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AA4A9291CA67D3200E74835 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AA4A92B1CA67D4C00E74835 /* ZYHomePageViewController.h */,
+				2AA4A92C1CA67D4C00E74835 /* ZYHomePageViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AA4A92A1CA67D3200E74835 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AA4A9301CA67DF600E74835 /* ZYHomePageViewModel.h */,
+				2AA4A9311CA67DF600E74835 /* ZYHomePageViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AB2086C1CC73A2400DE1EB0 /* ForeclosureHouse */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208951CC76E5B00DE1EB0 /* sections */,
+				2AB2086D1CC73A2400DE1EB0 /* Model */,
+				2AB2086E1CC73A2400DE1EB0 /* View */,
+				2AB2086F1CC73A2400DE1EB0 /* ViewController */,
+				2AB208701CC73A2400DE1EB0 /* ViewModel */,
+			);
+			path = ForeclosureHouse;
+			sourceTree = "<group>";
+		};
+		2AB2086D1CC73A2400DE1EB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AB2087D1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.h */,
+				2AB2087E1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m */,
+				2AB208831CC7505D00DE1EB0 /* ZYBankModel.h */,
+				2AB208841CC7505D00DE1EB0 /* ZYBankModel.m */,
+				2AB208861CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.h */,
+				2AB208871CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.m */,
+				2AB208881CC750AF00DE1EB0 /* ZYIntermediaryModel.h */,
+				2AB208891CC750AF00DE1EB0 /* ZYIntermediaryModel.m */,
+				2AB2089C1CC76FBC00DE1EB0 /* ZYBorrowerModel.h */,
+				2AB2089D1CC76FBC00DE1EB0 /* ZYBorrowerModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AB2086E1CC73A2400DE1EB0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AB2087A1CC7452000DE1EB0 /* ZYSegmentedCell.h */,
+				2AB2087B1CC7452000DE1EB0 /* ZYSegmentedCell.m */,
+				2AB2088C1CC7539200DE1EB0 /* ZYDoubleButtonCell.h */,
+				2AB2088D1CC7539200DE1EB0 /* ZYDoubleButtonCell.m */,
+				2AB2088E1CC7539200DE1EB0 /* ZYSingleButtonCell.h */,
+				2AB2088F1CC7539200DE1EB0 /* ZYSingleButtonCell.m */,
+				2AB208AE1CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.h */,
+				2AB208AF1CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.m */,
+				2AB208B01CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.h */,
+				2AB208B11CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.m */,
+				2AB208B21CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.h */,
+				2AB208B31CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.m */,
+				2AB208BA1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.h */,
+				2AB208BB1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.m */,
+				2AB208C01CC77CF600DE1EB0 /* ZYStepView.h */,
+				2AB208C11CC77CF600DE1EB0 /* ZYStepView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AB2086F1CC73A2400DE1EB0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208711CC73A5700DE1EB0 /* ZYForeclosureHouseController.h */,
+				2AB208721CC73A5700DE1EB0 /* ZYForeclosureHouseController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AB208701CC73A2400DE1EB0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208741CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.h */,
+				2AB208751CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AB208951CC76E5B00DE1EB0 /* sections */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208981CC76E7B00DE1EB0 /* ZYBussinessInfoSections.h */,
+				2AB208991CC76E7B00DE1EB0 /* ZYBussinessInfoSections.m */,
+				2AB208961CC76E7B00DE1EB0 /* ZYApplyInfoSections.h */,
+				2AB208971CC76E7B00DE1EB0 /* ZYApplyInfoSections.m */,
+				2AB2089F1CC7702900DE1EB0 /* ZYHousePropertyInfoSections.h */,
+				2AB208A01CC7702900DE1EB0 /* ZYHousePropertyInfoSections.m */,
+				2AB208A21CC770B800DE1EB0 /* ZYBothSideInfoSections.h */,
+				2AB208A31CC770B800DE1EB0 /* ZYBothSideInfoSections.m */,
+				2AB208A51CC7711000DE1EB0 /* ZYOriginalBankSections.h */,
+				2AB208A61CC7711000DE1EB0 /* ZYOriginalBankSections.m */,
+				2AB208A81CC771D900DE1EB0 /* ZYCurrentBankSections.h */,
+				2AB208A91CC771D900DE1EB0 /* ZYCurrentBankSections.m */,
+				2AB208BD1CC776A700DE1EB0 /* ZYCostInfoSections.h */,
+				2AB208BE1CC776A700DE1EB0 /* ZYCostInfoSections.m */,
+				2AB208AB1CC7731100DE1EB0 /* ZYOrderInfoSections.h */,
+				2AB208AC1CC7731100DE1EB0 /* ZYOrderInfoSections.m */,
+				2AB208B71CC7751100DE1EB0 /* ZYApplicationSections.h */,
+				2AB208B81CC7751100DE1EB0 /* ZYApplicationSections.m */,
+			);
+			path = sections;
+			sourceTree = "<group>";
+		};
+		2AB208C61CC7911200DE1EB0 /* sections */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208CA1CC7968700DE1EB0 /* ZYCalculatorSections.h */,
+				2AB208CB1CC7968700DE1EB0 /* ZYCalculatorSections.m */,
+			);
+			path = sections;
+			sourceTree = "<group>";
+		};
+		2AC6B7451CABB76E00C9EB9B /* CalculatorSliderBar */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B7461CABB79A00C9EB9B /* ZYCalculatorSliderBar.h */,
+				2AC6B7471CABB79A00C9EB9B /* ZYCalculatorSliderBar.m */,
+			);
+			path = CalculatorSliderBar;
+			sourceTree = "<group>";
+		};
+		2AC6B7491CABC14F00C9EB9B /* CalculatorButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B74A1CABC17800C9EB9B /* ZYCalculatorButtonCell.h */,
+				2AC6B74B1CABC17800C9EB9B /* ZYCalculatorButtonCell.m */,
+				2AC6B74F1CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib */,
+			);
+			path = CalculatorButtonCell;
+			sourceTree = "<group>";
+		};
+		2AC6B7DA1CAE22A700C9EB9B /* LoanCalculatorResult */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B7DB1CAE22A700C9EB9B /* Model */,
+				2AC6B7DC1CAE22A700C9EB9B /* View */,
+				2AC6B7DD1CAE22A700C9EB9B /* ViewController */,
+				2AC6B7DE1CAE22A700C9EB9B /* ViewModel */,
+			);
+			path = LoanCalculatorResult;
+			sourceTree = "<group>";
+		};
+		2AC6B7DB1CAE22A700C9EB9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B84F1CB6956F00C9EB9B /* ZYCaclulatorResultModel.h */,
+				2AC6B8501CB6956F00C9EB9B /* ZYCaclulatorResultModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AC6B7DC1CAE22A700C9EB9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B82C1CB60FC200C9EB9B /* ZYCalculatorResultHeader.h */,
+				2AC6B82D1CB60FC200C9EB9B /* ZYCalculatorResultHeader.m */,
+				2AC6B82F1CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib */,
+				2AC6B8311CB6177E00C9EB9B /* ZYCalculatorResultCell.h */,
+				2AC6B8321CB6177F00C9EB9B /* ZYCalculatorResultCell.m */,
+				2AC6B8341CB6179100C9EB9B /* ZYCalculatorResultCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AC6B7DD1CAE22A700C9EB9B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8291CB6095D00C9EB9B /* ZYCalculatorResultViewController.h */,
+				2AC6B82A1CB6095D00C9EB9B /* ZYCalculatorResultViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AC6B7DE1CAE22A700C9EB9B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8361CB62FB600C9EB9B /* ZYCalculatorResultViewModel.h */,
+				2AC6B8371CB62FB600C9EB9B /* ZYCalculatorResultViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AC6B8551CB77BBA00C9EB9B /* BusinessApplication */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8561CB77BBA00C9EB9B /* Model */,
+				2AC6B8571CB77BBA00C9EB9B /* View */,
+				2AC6B8581CB77BBA00C9EB9B /* ViewController */,
+				2AC6B8591CB77BBA00C9EB9B /* ViewModel */,
+			);
+			path = BusinessApplication;
+			sourceTree = "<group>";
+		};
+		2AC6B8561CB77BBA00C9EB9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AC6B8571CB77BBA00C9EB9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8601CB77DB000C9EB9B /* ZYBusinessApplyListCell.h */,
+				2AC6B8611CB77DB000C9EB9B /* ZYBusinessApplyListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AC6B8581CB77BBA00C9EB9B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B85D1CB77C8600C9EB9B /* ZYBusinessApplyListController.h */,
+				2AC6B85E1CB77C8600C9EB9B /* ZYBusinessApplyListController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AC6B8591CB77BBA00C9EB9B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8651CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.h */,
+				2AC6B8661CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AC6B8B61CB7AAD500C9EB9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B8B71CB7AAFC00C9EB9B /* ZYSelectCell.h */,
+				2AC6B8B81CB7AAFC00C9EB9B /* ZYSelectCell.m */,
+				2AC6B8BC1CB7ABA200C9EB9B /* ZYInputCell.h */,
+				2AC6B8BD1CB7ABA200C9EB9B /* ZYInputCell.m */,
+				2AB208C31CC788C200DE1EB0 /* ZYTopTabBar.h */,
+				2AB208C41CC788C200DE1EB0 /* ZYTopTabBar.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AC6B9001CBCCDB700C9EB9B /* Transion */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B9011CBCCDE100C9EB9B /* ZYFadeTransion.h */,
+				2AC6B9021CBCCDE100C9EB9B /* ZYFadeTransion.m */,
+			);
+			path = Transion;
+			sourceTree = "<group>";
+		};
+		2AC6B9041CBCCEEC00C9EB9B /* SearchController */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B9051CBCCEEC00C9EB9B /* Model */,
+				2AC6B9061CBCCEEC00C9EB9B /* View */,
+				2AC6B9071CBCCEEC00C9EB9B /* ViewController */,
+				2AC6B90A1CBCCEEC00C9EB9B /* ViewModel */,
+			);
+			path = SearchController;
+			sourceTree = "<group>";
+		};
+		2AC6B9051CBCCEEC00C9EB9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AC6B9061CBCCEEC00C9EB9B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AC6B9071CBCCEEC00C9EB9B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B9081CBCCEEC00C9EB9B /* ZYSearchViewController.h */,
+				2AC6B9091CBCCEEC00C9EB9B /* ZYSearchViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AC6B90A1CBCCEEC00C9EB9B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B90C1CBCD07E00C9EB9B /* ZYSearchViewModel.h */,
+				2AC6B90D1CBCD07E00C9EB9B /* ZYSearchViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AD07AAC1CA559F700A869AE = {
+			isa = PBXGroup;
+			children = (
+				2AD07AB71CA559F700A869AE /* FinanceERP */,
+				2AD07AB61CA559F700A869AE /* Products */,
+				E72103E2EA3E41B70B56866B /* Pods */,
+				AE3143427E98F8602F535C93 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		2AD07AB61CA559F700A869AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AB51CA559F700A869AE /* FinanceERP.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2AD07AB71CA559F700A869AE /* FinanceERP */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07ABB1CA559F700A869AE /* AppDelegate.h */,
+				2AD07ABC1CA559F700A869AE /* AppDelegate.m */,
+				2AA4A9271CA67D3200E74835 /* HomePage */,
+				2AB2086C1CC73A2400DE1EB0 /* ForeclosureHouse */,
+				2AC6B8551CB77BBA00C9EB9B /* BusinessApplication */,
+				2AD2E51F1CAA21F900908FB8 /* FinanceTools */,
+				2AD2E5321CAA364E00908FB8 /* UserCenter */,
+				2AD2E5531CAA5FB100908FB8 /* HousingLoanCalculator */,
+				2AC6B7DA1CAE22A700C9EB9B /* LoanCalculatorResult */,
+				2AC6B9041CBCCEEC00C9EB9B /* SearchController */,
+				2AD07AD41CA55BEC00A869AE /* Base */,
+				2AD07AC41CA559F700A869AE /* Assets.xcassets */,
+				2AA4A9341CA6864600E74835 /* Main.storyboard */,
+				2AC6B8ED1CBC921000C9EB9B /* LaunchScreen.storyboard */,
+				2AD2E4E91CA90B4700908FB8 /* PrefixHeader.pch */,
+				2AC6B9341CBDDBAE00C9EB9B /* Info.plist */,
+				2AC6B8F91CBC937B00C9EB9B /* InfoPlist.strings */,
+				2AC6B9291CBCF0E800C9EB9B /* QFDB.db */,
+				2AD07AB81CA559F700A869AE /* Supporting Files */,
+			);
+			path = FinanceERP;
+			sourceTree = "<group>";
+		};
+		2AD07AB81CA559F700A869AE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AB91CA559F700A869AE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2AD07AD41CA55BEC00A869AE /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B9001CBCCDB700C9EB9B /* Transion */,
+				2AC6B8B61CB7AAD500C9EB9B /* View */,
+				2A1BA4801CB007DE00FEF53E /* Model */,
+				2AD07B031CA8E1D000A869AE /* MacroDefinition */,
+				2AD07AF51CA8DC0300A869AE /* category */,
+				2A0C4B0F1CA5874E00A1780E /* ViewModel */,
+				2AD07AD71CA55CFF00A869AE /* ViewController */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		2AD07AD71CA55CFF00A869AE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AD81CA55DBC00A869AE /* ZYViewController.h */,
+				2AD07AD91CA55DBC00A869AE /* ZYViewController.m */,
+				2AD2E5101CA95BAE00908FB8 /* TabBar */,
+				2AD07ADE1CA8C8F300A869AE /* TableView */,
+				2AD2E51B1CAA198500908FB8 /* SliderViewController */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AD07ADE1CA8C8F300A869AE /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AE21CA8C92200A869AE /* ZYSection.h */,
+				2AD07AE31CA8C92200A869AE /* ZYSection.m */,
+				2AD07AE51CA8C94100A869AE /* ZYTableViewCell.h */,
+				2AD07AE61CA8C94100A869AE /* ZYTableViewCell.m */,
+				2AC6B7DF1CAE22FF00C9EB9B /* ZYTableViewController.h */,
+				2AC6B7E01CAE22FF00C9EB9B /* ZYTableViewController.m */,
+				2AB208801CC74A4900DE1EB0 /* ZYSections.h */,
+				2AB208811CC74A4900DE1EB0 /* ZYSections.m */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		2AD07AE81CA8CF2600A869AE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E4FF1CA93F2F00908FB8 /* WarningEvent */,
+				2AD2E4F91CA935CF00908FB8 /* FunctionButton */,
+				2AD2E4ED1CA929C000908FB8 /* CheckIn */,
+				2AD07AF91CA8DC1D00A869AE /* ScrollAd */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AD07AF51CA8DC0300A869AE /* category */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AF61CA8DC0300A869AE /* UIColor+Hex.h */,
+				2AD07AF71CA8DC0300A869AE /* UIColor+Hex.m */,
+				2AD2E4F31CA92B6D00908FB8 /* UIButton+custom.h */,
+				2AD2E4F41CA92B6D00908FB8 /* UIButton+custom.m */,
+				2AD2E4F61CA9306900908FB8 /* UIView+custom.h */,
+				2AD2E4F71CA9306900908FB8 /* UIView+custom.m */,
+				2AC6B7F31CAE916A00C9EB9B /* NSString+tools.h */,
+				2AC6B7F41CAE916A00C9EB9B /* NSString+tools.m */,
+				2AC6B8391CB6525000C9EB9B /* NSNumber+tools.h */,
+				2AC6B83A1CB6525000C9EB9B /* NSNumber+tools.m */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
+		2AD07AF91CA8DC1D00A869AE /* ScrollAd */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07AFF1CA8DEFA00A869AE /* Ad */,
+				2AD07AFA1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.h */,
+				2AD07AFB1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.m */,
+			);
+			path = ScrollAd;
+			sourceTree = "<group>";
+		};
+		2AD07AFF1CA8DEFA00A869AE /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07B001CA8E07300A869AE /* ZYBannerView.h */,
+				2AD07B011CA8E07300A869AE /* ZYBannerView.m */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
+		2AD07B031CA8E1D000A869AE /* MacroDefinition */ = {
+			isa = PBXGroup;
+			children = (
+				2AD07B041CA8E26600A869AE /* ZYMacroDefinition.h */,
+			);
+			path = MacroDefinition;
+			sourceTree = "<group>";
+		};
+		2AD2E4ED1CA929C000908FB8 /* CheckIn */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E4EE1CA929EB00908FB8 /* ZYHomePageCheckInCell.h */,
+				2AD2E4EF1CA929EB00908FB8 /* ZYHomePageCheckInCell.m */,
+			);
+			path = CheckIn;
+			sourceTree = "<group>";
+		};
+		2AD2E4F91CA935CF00908FB8 /* FunctionButton */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E4FA1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.h */,
+				2AD2E4FB1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.m */,
+			);
+			path = FunctionButton;
+			sourceTree = "<group>";
+		};
+		2AD2E4FF1CA93F2F00908FB8 /* WarningEvent */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5001CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.h */,
+				2AD2E5011CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.m */,
+				2AD2E5081CA9471000908FB8 /* ZYHomePageEventCell.h */,
+				2AD2E5091CA9471000908FB8 /* ZYHomePageEventCell.m */,
+				2AD2E50D1CA9504800908FB8 /* ZYHomePageEventView.h */,
+				2AD2E50E1CA9504800908FB8 /* ZYHomePageEventView.m */,
+			);
+			path = WarningEvent;
+			sourceTree = "<group>";
+		};
+		2AD2E5101CA95BAE00908FB8 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5111CA95C1300908FB8 /* ZYTabBar.h */,
+				2AD2E5121CA95C1300908FB8 /* ZYTabBar.m */,
+				2AD2E5141CA95E5300908FB8 /* ZYTabBarController.h */,
+				2AD2E5151CA95E5300908FB8 /* ZYTabBarController.m */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		2AD2E51B1CAA198500908FB8 /* SliderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E51C1CAA19B500908FB8 /* ZYSliderViewController.h */,
+				2AD2E51D1CAA19B500908FB8 /* ZYSliderViewController.m */,
+			);
+			path = SliderViewController;
+			sourceTree = "<group>";
+		};
+		2AD2E51F1CAA21F900908FB8 /* FinanceTools */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5201CAA21F900908FB8 /* Model */,
+				2AD2E5211CAA21F900908FB8 /* View */,
+				2AD2E5221CAA21F900908FB8 /* ViewController */,
+				2AD2E5231CAA21F900908FB8 /* ViewModel */,
+			);
+			path = FinanceTools;
+			sourceTree = "<group>";
+		};
+		2AD2E5201CAA21F900908FB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AD2E5211CAA21F900908FB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AD2E5221CAA21F900908FB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5241CAA221300908FB8 /* ZYFinanceToolsViewController.h */,
+				2AD2E5251CAA221300908FB8 /* ZYFinanceToolsViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AD2E5231CAA21F900908FB8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5271CAA293800908FB8 /* ZYFinanceToolsViewModel.h */,
+				2AD2E5281CAA293800908FB8 /* ZYFinanceToolsViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AD2E5321CAA364E00908FB8 /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5331CAA364E00908FB8 /* Model */,
+				2AD2E5341CAA364E00908FB8 /* View */,
+				2AD2E5351CAA364E00908FB8 /* ViewController */,
+				2AD2E5361CAA364E00908FB8 /* ViewModel */,
+			);
+			path = UserCenter;
+			sourceTree = "<group>";
+		};
+		2AD2E5331CAA364E00908FB8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5501CAA57E100908FB8 /* ZYUser.h */,
+				2AD2E5511CAA57E100908FB8 /* ZYUser.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2AD2E5341CAA364E00908FB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5441CAA4C3100908FB8 /* ListCell */,
+				2AD2E53D1CAA37E100908FB8 /* UserInfo */,
+				2AD2E54A1CAA523200908FB8 /* Logout */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AD2E5351CAA364E00908FB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5371CAA367100908FB8 /* ZYUserCenterViewController.h */,
+				2AD2E5381CAA367100908FB8 /* ZYUserCenterViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AD2E5361CAA364E00908FB8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E53A1CAA369300908FB8 /* ZYUserCenterViewModel.h */,
+				2AD2E53B1CAA369300908FB8 /* ZYUserCenterViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2AD2E53D1CAA37E100908FB8 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E53E1CAA380E00908FB8 /* ZYUserCenterUserInfoCell.h */,
+				2AD2E53F1CAA380E00908FB8 /* ZYUserCenterUserInfoCell.m */,
+				2AD2E5411CAA383500908FB8 /* ZYUserCenterUserInfoCell.xib */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		2AD2E5441CAA4C3100908FB8 /* ListCell */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E5451CAA4C5900908FB8 /* ZYUserCenterCell.h */,
+				2AD2E5461CAA4C5900908FB8 /* ZYUserCenterCell.m */,
+				2AD2E5481CAA4C7B00908FB8 /* ZYUserCenterCell.xib */,
+			);
+			path = ListCell;
+			sourceTree = "<group>";
+		};
+		2AD2E54A1CAA523200908FB8 /* Logout */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E54B1CAA529F00908FB8 /* ZYUserCenterLogoutCell.h */,
+				2AD2E54C1CAA529F00908FB8 /* ZYUserCenterLogoutCell.m */,
+				2AD2E54E1CAA52B100908FB8 /* ZYUserCenterLogoutCell.xib */,
+			);
+			path = Logout;
+			sourceTree = "<group>";
+		};
+		2AD2E5531CAA5FB100908FB8 /* HousingLoanCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				2AB208C61CC7911200DE1EB0 /* sections */,
+				2A1BA48A1CB0160B00FEF53E /* Model */,
+				2AD2E5551CAA5FB100908FB8 /* View */,
+				2AD2E5561CAA5FB100908FB8 /* ViewController */,
+				2AD2E5571CAA5FB100908FB8 /* ViewModel */,
+			);
+			path = HousingLoanCalculator;
+			sourceTree = "<group>";
+		};
+		2AD2E5551CAA5FB100908FB8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B7491CABC14F00C9EB9B /* CalculatorButtonCell */,
+				2AC6B7451CABB76E00C9EB9B /* CalculatorSliderBar */,
+				2A53FE781CAB76930007E6CD /* CalculatorCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2AD2E5561CAA5FB100908FB8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2AD2E55B1CAA630C00908FB8 /* ZYCalculatorViewController.h */,
+				2AD2E55C1CAA630C00908FB8 /* ZYCalculatorViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2AD2E5571CAA5FB100908FB8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2AC6B7D41CAD1C4E00C9EB9B /* ZYCalculatorViewModel.h */,
+				2AC6B7D51CAD1C4E00C9EB9B /* ZYCalculatorViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AE3143427E98F8602F535C93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0486DE8B95D3F886CC90AEEA /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E72103E2EA3E41B70B56866B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1C07CC9D3E98833F34BF7902 /* Pods.debug.xcconfig */,
+				FBFCC5FDD2A6B18C67790EC1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2AD07AB41CA559F700A869AE /* FinanceERP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2AD07ACC1CA559F700A869AE /* Build configuration list for PBXNativeTarget "FinanceERP" */;
+			buildPhases = (
+				5B1364B7D476FC37103C21F6 /* Check Pods Manifest.lock */,
+				2AD07AB11CA559F700A869AE /* Sources */,
+				2AD07AB21CA559F700A869AE /* Frameworks */,
+				2AD07AB31CA559F700A869AE /* Resources */,
+				DCEA482BC0A3AA058F602D50 /* Embed Pods Frameworks */,
+				8DFE78BFA35B4C90F986B4AC /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FinanceERP;
+			productName = FinanceERP;
+			productReference = 2AD07AB51CA559F700A869AE /* FinanceERP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2AD07AAD1CA559F700A869AE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "张昱";
+				TargetAttributes = {
+					2AD07AB41CA559F700A869AE = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = PDFNCJM5PL;
+					};
+				};
+			};
+			buildConfigurationList = 2AD07AB01CA559F700A869AE /* Build configuration list for PBXProject "FinanceERP" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 2AD07AAC1CA559F700A869AE;
+			productRefGroup = 2AD07AB61CA559F700A869AE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2AD07AB41CA559F700A869AE /* FinanceERP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2AD07AB31CA559F700A869AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD2E5491CAA4C7B00908FB8 /* ZYUserCenterCell.xib in Resources */,
+				2AC6B92A1CBCF0E800C9EB9B /* QFDB.db in Resources */,
+				2AD2E54F1CAA52B100908FB8 /* ZYUserCenterLogoutCell.xib in Resources */,
+				2A53FE801CAB77140007E6CD /* ZYCalculatorSelectCell.xib in Resources */,
+				2AD2E5421CAA383500908FB8 /* ZYUserCenterUserInfoCell.xib in Resources */,
+				2AC6B8F71CBC937B00C9EB9B /* InfoPlist.strings in Resources */,
+				2AC6B9351CBDDBAE00C9EB9B /* Info.plist in Resources */,
+				2AC6B8EE1CBC921000C9EB9B /* LaunchScreen.storyboard in Resources */,
+				2AC6B8351CB6179100C9EB9B /* ZYCalculatorResultCell.xib in Resources */,
+				2AC6B7501CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib in Resources */,
+				2AC6B8301CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib in Resources */,
+				2AD07AC51CA559F700A869AE /* Assets.xcassets in Resources */,
+				2AA4A9351CA6864600E74835 /* Main.storyboard in Resources */,
+				2A53FE821CAB78AF0007E6CD /* ZYCalculatorInputCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B1364B7D476FC37103C21F6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8DFE78BFA35B4C90F986B4AC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DCEA482BC0A3AA058F602D50 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2AD07AB11CA559F700A869AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AA4A92E1CA67D4C00E74835 /* ZYHomePageViewController.m in Sources */,
+				2AB208B91CC7751100DE1EB0 /* ZYApplicationSections.m in Sources */,
+				2AB208B61CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoTextCell.m in Sources */,
+				2AD07B021CA8E07300A869AE /* ZYBannerView.m in Sources */,
+				2AD2E50F1CA9504800908FB8 /* ZYHomePageEventView.m in Sources */,
+				2AC6B74C1CABC17800C9EB9B /* ZYCalculatorButtonCell.m in Sources */,
+				2AC6B8671CB77F2100C9EB9B /* ZYBusinessApplyListViewModel.m in Sources */,
+				2AD2E50A1CA9471000908FB8 /* ZYHomePageEventCell.m in Sources */,
+				2AD2E5071CA9436200908FB8 /* ZYWarningEvent.m in Sources */,
+				2AD07AF81CA8DC0300A869AE /* UIColor+Hex.m in Sources */,
+				2AD07AE71CA8C94100A869AE /* ZYTableViewCell.m in Sources */,
+				2AB208911CC7539200DE1EB0 /* ZYSingleButtonCell.m in Sources */,
+				2AB2088B1CC750AF00DE1EB0 /* ZYIntermediaryModel.m in Sources */,
+				2AC6B8381CB62FB600C9EB9B /* ZYCalculatorResultViewModel.m in Sources */,
+				2AD2E4FC1CA9362500908FB8 /* ZYHomePageFunctionButtonCell.m in Sources */,
+				2AB208AD1CC7731100DE1EB0 /* ZYOrderInfoSections.m in Sources */,
+				2AB2087C1CC7452000DE1EB0 /* ZYSegmentedCell.m in Sources */,
+				2AD2E4F51CA92B6D00908FB8 /* UIButton+custom.m in Sources */,
+				2AD2E51E1CAA19B500908FB8 /* ZYSliderViewController.m in Sources */,
+				2AB2089A1CC76E7B00DE1EB0 /* ZYApplyInfoSections.m in Sources */,
+				2AB208C51CC788C200DE1EB0 /* ZYTopTabBar.m in Sources */,
+				2AB2087F1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m in Sources */,
+				2AB208AA1CC771D900DE1EB0 /* ZYCurrentBankSections.m in Sources */,
+				2AC6B83B1CB6525000C9EB9B /* NSNumber+tools.m in Sources */,
+				2A53FE7E1CAB77030007E6CD /* ZYCalculatorInputCell.m in Sources */,
+				2AD2E5131CA95C1300908FB8 /* ZYTabBar.m in Sources */,
+				2AB208C21CC77CF600DE1EB0 /* ZYStepView.m in Sources */,
+				2AC6B8261CB5F44700C9EB9B /* ZYStoreModel.m in Sources */,
+				2AC6B7481CABB79A00C9EB9B /* ZYCalculatorSliderBar.m in Sources */,
+				2AC6B85F1CB77C8600C9EB9B /* ZYBusinessApplyListController.m in Sources */,
+				2AD07ABD1CA559F700A869AE /* AppDelegate.m in Sources */,
+				2AC6B8331CB6177F00C9EB9B /* ZYCalculatorResultCell.m in Sources */,
+				2AC6B7D61CAD1C4E00C9EB9B /* ZYCalculatorViewModel.m in Sources */,
+				2AC6B8511CB6956F00C9EB9B /* ZYCaclulatorResultModel.m in Sources */,
+				2AB208A41CC770B800DE1EB0 /* ZYBothSideInfoSections.m in Sources */,
+				2AC6B9031CBCCDE100C9EB9B /* ZYFadeTransion.m in Sources */,
+				2A53FE7B1CAB76E60007E6CD /* ZYCalculatorSelectCell.m in Sources */,
+				2A0C4B121CA5876E00A1780E /* ZYViewModel.m in Sources */,
+				2AD07ABA1CA559F700A869AE /* main.m in Sources */,
+				2AC6B82E1CB60FC200C9EB9B /* ZYCalculatorResultHeader.m in Sources */,
+				2AB208CC1CC7968700DE1EB0 /* ZYCalculatorSections.m in Sources */,
+				2AB208821CC74A4900DE1EB0 /* ZYSections.m in Sources */,
+				2AB208761CC73B5E00DE1EB0 /* ZYForeclosureHouseViewModel.m in Sources */,
+				2AD2E5471CAA4C5900908FB8 /* ZYUserCenterCell.m in Sources */,
+				2AB208A11CC7702900DE1EB0 /* ZYHousePropertyInfoSections.m in Sources */,
+				2AD07ADA1CA55DBC00A869AE /* ZYViewController.m in Sources */,
+				2AB208BF1CC776A700DE1EB0 /* ZYCostInfoSections.m in Sources */,
+				2AB208BC1CC7753600DE1EB0 /* ZYForeclosureHouseApplicationContentCell.m in Sources */,
+				2AC6B8621CB77DB000C9EB9B /* ZYBusinessApplyListCell.m in Sources */,
+				2AD2E5261CAA221300908FB8 /* ZYFinanceToolsViewController.m in Sources */,
+				2AC6B8BE1CB7ABA200C9EB9B /* ZYInputCell.m in Sources */,
+				2AD2E4F01CA929EB00908FB8 /* ZYHomePageCheckInCell.m in Sources */,
+				2AC6B8B91CB7AAFC00C9EB9B /* ZYSelectCell.m in Sources */,
+				2AD2E55D1CAA630C00908FB8 /* ZYCalculatorViewController.m in Sources */,
+				2AD2E53C1CAA369300908FB8 /* ZYUserCenterViewModel.m in Sources */,
+				2AB208851CC7505D00DE1EB0 /* ZYBankModel.m in Sources */,
+				2AC6B90B1CBCCEEC00C9EB9B /* ZYSearchViewController.m in Sources */,
+				2AD2E5521CAA57E100908FB8 /* ZYUser.m in Sources */,
+				2AD2E54D1CAA529F00908FB8 /* ZYUserCenterLogoutCell.m in Sources */,
+				2AC6B90E1CBCD07E00C9EB9B /* ZYSearchViewModel.m in Sources */,
+				2AD07AFD1CA8DC1D00A869AE /* ZYHomePageScrollAdCell.m in Sources */,
+				2AC6B7F51CAE916A00C9EB9B /* NSString+tools.m in Sources */,
+				2AD2E5021CA93F7A00908FB8 /* ZYHomePageWarningEventTitleCell.m in Sources */,
+				2A1BA4901CB0164900FEF53E /* ZYCalculatorValueModel.m in Sources */,
+				2AD07AE41CA8C92200A869AE /* ZYSection.m in Sources */,
+				2AB208B41CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoCell.m in Sources */,
+				2AC6B82B1CB6095D00C9EB9B /* ZYCalculatorResultViewController.m in Sources */,
+				2AA4A9321CA67DF600E74835 /* ZYHomePageViewModel.m in Sources */,
+				2AD2E5401CAA380E00908FB8 /* ZYUserCenterUserInfoCell.m in Sources */,
+				2AD2E5161CA95E5300908FB8 /* ZYTabBarController.m in Sources */,
+				2AB208901CC7539200DE1EB0 /* ZYDoubleButtonCell.m in Sources */,
+				2AB2088A1CC750AF00DE1EB0 /* ZYCooperativeOrganizationModel.m in Sources */,
+				2AB208B51CC7737000DE1EB0 /* ZYForeclosureHouseOrderInfoHeader.m in Sources */,
+				2AB2089E1CC76FBC00DE1EB0 /* ZYBorrowerModel.m in Sources */,
+				2AB2089B1CC76E7B00DE1EB0 /* ZYBussinessInfoSections.m in Sources */,
+				2AB208731CC73A5700DE1EB0 /* ZYForeclosureHouseController.m in Sources */,
+				2AC6B7E11CAE22FF00C9EB9B /* ZYTableViewController.m in Sources */,
+				2AD2E5291CAA293800908FB8 /* ZYFinanceToolsViewModel.m in Sources */,
+				2AD2E4F81CA9306900908FB8 /* UIView+custom.m in Sources */,
+				2AD2E5391CAA367100908FB8 /* ZYUserCenterViewController.m in Sources */,
+				2AB208A71CC7711000DE1EB0 /* ZYOriginalBankSections.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2AC6B8F91CBC937B00C9EB9B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AC6B8F81CBC937B00C9EB9B /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2AD07ACA1CA559F700A869AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2AD07ACB1CA559F700A869AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2AD07ACD1CA559F700A869AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C07CC9D3E98833F34BF7902 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FinanceERP/PrefixHeader.pch";
+				INFOPLIST_FILE = FinanceERP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QFang.FinanceERP;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		2AD07ACE1CA559F700A869AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBFCC5FDD2A6B18C67790EC1 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/FinanceERP/PrefixHeader.pch";
+				INFOPLIST_FILE = FinanceERP/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.QFang.FinanceERP;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2AD07AB01CA559F700A869AE /* Build configuration list for PBXProject "FinanceERP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AD07ACA1CA559F700A869AE /* Debug */,
+				2AD07ACB1CA559F700A869AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2AD07ACC1CA559F700A869AE /* Build configuration list for PBXNativeTarget "FinanceERP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2AD07ACD1CA559F700A869AE /* Debug */,
+				2AD07ACE1CA559F700A869AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2AD07AAD1CA559F700A869AE /* Project object */;
+}
