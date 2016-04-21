@@ -15,4 +15,8 @@
 + (NSString*)notNil:(NSString*)str;
 
 + (NSString *)firstCharactor:(NSString *)aString;
+
++ (NSString *)checkTelephone;
+
++ (NSString *)checkCardNum;
 @end

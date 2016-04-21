@@ -26,4 +26,14 @@
  */
 @property(nonatomic,assign)NSInteger maxLength;
 
+#pragma mark - cell关联的 已选 选项
+//自动加载选择内容
+@property(nonatomic,assign)BOOL hiddenSelecedObj;
+
+@property(nonatomic,assign)NSInteger selecedIndex;
+
+@property(nonatomic,strong)id selecedObj;
+//显示类的属性名称
+@property(nonatomic,strong)NSString *showKey;
+
 @end

@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) UILabel *cellTitleLabel;
 @property (strong, nonatomic) UILabel *cellTextLabel;
-
+@property(nonatomic,assign)BOOL checkInput;///检查是否为空
 @end
 
 @implementation ZYSelectCell
@@ -24,6 +24,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.cellError = @"";///初始化为空字符串 防止放入数组筛选出现错误
+        
         _cellTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(GAP, 0, 100, [ZYSelectCell defaultHeight])];
         _cellTitleLabel.textAlignment = NSTextAlignmentRight;
         _cellTitleLabel.font = FONT(14);
@@ -43,17 +45,30 @@
                 [self setCellTitle:self.cellTitle];
             }
         }];
+        
+        [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+            if(!self.hiddenSelecedObj)
+            {
+                if([x isKindOfClass:[NSString class]])
+                {
+                    self.cellText = x;
+                }
+                else if ([x isKindOfClass:[NSDate class]])
+                {
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyy-MM-dd"];
+                    self.cellText = [formatter stringFromDate:x];
+                }
+                else if (self.showKey.length!=0)
+                {
+                    self.cellText = [x valueForKey:self.showKey];
+                }
+            }
+        }];
     }
     return self;
 }
-- (void)setCheckInput:(BOOL)checkInput
-{
-    _checkInput = checkInput;
-    if(_checkInput)
-    {
-        [self setCellTitle:self.cellTitle];
-    }
-}
+
 - (void)setCellTitle:(NSString *)cellTitle
 {
     _cellTitle = cellTitle;
@@ -65,19 +80,20 @@
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",cellTitle]];
             [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
             _cellTitleLabel.attributedText = attrStr;
-            self.available = YES;
+            self.cellError = @"";
         }
         else if(_cellText.length==0)
         {
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",cellTitle]];
             [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, attrStr.length)];
             _cellTitleLabel.attributedText = attrStr;
-            self.available = NO;
+            self.cellError = [NSString stringWithFormat:@"请选择%@",cellTitle];
         }
     }
     else
     {
         _cellTitleLabel.text = cellTitle;
+        self.cellError = @"";
     }
 }
 - (void)setCellText:(NSString *)cellText
@@ -90,5 +106,13 @@
     _cellNullable = cellNullable;
     [self setCellTitle:_cellTitle];
 }
-
+- (NSString*)checkInput:(BOOL)checkInput
+{
+    _checkInput = checkInput;
+    if(_checkInput)
+    {
+        [self setCellTitle:self.cellTitle];
+    }
+    return self.cellError;
+}
 @end

@@ -18,90 +18,11 @@
 #import "ZYCostInfoSections.h"
 #import "ZYStepView.h"
 #import "ZYTopTabBar.h"
+#import "ZYForeclosureHouseSubController.h"
+#import "ZYSearchViewController.h"
+#import "ZYFadeTransion.h"
 
-@interface ZYForeclosureHouseSubController : ZYSliderViewController
-
-@end
-
-@implementation ZYForeclosureHouseSubController
-{
-    ZYHousePropertyInfoSections *housePropertyInfoSections;
-    ZYBothSideInfoSections *bothSideInfoSections;
-    ZYOriginalBankSections *originalBankSections;
-    ZYCurrentBankSections *currentBankSections;
-    
-    NSArray *sectionsArr;
-    
-    ZYTopTabBar *topBar;
-}
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self buildUI];
-}
-- (void)buildUI
-{
-    housePropertyInfoSections = [[ZYHousePropertyInfoSections alloc] initWithTitle:@"物业信息"];
-    bothSideInfoSections = [[ZYBothSideInfoSections alloc] initWithTitle:@"买卖双方信息"];
-    originalBankSections = [[ZYOriginalBankSections alloc] initWithTitle:@"原贷款银行信息"];
-    currentBankSections = [[ZYCurrentBankSections alloc] initWithTitle:@"新贷款银行信息"];
-    
-    sectionsArr = @[housePropertyInfoSections,
-                    bothSideInfoSections,
-                    originalBankSections,
-                    currentBankSections,];
-    [self buildTableViewController];
-    
-    NSMutableArray *titleArr = [NSMutableArray arrayWithCapacity:4];
-    for(ZYSections *sections in sectionsArr)
-    {
-        [titleArr addObject:sections.title];
-    }
-    
-    topBar = [[ZYTopTabBar alloc] initWithTabs:titleArr];
-    topBar.backgroundColor = [UIColor whiteColor];
-    topBar.frame = CGRectMake(0, 0, FUll_SCREEN_WIDTH, 50);
-    [self.view addSubview:topBar];
-    
-    [topBar.tabButtonPressedSignal subscribeNext:^(NSNumber *index) {
-        [self changePage:index.longLongValue];
-    }];
-    
-    ZYDoubleButtonCell *buttonView = [ZYDoubleButtonCell cellWithActionBlock:nil];
-    buttonView.frame = CGRectMake(0, FUll_SCREEN_HEIGHT-50-64-[ZYDoubleButtonCell defaultHeight], FUll_SCREEN_WIDTH, [ZYDoubleButtonCell defaultHeight]);
-    buttonView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:buttonView];
-    
-    [[buttonView leftButtonPressedSignal] subscribeNext:^(id x) {
-        
-    }];
-    [[buttonView rightButtonPressedSignal] subscribeNext:^(id x) {
-        
-    }];
-}
-- (ZYSections*)sliderController:(ZYSliderViewController*)controller sectionsWithPage:(NSInteger)page
-{
-    return sectionsArr[page];
-}
-- (NSInteger)countOfControllerSliderController:(ZYSliderViewController *)controller
-{
-    return sectionsArr.count;
-}
-- (CGRect)sliderController:(ZYSliderViewController*)controller frameWithPage:(NSInteger)page
-{
-    return CGRectMake(page*FUll_SCREEN_WIDTH, 50, FUll_SCREEN_WIDTH, FUll_SCREEN_HEIGHT-100-64);
-}
-- (void)sliderController:(ZYSliderViewController *)controller changingPage:(NSInteger)index direction:(ZYSliderDirection)direction rate:(CGFloat)rate
-{
-    topBar.rate = rate;
-}
-- (void)sliderController:(ZYSliderViewController *)controller didChangePage:(NSInteger)index direction:(ZYSliderDirection)direction
-{
-    topBar.highlightIndex = index;
-}
-@end
-
-@interface ZYForeclosureHouseController ()
+@interface ZYForeclosureHouseController ()<UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *progressBackView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWidth;
@@ -117,6 +38,9 @@
 
 @implementation ZYForeclosureHouseController
 {
+    UIPercentDrivenInteractiveTransition *percentDrivenTransition;
+    ZYFadeTransion *transion;
+    
     NSArray *sectionsArr;
     
     ZYBussinessInfoSections *bussinessInfoSections;
@@ -130,11 +54,26 @@
     
     NSInteger steps;
     CGFloat stepWidth;
+    
+    ZYTableViewCell *firstResponderCell;
 }
+ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    transion = [[ZYFadeTransion alloc] init];
     [self buildUI];
+    [self blendViewModel];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;///关闭手势返回 防止误操作
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
 - (void)updateViewConstraints
 {
@@ -143,12 +82,17 @@
 }
 - (void)buildUI
 {
+    [self buildPickerView];
+    self.pickerViewTapBlankHidden = YES;
+    [self buildDatePickerView];
+    self.datePickerViewTapBlankHidden = YES;
+    
     bussinessInfoSections = [[ZYBussinessInfoSections alloc] initWithTitle:@"业务信息"];
     applyInfoSections = [[ZYApplyInfoSections alloc] initWithTitle:@"申请信息 "];
     foreclosureHouseInfoSections = [[ZYSections alloc] initWithTitle:@"赎楼信息"];
     costInfoSections = [[ZYCostInfoSections alloc] initWithTitle:@"费用信息"];
     orderInfoSections = [[ZYOrderInfoSections alloc] initWithTitle:@"赎楼清单"];
-    applicationSections = [[ZYApplicationSections alloc] initWithTitle:@"申请信息"];
+    applicationSections = [[ZYApplicationSections alloc] initWithTitle:@"申请办理"];
     
     sectionsArr = @[bussinessInfoSections,
                     applyInfoSections,
@@ -157,7 +101,7 @@
                     orderInfoSections,
                     applicationSections];
     
-    subSliderViewCtl = [[ZYForeclosureHouseSubController alloc] init];
+    subSliderViewCtl = [[ZYForeclosureHouseSubController alloc] initWithModel:self.viewModel.valueModel];
     
     _labelArr = [NSMutableArray arrayWithCapacity:10];
     _viewArr = [NSMutableArray arrayWithCapacity:10];
@@ -189,6 +133,131 @@
         self.progressWidth.constant = (self.contentWidth.constant/steps)/2.f;
     
     [self buildTableViewController];
+}
+- (void)blendViewModel
+{
+    ZYForeclosureHouseViewModel *viewModel = self.viewModel;
+    [bussinessInfoSections blendModel:viewModel.valueModel];
+    [applyInfoSections blendModel:viewModel.valueModel];
+    [subSliderViewCtl blendSections:foreclosureHouseInfoSections];//这个特殊子页面 需要绑定一个section
+    [costInfoSections blendModel:viewModel.valueModel];
+    [orderInfoSections blendModel:viewModel.valueModel];
+    [applicationSections blendModel:viewModel.valueModel];
+    
+    [bussinessInfoSections.showSectionSignal subscribeNext:^(RACTuple *value) {
+        [self showSection:[value.first boolValue] sectionIndex:[value.second longLongValue] page:0];
+    }];
+    [orderInfoSections.showSectionSignal subscribeNext:^(RACTuple *value) {
+        [self showSection:[value.first boolValue] sectionIndex:[value.second longLongValue] page:4];
+    }];
+    [[RACSignal merge:@[bussinessInfoSections.pickerByDataSourceSignal,bussinessInfoSections.pickerBySignalSignal]] subscribeNext:^(RACTuple *value) {
+        if([value.first isKindOfClass:[ZYSelectCell class]])
+        {
+            firstResponderCell = (ZYSelectCell*)value.first;
+            self.selecedRow = [(ZYSelectCell*)firstResponderCell selecedIndex];
+        }
+        if([value.first isKindOfClass:[ZYInputCell class]])
+        {
+            firstResponderCell = (ZYInputCell*)value.first;
+            self.selecedRow = [(ZYInputCell*)firstResponderCell selecedIndex];
+        }
+        
+        NSString *showKey = value.third;
+        self.pickerShowValueKey = showKey;
+        if([value.second isKindOfClass:[NSArray class]])
+        {
+            NSArray *dataSource = value.second;
+            self.components = @[dataSource];
+        }
+        else if([value.second isKindOfClass:[RACSignal class]])
+        {
+            RACSignal *signal = value.second;
+            [signal subscribeNext:^(NSArray *dataSource) {
+                self.components = @[dataSource];
+            }];
+        }
+        [self showPickerView:YES];
+    }];
+    
+    [[RACSignal merge:@[bussinessInfoSections.datePickerSignal,foreclosureHouseInfoSections.datePickerSignal,applicationSections.datePickerSignal]] subscribeNext:^(RACTuple *value) {
+        firstResponderCell = (ZYSelectCell*)value.first;
+        [self showDatePickerView:YES];
+    }];
+    
+    [[RACSignal merge:@[bussinessInfoSections.searchBySignalSignal,applyInfoSections.searchBySignalSignal,foreclosureHouseInfoSections.searchBySignalSignal]] subscribeNext:^(RACTuple *value) {
+        firstResponderCell = (ZYSelectCell*)value.first;
+        [self performSegueWithIdentifier:@"search" sender:value];
+    }];
+    
+    [[RACSignal merge:@[bussinessInfoSections.nextStepSignal,applyInfoSections.nextStepSignal,costInfoSections.nextStepSignal,costInfoSections.nextStepSignal,orderInfoSections.nextStepSignal,foreclosureHouseInfoSections.nextStepSignal]] subscribeNext:^(RACTuple *value) {
+        NSString *error = value.first;
+        if(error.length==0)
+        {
+            [self nextPage];
+        }
+        else
+        {
+            [self tip:error];
+        }
+    }];
+    [[RACSignal merge:@[applyInfoSections.lastStepSignal,costInfoSections.lastStepSignal,costInfoSections.lastStepSignal,orderInfoSections.lastStepSignal,applicationSections.lastStepSignal,foreclosureHouseInfoSections.lastStepSignal]] subscribeNext:^(RACTuple *value) {
+        [self lastPage];
+    }];
+    [applicationSections.saveSignal subscribeNext:^(RACTuple *value) {
+        NSString *error = value.first;
+        if(error.length==0)
+        {
+            //保存
+        }
+        else
+        {
+            [self tip:error];
+        }
+    }];
+    [applicationSections.submitSignal subscribeNext:^(RACTuple *value) {
+        NSString *error = value.first;
+        if(error.length==0)
+        {
+            //提交
+        }
+        else
+        {
+            [self tip:error];
+        }
+    }];
+    
+    [RACObserve(self, selecedRow) subscribeNext:^(NSNumber *index) {
+        if([firstResponderCell isKindOfClass:[ZYSelectCell class]])
+        {
+            [(ZYSelectCell*)firstResponderCell setSelecedIndex:index.longLongValue];
+        }
+        if([firstResponderCell isKindOfClass:[ZYInputCell class]])
+        {
+            [(ZYSelectCell*)firstResponderCell setSelecedIndex:index.longLongValue];
+        }
+    }];
+    [RACObserve(self, selecedObj) subscribeNext:^(id obj) {
+        if([firstResponderCell isKindOfClass:[ZYSelectCell class]])
+        {
+            [(ZYSelectCell*)firstResponderCell setSelecedObj:obj];
+        }
+        if([firstResponderCell isKindOfClass:[ZYInputCell class]])
+        {
+            [(ZYInputCell*)firstResponderCell setSelecedObj:obj];
+        }
+    }];
+    [RACObserve(self, selecedDate) subscribeNext:^(NSDate *date) {
+        if([firstResponderCell isKindOfClass:[ZYSelectCell class]])
+        {
+            [(ZYSelectCell*)firstResponderCell setSelecedObj:date];
+        }
+        if([firstResponderCell isKindOfClass:[ZYInputCell class]])
+        {
+            [(ZYInputCell*)firstResponderCell setSelecedObj:date];
+        }
+    }];
+    
+    [viewModel.valueModel reset];
 }
 - (ZYSections*)sliderController:(ZYSliderViewController*)controller sectionsWithPage:(NSInteger)page
 {
@@ -248,14 +317,45 @@
         [self.stepScrollView setContentOffset:point animated:YES];
     }
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"search"])
+    {
+        ZYSearchViewController *controller = [segue destinationViewController];
+        RACSignal *signal = [(RACTuple*)sender second];
+        NSString *key = [(RACTuple*)sender third];
+        ZYSearchViewModel *viewModel = [ZYSearchViewModel viewModelWithSignal:signal];
+        @weakify(self)
+        [[RACObserve(viewModel, searchSelecedObj) skip:1] subscribeNext:^(id x) {
+            @strongify(self)
+            self.selecedObj = x;
+        }];
+        viewModel.showPropertyKey = key;
+        controller.viewModel = viewModel;
+        segue.destinationViewController.transitioningDelegate = self;
+    }
 }
-*/
+#pragma mark - 转场动画
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return transion;
+}
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    return transion;
+}
+-(id<UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+    return percentDrivenTransition;
+}
+-(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+    return percentDrivenTransition;
+}
 
 @end

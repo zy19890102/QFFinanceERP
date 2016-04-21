@@ -40,6 +40,7 @@
 {
     header = [ZYForeclosureHouseOrderInfoHeader cellWithActionBlock:nil];
     header.frame = CGRectMake(0, 0, FUll_SCREEN_WIDTH, [ZYForeclosureHouseOrderInfoHeader defaultHeight]);
+    ZYSection *headerSection = [ZYSection sectionWithCells:@[header]];
     
     orderInfoPowerOfAttorney = [ZYForeclosureHouseOrderInfoCell cellWithActionBlock:nil];
     orderInfoPowerOfAttorney.cellTitle = @"公正委托书";
@@ -53,12 +54,12 @@
         orderInfoPowerOfAttorney.buttonRotate = section2.hasFold;
         if(section2.hasFold)
         {
-            [self showSection:YES sectionIndex:1];
+            [self showSection:YES sectionIndex:2];
             [orderInfoPowerOfAttorneyContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:1];
+            [self showSection:NO sectionIndex:2];
         }
     }];
     
@@ -74,12 +75,12 @@
         orderInfoIdentificationCard.buttonRotate = section4.hasFold;
         if(section4.hasFold)
         {
-            [self showSection:YES sectionIndex:3];
+            [self showSection:YES sectionIndex:4];
             [orderInfoIdentificationCardContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:3];
+            [self showSection:NO sectionIndex:4];
         }
     }];
     
@@ -95,12 +96,12 @@
         orderInfoCardForBuilding.buttonRotate = section6.hasFold;
         if(section6.hasFold)
         {
-            [self showSection:YES sectionIndex:5];
+            [self showSection:YES sectionIndex:6];
             [orderInfoCardForBuildingContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:5];
+            [self showSection:NO sectionIndex:6];
         }
     }];
     
@@ -116,12 +117,12 @@
         orderInfoBankbook.buttonRotate = section8.hasFold;
         if(section8.hasFold)
         {
-            [self showSection:YES sectionIndex:7];
+            [self showSection:YES sectionIndex:8];
             [orderInfoBankbookContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:7];
+            [self showSection:NO sectionIndex:8];
         }
     }];
     
@@ -137,12 +138,12 @@
         orderInfoSecurityAgreement.buttonRotate = section10.hasFold;
         if(section10.hasFold)
         {
-            [self showSection:YES sectionIndex:9];
+            [self showSection:YES sectionIndex:10];
             [orderInfoSecurityAgreementContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:9];
+            [self showSection:NO sectionIndex:10];
         }
     }];
     
@@ -158,16 +159,25 @@
         orderInfoMortgageContract.buttonRotate = section12.hasFold;
         if(section12.hasFold)
         {
-            [self showSection:YES sectionIndex:11];
+            [self showSection:YES sectionIndex:12];
             [orderInfoMortgageContractContent becomeFirstResponder];
         }
         else
         {
-            [self showSection:NO sectionIndex:11];
+            [self showSection:NO sectionIndex:12];
         }
     }];
+    ZYDoubleButtonCell *buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
+    [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
+        [self cellNextStep:nil];
+    }];
+    [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
+        [self cellLastStep];
+    }];
+    ZYSection *buttonSection = [ZYSection sectionWithCells:@[buttonCell]];
     
-    self.sections = @[section1,
+    self.sections = @[headerSection,
+                      section1,
                       section2,
                       section3,
                       section4,
@@ -178,6 +188,33 @@
                       section9,
                       section10,
                       section11,
-                      section12];
+                      section12,buttonSection];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,orderInfoPowerOfAttorneyContent) = RACChannelTo(orderInfoPowerOfAttorneyContent,cellText);
+    RACChannelTo(model,orderInfoIdentificationCardContent) = RACChannelTo(orderInfoIdentificationCardContent,cellText);
+    RACChannelTo(model,orderInfoCardForBuildingContent) = RACChannelTo(orderInfoCardForBuildingContent,cellText);
+    RACChannelTo(model,orderInfoBankbookContent) = RACChannelTo(orderInfoBankbookContent,cellText);
+    RACChannelTo(model,orderInfoSecurityAgreementContent) = RACChannelTo(orderInfoSecurityAgreementContent,cellText);
+    RACChannelTo(model,orderInfoMortgageContractContent) = RACChannelTo(orderInfoMortgageContractContent,cellText);
+    
+    RACChannelTo(model,orderInfoPowerOfAttorney) = RACChannelTo(orderInfoPowerOfAttorney,cellLeftSteps);
+    RACChannelTo(model,orderInfoIdentificationCard) = RACChannelTo(orderInfoIdentificationCard,cellLeftSteps);
+    RACChannelTo(model,orderInfoCardForBuilding) = RACChannelTo(orderInfoCardForBuilding,cellLeftSteps);
+    RACChannelTo(model,orderInfoBankbook) = RACChannelTo(orderInfoBankbook,cellLeftSteps);
+    RACChannelTo(model,orderInfoSecurityAgreement) = RACChannelTo(orderInfoSecurityAgreement,cellLeftSteps);
+    RACChannelTo(model,orderInfoMortgageContract) = RACChannelTo(orderInfoMortgageContract,cellLeftSteps);
+    
+    RACChannelTo(model,orderInfoPowerOfAttorneyCopy) = RACChannelTo(orderInfoPowerOfAttorney,cellRightSteps);
+    RACChannelTo(model,orderInfoIdentificationCardCopy) = RACChannelTo(orderInfoIdentificationCard,cellRightSteps);
+    RACChannelTo(model,orderInfoCardForBuildingCopy) = RACChannelTo(orderInfoCardForBuilding,cellRightSteps);
+    RACChannelTo(model,orderInfoBankbookCopy) = RACChannelTo(orderInfoBankbook,cellRightSteps);
+    RACChannelTo(model,orderInfoSecurityAgreementCopy) = RACChannelTo(orderInfoSecurityAgreement,cellRightSteps);
+    RACChannelTo(model,orderInfoMortgageContractCopy) = RACChannelTo(orderInfoMortgageContract,cellRightSteps);
+}
+- (NSString*)error
+{
+    return nil;//全部都非必填
 }
 @end

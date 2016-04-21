@@ -12,5 +12,5 @@
 
 @property(nonatomic,strong)NSString *cellContent;
 @property(nonatomic,strong)NSString *cellTitle;
-
+@property(nonatomic,assign)NSInteger maxLength;
 @end

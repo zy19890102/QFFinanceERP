@@ -34,21 +34,15 @@
 - (void)blendModel
 {
     RACChannelTo(self,calculatorComputingFormulaSelected) = RACChannelTo(_valueModel,calculatorComputingFormulaValue);
-    RAC(self,calculatorComputingFormula) = [RACObserve(self,calculatorComputingFormulaSelected) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorComputingFormulaArr][value.longLongValue];
-    }];
+    
     
     RACChannelTo(self,calculatorPaymentTypeSelected) = RACChannelTo(_valueModel,calculatorPaymentTypeValue);
-    RAC(self,calculatorPaymentType) = [RACObserve(self,calculatorPaymentTypeSelected) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorPaymentTypeArr][value.longLongValue];
-    }];
+    
     
     [[RACChannelTo(self,calculatorMonthsSelected) map:^id(NSNumber *value) {
         return @((30-[value longLongValue])*12);///年数 转换 为月数（期）
     }] subscribe:RACChannelTo(_valueModel,calculatorMonthsValue)];
-    RAC(self,calculatorMonths) = [RACObserve(self,calculatorMonthsSelected) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorMonthsArr][value.longLongValue];
-    }];
+    
     
     [[RACChannelTo(self,calculatorInterestSelected) map:^id(NSNumber *value) {
         switch (value.longLongValue) {
@@ -69,16 +63,12 @@
                 break;
         }
     }] subscribe:RACChannelTo(_valueModel,calculatorInterestValue)];
-    RAC(self,calculatorInterest) = [RACObserve(self,calculatorInterestSelected) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorInterestArr][value.longLongValue];
-    }];
+    
     
     [[RACChannelTo(self,calculatorLoanRateSelected) map:^id(NSNumber *value) {
         return @(7-value.longLongValue);//由于展示的时候第一个为7成 需要倒序 然后1就代表1成 以此类推
     }] subscribe:RACChannelTo(_valueModel,calculatorLoanRateValue)];
-    RAC(self,calculatorLoanRate) = [RACObserve(self,calculatorLoanRateSelected) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorLoanRateArr][value.longLongValue];
-    }];
+    
     
     
     [[RACChannelTo(self, calculatorTotleMoney) map:^id(NSString *value) {

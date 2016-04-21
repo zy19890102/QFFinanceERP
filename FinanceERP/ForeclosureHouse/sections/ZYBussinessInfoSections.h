@@ -9,7 +9,7 @@
 #import "ZYSections.h"
 
 #import "ZYForeclosureHouseValueModel.h"
-
+#import "ZYForeclosureHouseViewModel.h"
 
 @interface ZYBussinessInfoSections : ZYSections
 

@@ -12,4 +12,5 @@
 
 @property(nonatomic,strong)NSString *cellText;
 
+@property(nonatomic,assign)NSInteger maxLength;
 @end

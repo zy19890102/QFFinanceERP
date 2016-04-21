@@ -7,7 +7,7 @@
 //
 
 #import "ZYSections.h"
-
+#import "ZYForeclosureHouseValueModel.h"
 @interface ZYOrderInfoSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
 @end

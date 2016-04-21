@@ -35,10 +35,12 @@
 - (void)initSection
 {
     @weakify(self)
+    
     originalBankNameCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
         [self cellSearch:originalBankNameCell withDataSourceSignal:[ZYForeclosureHouseValueModel bankSearchSignal] showKey:@"name"];
     }];
+    originalBankNameCell.showKey = @"name";
     originalBankNameCell.cellTitle = @"原贷款银行";
     
     originalBankLoanMoneyCell = [ZYInputCell cellWithActionBlock:nil];
@@ -55,7 +57,7 @@
     
     originalBankLoanEndTimeCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
-        [self cellDatePicker:originalBankLoanEndTimeCell];
+        [self cellDatePicker:originalBankLoanEndTimeCell onlyFutura:NO];
     }];
     originalBankLoanEndTimeCell.cellTitle = @"贷款结束时间";
     
@@ -69,6 +71,7 @@
     originalBankTelephoneCell.cellPlaceHolder = @"联系电话";
     originalBankTelephoneCell.onlyInt = YES;
     originalBankTelephoneCell.maxLength = 11;
+    originalBankTelephoneCell.cellRegular = [NSString checkTelephone];
     originalBankTelephoneCell.cellNullable = YES;
     
     originalBankThirdPartyLoanCell = [ZYInputCell cellWithActionBlock:nil];
@@ -78,13 +81,16 @@
     
     originalBankThirdPartyCardNumberCell = [ZYInputCell cellWithActionBlock:nil];
     originalBankThirdPartyCardNumberCell.cellTitle = @"身份证号";
+    originalBankThirdPartyCardNumberCell.cellRegular = [NSString checkCardNum];
     originalBankThirdPartyCardNumberCell.cellPlaceHolder = @"请输入身份证号";
     originalBankThirdPartyCardNumberCell.cellNullable = YES;
+    originalBankThirdPartyCardNumberCell.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     
     originalBankThirdPartyTelephoneCell = [ZYInputCell cellWithActionBlock:nil];
     originalBankThirdPartyTelephoneCell.cellTitle = @"手机号码";
     originalBankThirdPartyTelephoneCell.onlyInt = YES;
     originalBankThirdPartyTelephoneCell.maxLength = 11;
+    originalBankThirdPartyTelephoneCell.cellRegular = [NSString checkTelephone];
     originalBankThirdPartyTelephoneCell.cellPlaceHolder = @"请输入手机号码";
     originalBankThirdPartyTelephoneCell.cellNullable = YES;
     
@@ -94,6 +100,8 @@
     originalBankThirdPartyAddressCell.cellNullable = YES;
     
     ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    footCell.lineHidden = YES;
     
     ZYSection *section = [ZYSection sectionWithCells:@[originalBankNameCell,
                                                        originalBankLoanMoneyCell,
@@ -107,5 +115,50 @@
                                                        originalBankThirdPartyAddressCell,
                                                        footCell]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,originalBankName) = RACChannelTo(originalBankNameCell,selecedObj);
+    RACChannelTo(model,originalBankLoanMoney) = RACChannelTo(originalBankLoanMoneyCell,cellText);
+    RACChannelTo(model,originalBankDebt) = RACChannelTo(originalBankDebtCell,cellText);
+    RACChannelTo(model,originalBankLoanEndTime) = RACChannelTo(originalBankLoanEndTimeCell,selecedObj);
+    
+    RACChannelTo(model,originalBankLinkman) = RACChannelTo(originalBankLinkmanCell,cellText);
+    RACChannelTo(model,originalBankTelephone) = RACChannelTo(originalBankTelephoneCell,cellText);
+    RACChannelTo(model,originalBankThirdPartyLoan) = RACChannelTo(originalBankThirdPartyLoanCell,cellText);
+    RACChannelTo(model,originalBankThirdPartyCardNumber) = RACChannelTo(originalBankThirdPartyCardNumberCell,cellText);
+    RACChannelTo(model,originalBankThirdPartyTelephone) = RACChannelTo(originalBankThirdPartyTelephoneCell,cellText);
+    RACChannelTo(model,originalBankThirdPartyAddress) = RACChannelTo(originalBankThirdPartyAddressCell,cellText);
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[originalBankNameCell,
+                          originalBankLoanMoneyCell,
+                          originalBankDebtCell,
+                          originalBankLoanEndTimeCell,
+                          originalBankLinkmanCell,
+                          originalBankTelephoneCell,
+                          originalBankThirdPartyLoanCell,
+                          originalBankThirdPartyCardNumberCell,
+                          originalBankThirdPartyTelephoneCell,
+                          originalBankThirdPartyAddressCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

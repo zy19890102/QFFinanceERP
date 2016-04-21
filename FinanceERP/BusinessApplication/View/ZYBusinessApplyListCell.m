@@ -34,7 +34,7 @@
         CGFloat labelHeight = 20;
         _cellTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(width+GAP*2, ([ZYBusinessApplyListCell defaultHeight]-labelHeight-labelHeight)/2.f, labelWidth, labelHeight)];
         _cellTitleLabel.font = FONT(17);
-        _cellTitleLabel.textColor = ORANGE;
+        _cellTitleLabel.textColor = YELLOW;
         [self addSubview:_cellTitleLabel];
         
         _cellSubTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(width+GAP*2, ([ZYBusinessApplyListCell defaultHeight]-labelHeight-labelHeight)/2.f+labelHeight, labelWidth, labelHeight)];

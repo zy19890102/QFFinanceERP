@@ -45,4 +45,12 @@
     else
         return nil;
 }
++ (NSString *)checkTelephone
+{
+    return @"1[0-9]{10}";
+}
++ (NSString *)checkCardNum
+{
+    return @"^(\\d{14}|\\d{17})(\\d|[xX])$";
+}
 @end

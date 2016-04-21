@@ -97,7 +97,7 @@
         self.components = @[dataSource];//二维数组 可以多列
         [self showPickerView:YES];
     }];
-    [[[bussinessSections rac_signalForSelector:@selector(cellNextStep)] filter:^BOOL(id value) {
+    [[[bussinessSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
         if(bussinessViewModel.computeError!=nil)
         {
             [self tip:bussinessViewModel.computeError];
@@ -107,7 +107,7 @@
     }] subscribeNext:^(RACTuple *value) {
         [self performSegueWithIdentifier:@"result" sender:bussinessViewModel.valueModel];
     }];
-    [[[publicFundSections rac_signalForSelector:@selector(cellNextStep)] filter:^BOOL(id value) {
+    [[[publicFundSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
         if(publicFundViewModel.computeError!=nil)
         {
             [self tip:publicFundViewModel.computeError];
@@ -117,7 +117,7 @@
     }] subscribeNext:^(RACTuple *value) {
         [self performSegueWithIdentifier:@"result" sender:publicFundViewModel.valueModel];
     }];
-    [[[admixtureSections rac_signalForSelector:@selector(cellNextStep)] filter:^BOOL(id value) {
+    [[[admixtureSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
         if(admixtureViewModel.computeError!=nil)
         {
             [self tip:admixtureViewModel.computeError];

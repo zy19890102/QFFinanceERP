@@ -45,7 +45,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhK-7V-mhh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1033" y="-87"/>
+            <point key="canvasLocation" x="897" y="-897"/>
         </scene>
         <!--信贷工具-->
         <scene sceneID="FA8-lu-4fP">
@@ -201,6 +201,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Za-mh-TaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1752" y="706"/>
+        </scene>
+        <!--业务办理-->
+        <scene sceneID="aqs-xC-OYa">
+            <objects>
+                <viewController id="Das-o8-RED" customClass="ZYBusinessProcessingController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UGs-6k-ksX"/>
+                        <viewControllerLayoutGuide type="bottom" id="zfd-rM-Rv0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="l81-hY-2hV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="业务办理" id="Zah-hB-rn8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6HN-EP-bjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1588" y="-93"/>
         </scene>
         <!--房贷计算器-->
         <scene sceneID="NP4-IL-Fnv">
@@ -381,11 +400,12 @@
                     <connections>
                         <outlet property="myTableView" destination="bYR-xA-jRZ" id="8oY-tm-nN8"/>
                         <segue destination="hdg-y4-FDh" kind="show" identifier="applyList" id="dhM-GE-bq7"/>
+                        <segue destination="Das-o8-RED" kind="show" identifier="processing" id="yDE-LL-Zxg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7tc-NX-DKF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1724" y="-88"/>
+            <point key="canvasLocation" x="1588" y="-898"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="sug-mU-3KU">
@@ -447,7 +467,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tCN-LN-d0d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3106" y="-842"/>
+            <point key="canvasLocation" x="2970" y="-1652"/>
         </scene>
         <!--产品列表-->
         <scene sceneID="lQc-Wn-20G">
@@ -482,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7J7-iY-lC6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2404" y="-88"/>
+            <point key="canvasLocation" x="2268" y="-898"/>
         </scene>
         <!--赎楼-->
         <scene sceneID="5f1-8W-erD">
@@ -549,7 +569,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P8u-iU-T7P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3106" y="-87"/>
+            <point key="canvasLocation" x="2970" y="-897"/>
         </scene>
         <!--房贷计算器-->
         <scene sceneID="oOJ-fr-WnS">

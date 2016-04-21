@@ -29,6 +29,7 @@
     @weakify(self)
     applyInfoBorrowerNameCell = [ZYInputCell cellWithActionBlock:^{
         @strongify(self)
+        applyInfoBorrowerNameCell.showKey = @"name";
         [self cellSearch:applyInfoBorrowerNameCell withDataSourceSignal:[ZYForeclosureHouseValueModel borrowersSignal] showKey:@"name"];
     }];
     applyInfoBorrowerNameCell.cellTitle = @"借款人";
@@ -38,6 +39,8 @@
     
     applyInfoBorrowerCardNumberCell = [ZYInputCell cellWithActionBlock:nil];
     applyInfoBorrowerCardNumberCell.cellTitle = @"身份证号";
+    applyInfoBorrowerCardNumberCell.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    applyInfoBorrowerCardNumberCell.cellRegular = [NSString checkCardNum];
     applyInfoBorrowerCardNumberCell.cellPlaceHolder = @"请输入身份证号";
     
     applyInfoBorrowerTelphoneCell = [ZYInputCell cellWithActionBlock:nil];
@@ -46,6 +49,7 @@
     
     applyInfoHousePropertyCardNumberCell = [ZYInputCell cellWithActionBlock:nil];
     applyInfoHousePropertyCardNumberCell.cellTitle = @"房产证号";
+    applyInfoHousePropertyCardNumberCell.onlyInt = YES;
     applyInfoHousePropertyCardNumberCell.cellPlaceHolder = @"请输入房产证号";
     
     applyInfoAddressCell = [ZYInputCell cellWithActionBlock:nil];
@@ -54,7 +58,7 @@
     
     ZYDoubleButtonCell *buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
-        [self cellNextStep];
+        [self cellNextStep:[self error]];
     }];
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self cellLastStep];
@@ -67,5 +71,48 @@
                                                        applyInfoAddressCell,
                                                        buttonCell]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,applyInfoBorrowerName) = RACChannelTo(applyInfoBorrowerNameCell,cellText);
+    
+    RACChannelTo(model,applyInfoBorrowerCardNumber) = RACChannelTo(applyInfoBorrowerCardNumberCell,cellText);
+    RACChannelTo(model,applyInfoBorrowerTelphone) = RACChannelTo(applyInfoBorrowerTelphoneCell,cellText);
+    RACChannelTo(model,applyInfoHousePropertyCardNumber) = RACChannelTo(applyInfoHousePropertyCardNumberCell,cellText);
+    RACChannelTo(model,applyInfoAddress) = RACChannelTo(applyInfoAddressCell,cellText);
+    
+    [RACObserve(applyInfoBorrowerNameCell, selecedObj) subscribeNext:^(id x) {
+       if([x isKindOfClass:[ZYBorrowerModel class]])
+       {
+           model.applyInfoBorrowerCardNumber = [(ZYBorrowerModel*)x cardNumber];
+           model.applyInfoBorrowerTelphone = [(ZYBorrowerModel*)x telephone];
+       }
+    }];
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[applyInfoBorrowerNameCell,
+                          applyInfoBorrowerCardNumberCell,
+                          applyInfoBorrowerTelphoneCell,
+                          applyInfoHousePropertyCardNumberCell,
+                          applyInfoAddressCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

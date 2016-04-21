@@ -61,6 +61,8 @@
     housePropertyInfoAssessmentPrice.cellTailText = @"元";
     
     ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    footCell.lineHidden = YES;
     
     ZYSection *section = [ZYSection sectionWithCells:@[housePropertyInfoName,
                                                        housePropertyInfoArea,
@@ -70,5 +72,41 @@
                                                        housePropertyInfoAssessmentPrice,
                                                        footCell]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,housePropertyInfoName) = RACChannelTo(housePropertyInfoName,cellText);
+    RACChannelTo(model,housePropertyInfoArea) = RACChannelTo(housePropertyInfoArea,cellText);
+    RACChannelTo(model,housePropertyInfoOrigePrice) = RACChannelTo(housePropertyInfoOrigePrice,cellText);
+    RACChannelTo(model,housePropertyInfoHousePropertyCardNumber) = RACChannelTo(housePropertyInfoHousePropertyCardNumber,cellText);
+    RACChannelTo(model,housePropertyInfoDealPrice) = RACChannelTo(housePropertyInfoDealPrice,cellText);
+    RACChannelTo(model,housePropertyInfoAssessmentPrice) = RACChannelTo(housePropertyInfoAssessmentPrice,cellText);
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[housePropertyInfoName,
+                          housePropertyInfoArea,
+                          housePropertyInfoOrigePrice,
+                          housePropertyInfoHousePropertyCardNumber,
+                          housePropertyInfoDealPrice,
+                          housePropertyInfoAssessmentPrice];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

@@ -40,6 +40,8 @@
         [_rightButton setTitle:@"下一步" forState:UIControlStateNormal];
         
         [_rightButton roundRectWith:_rightButton.height*ROUND_RECT_HEIGHT_RATE];
+        
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

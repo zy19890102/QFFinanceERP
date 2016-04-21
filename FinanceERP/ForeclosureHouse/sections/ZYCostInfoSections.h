@@ -10,5 +10,5 @@
 #import "ZYForeclosureHouseValueModel.h"
 
 @interface ZYCostInfoSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
 @end

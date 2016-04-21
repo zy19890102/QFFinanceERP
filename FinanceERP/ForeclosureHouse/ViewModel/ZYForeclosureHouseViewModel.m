@@ -9,5 +9,12 @@
 #import "ZYForeclosureHouseViewModel.h"
 
 @implementation ZYForeclosureHouseViewModel
-
+- (ZYForeclosureHouseValueModel*)valueModel
+{
+    if(_valueModel==nil)
+    {
+        _valueModel = [[ZYForeclosureHouseValueModel alloc] init];
+    }
+    return _valueModel;
+}
 @end

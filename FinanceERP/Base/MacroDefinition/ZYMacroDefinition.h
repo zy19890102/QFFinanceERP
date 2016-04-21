@@ -16,6 +16,7 @@
 
 #define BLUE [UIColor colorWithHexString:@"0086d1"]
 #define ORANGE [UIColor colorWithHexString:@"FF5715"]
+#define YELLOW [UIColor colorWithHexString:@"F9BF00"]
 
 #define TITLE_COLOR [UIColor colorWithHexString:@"555555"]
 #define TEXT_COLOR [UIColor colorWithHexString:@"c3c3c3"]

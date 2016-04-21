@@ -143,17 +143,17 @@
     
     RACChannelTo(calculatorPricePerCentiareCell,cellDetail) = RACChannelTo(viewModel,calculatorPricePerCentiare);
     RACChannelTo(calculatorAreaCell,cellDetail) = RACChannelTo(viewModel,calculatorArea);
-    RACChannelTo(calculatorLoanRateCell,cellDetail) = RACChannelTo(viewModel,calculatorLoanRate);
+//    RACChannelTo(calculatorLoanRateCell,cellDetail) = RACChannelTo(viewModel,calculatorLoanRate);
     RACChannelTo(calculatorBussinessTotleMoneyCell,cellDetail) = RACChannelTo(viewModel,calculatorBussinessTotleMoney);
     RACChannelTo(calculatorPublicFundsTotleMoneyCell,cellDetail) = RACChannelTo(viewModel,calculatorPublicFundsTotleMoney);
     RACChannelTo(calculatorBussinessInterestRateCell,cellDetail) = RACChannelTo(viewModel,calculatorBussinessInterestRate);
     RACChannelTo(calculatorPublicFundsInterestRateCell,cellDetail) = RACChannelTo(viewModel,calculatorPublicFundsInterestRate);
     RACChannelTo(calculatorInterestRateCell,cellDetail) = RACChannelTo(viewModel,calculatorInterestRate);
     
-    RACChannelTo(calculatorComputingFormulaCell,cellDetail) = RACChannelTo(viewModel,calculatorComputingFormula);
-    RACChannelTo(calculatorMonthsCell,cellDetail) = RACChannelTo(viewModel,calculatorMonths);
-    RACChannelTo(calculatorInterestCell,cellDetail) = RACChannelTo(viewModel,calculatorInterest);
-    RACChannelTo(calculatorPaymentTypeCell,cellDetail) = RACChannelTo(viewModel,calculatorPaymentType);
+//    RACChannelTo(calculatorComputingFormulaCell,cellDetail) = RACChannelTo(viewModel,calculatorComputingFormula);
+//    RACChannelTo(calculatorMonthsCell,cellDetail) = RACChannelTo(viewModel,calculatorMonths);
+//    RACChannelTo(calculatorInterestCell,cellDetail) = RACChannelTo(viewModel,calculatorInterest);
+//    RACChannelTo(calculatorPaymentTypeCell,cellDetail) = RACChannelTo(viewModel,calculatorPaymentType);
     
     RACChannelTo(calculatorComputingFormulaCell,selecedIndex) = RACChannelTo(viewModel,calculatorComputingFormulaSelected);
     RACChannelTo(calculatorLoanRateCell,selecedIndex) = RACChannelTo(viewModel,calculatorLoanRateSelected);
@@ -161,11 +161,27 @@
     RACChannelTo(calculatorInterestCell,selecedIndex) = RACChannelTo(viewModel,calculatorInterestSelected);
     RACChannelTo(calculatorPaymentTypeCell,selecedIndex) = RACChannelTo(viewModel,calculatorPaymentTypeSelected);
     
+    RAC(calculatorComputingFormulaCell,selecedObj) = [RACObserve(calculatorComputingFormulaCell,selecedIndex) map:^id(NSNumber *value) {
+        return [ZYCalculatorValueModel calculatorComputingFormulaArr][value.longLongValue];
+    }];
+    RAC(calculatorLoanRateCell,selecedObj) = [RACObserve(calculatorLoanRateCell,selecedIndex) map:^id(NSNumber *value) {
+        return [ZYCalculatorValueModel calculatorPaymentTypeArr][value.longLongValue];
+    }];
+    RAC(calculatorMonthsCell,selecedObj) = [RACObserve(calculatorMonthsCell,selecedIndex) map:^id(NSNumber *value) {
+        return [ZYCalculatorValueModel calculatorMonthsArr][value.longLongValue];
+    }];
+    RAC(calculatorInterestCell,selecedObj) = [RACObserve(calculatorInterestCell,selecedIndex) map:^id(NSNumber *value) {
+        return [ZYCalculatorValueModel calculatorInterestArr][value.longLongValue];
+    }];
+    RAC(calculatorPaymentTypeCell,selecedObj) = [RACObserve(calculatorPaymentTypeCell,selecedIndex) map:^id(NSNumber *value) {
+        return [ZYCalculatorValueModel calculatorLoanRateArr][value.longLongValue];
+    }];
+    
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self reset];
     }];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
-        [self cellNextStep];
+        [self cellNextStep:nil];
     }];
     [RACObserve(viewModel, calculatorComputingFormulaSelected) subscribeNext:^(id x) {
         [self reloadCells];

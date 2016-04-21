@@ -30,7 +30,9 @@
     bothSideInfoSellerNameCell.cellPlaceHolder = @"请输入卖家名称";
     
     bothSideInfoSellerCardNumberCell = [ZYInputCell cellWithActionBlock:nil];
-    bothSideInfoSellerCardNumberCell.cellTitle = @"身份证";
+    bothSideInfoSellerCardNumberCell.cellTitle = @"身份证号";
+    bothSideInfoSellerCardNumberCell.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    bothSideInfoSellerCardNumberCell.cellRegular = [NSString checkCardNum];
     bothSideInfoSellerCardNumberCell.cellPlaceHolder = @"请输入身份证号";
     
     bothSideInfoSellerTelephoneCell = [ZYInputCell cellWithActionBlock:nil];
@@ -44,9 +46,43 @@
     bothSideInfoSellerAddressCell.cellPlaceHolder = @"请输入家庭住址";
     
     ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    footCell.lineHidden = YES;
     
     ZYSection *section = [ZYSection sectionWithCells:@[bothSideInfoSellerNameCell,bothSideInfoSellerCardNumberCell,bothSideInfoSellerTelephoneCell,bothSideInfoSellerAddressCell,footCell]];
     
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,bothSideInfoSellerName) = RACChannelTo(bothSideInfoSellerNameCell,cellText);
+    RACChannelTo(model,bothSideInfoSellerCardNumber) = RACChannelTo(bothSideInfoSellerCardNumberCell,cellText);
+    RACChannelTo(model,bothSideInfoSellerTelephone) = RACChannelTo(bothSideInfoSellerTelephoneCell,cellText);
+    RACChannelTo(model,bothSideInfoSellerAddress) = RACChannelTo(bothSideInfoSellerAddressCell,cellText);
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[bothSideInfoSellerNameCell,
+                          bothSideInfoSellerCardNumberCell,
+                          bothSideInfoSellerTelephoneCell,
+                          bothSideInfoSellerAddressCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

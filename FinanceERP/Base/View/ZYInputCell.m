@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UILabel *cellTitleLabel;
 @property (strong, nonatomic) UITextField *cellTextField;
 @property (strong, nonatomic) UILabel *tailLabel;
+@property(nonatomic,assign)BOOL checkInput;///检查是否为空  用于赋值
 
 @end
 
@@ -29,6 +30,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.cellError = @"";///初始化为空字符串 防止放入数组筛选出现错误
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         _cellTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(GAP, 0, 100, [ZYInputCell defaultHeight])];
         _cellTitleLabel.textAlignment = NSTextAlignmentRight;
         _cellTitleLabel.font = FONT(14);
@@ -44,22 +48,33 @@
         _cellTextField.font = FONT(12);
         _cellTextField.textColor = TITLE_COLOR;
         [self addSubview:_cellTextField];
+        
+        _cellTextField.delegate = self;
+        @weakify(self)
+        [_cellTextField.rac_textSignal subscribeNext:^(NSString *text) {
+            @strongify(self)
+            self.cellText = text;
+            if(_checkInput)
+            {
+                [self setCellTitle:self.cellTitle];
+            }
+        }];
+        
+        [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+            if(!self.hiddenSelecedObj)
+            {
+                if([x isKindOfClass:[NSString class]])
+                {
+                    self.cellText = x;
+                }
+                else if (self.showKey.length!=0)
+                {
+                    self.cellText = [x valueForKey:self.showKey];
+                }
+            }
+        }];
     }
     return self;
-}
-
-- (void)awakeFromNib
-{
-    _cellTextField.delegate = self;
-    @weakify(self)
-    [_cellTextField.rac_textSignal subscribeNext:^(NSString *text) {
-        @strongify(self)
-        self.cellText = text;
-        if(_checkInput)
-        {
-            [self setCellTitle:self.cellTitle];
-        }
-    }];
 }
 - (void)setOnlyFloat:(BOOL)onlyFloat
 {
@@ -94,6 +109,27 @@
 {
     _cellTitle = cellTitle;
     _cellTitleLabel.text = cellTitle;
+
+    BOOL isValid = YES;
+    if(self.cellRegular.length!=0&&_cellText.length!=0)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", self.cellRegular];
+        isValid = [predicate evaluateWithObject:_cellText];
+        if(!isValid)
+        {
+            NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",cellTitle]];
+            [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, attrStr.length)];
+            _cellTitleLabel.attributedText = attrStr;
+            self.cellError = [NSString stringWithFormat:@"请输入正确的%@",cellTitle];
+        }
+        else
+        {
+            self.cellError = @"";
+        }
+        return;
+    }
+    
+    
     if(!_cellNullable)
     {
         if(!_checkInput||(_checkInput&&_cellText.length!=0))///需要检查是否为空
@@ -101,19 +137,20 @@
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",cellTitle]];
             [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
             _cellTitleLabel.attributedText = attrStr;
-            self.available = YES;
+            self.cellError = @"";
         }
         else
         {
             NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"* %@",cellTitle]];
             [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, attrStr.length)];
             _cellTitleLabel.attributedText = attrStr;
-            self.available = NO;
+            self.cellError = self.cellPlaceHolder==nil?[NSString stringWithFormat:@"请输入%@",cellTitle]:self.cellPlaceHolder;
         }
     }
     else
     {
         _cellTitleLabel.text = cellTitle;
+        self.cellError = @"";
     }
 }
 - (void)setCellNullable:(BOOL)cellNullable
@@ -203,12 +240,25 @@
     }
     return YES;
 }
-- (void)setCheckInput:(BOOL)checkInput
+- (NSString*)checkInput:(BOOL)checkInput
 {
     _checkInput = checkInput;
     if(_checkInput)
     {
         [self setCellTitle:self.cellTitle];
+    }
+    return self.cellError;
+}
+- (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+    [super setAccessoryType:accessoryType];
+    if(accessoryType!=UITableViewCellAccessoryNone)
+    {
+        _cellTextField.width = FUll_SCREEN_WIDTH-4*GAP-_cellTitleLabel.width-_tailLabel.width-80;
+    }
+    else
+    {
+        _cellTextField.width = FUll_SCREEN_WIDTH-4*GAP-_cellTitleLabel.width-_tailLabel.width;
     }
 }
 @end

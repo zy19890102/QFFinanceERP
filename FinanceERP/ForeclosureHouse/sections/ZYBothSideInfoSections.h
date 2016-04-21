@@ -7,7 +7,8 @@
 //
 
 #import "ZYSections.h"
-
+#import "ZYForeclosureHouseValueModel.h"
 @interface ZYBothSideInfoSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
+@property(nonatomic,strong)NSString *error;
 @end

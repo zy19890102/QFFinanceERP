@@ -122,7 +122,9 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
             case 0:
                 [self performSegueWithIdentifier:@"applyList" sender:nil];
                 break;
-                
+            case 1:
+                [self performSegueWithIdentifier:@"processing" sender:nil];
+                break;
             default:
                 break;
         }

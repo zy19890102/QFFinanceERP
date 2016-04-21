@@ -10,5 +10,6 @@
 #import "ZYForeclosureHouseValueModel.h"
 
 @interface ZYOriginalBankSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
+@property(nonatomic,strong)NSString *error;
 @end

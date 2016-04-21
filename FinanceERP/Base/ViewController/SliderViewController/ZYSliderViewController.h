@@ -41,5 +41,10 @@ typedef enum : NSUInteger {
 
 - (void)changePage:(NSInteger)index;
 
+- (void)nextPage;
+- (void)lastPage;
+
 - (void)reloadTableViewAtIndex:(NSInteger)index;
+
+- (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex page:(NSInteger)page;
 @end

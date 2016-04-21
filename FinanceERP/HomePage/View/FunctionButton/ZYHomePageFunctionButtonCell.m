@@ -42,6 +42,7 @@
             [button setTitle:titleArr[idx] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(functionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:button];
+            button.tag = idx;
         }];
     }
     return self;

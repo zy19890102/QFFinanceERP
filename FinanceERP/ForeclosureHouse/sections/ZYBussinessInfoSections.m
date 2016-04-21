@@ -10,7 +10,7 @@
 
 @implementation ZYBussinessInfoSections
 {
-    ZYSegmentedCell *bussinessInfoComeFromTypeCell;
+    ZYSelectCell *bussinessInfoComeFromTypeCell;
     ZYSelectCell *bussinessInfoComeFromTypeSubCell;
     
     ZYInputCell *bussinessInfoAreaCell;
@@ -23,6 +23,11 @@
     ZYInputCell *bussinessInfoTelephoneCell;
     ZYSegmentedCell *bussinessInfoOrderTypeCell;
     ZYSegmentedCell *bussinessInfoTransactionTypeCell;
+    
+    NSInteger bankIndex;
+    NSInteger cooperativeOrganizationIndex;
+    NSInteger intermediaryIndex;
+
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
@@ -34,36 +39,39 @@
 }
 - (void)initSection
 {
-
-    bussinessInfoComeFromTypeCell = [ZYSegmentedCell cellWithActionBlock:nil];
-    bussinessInfoComeFromTypeCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    bussinessInfoComeFromTypeCell.lineHidden = YES;
-    bussinessInfoComeFromTypeCell.cellSegmentedTitles = [ZYForeclosureHouseValueModel foreclosureHouseBussinessInfoComeFromArr];
+    bussinessInfoComeFromTypeCell = [ZYSelectCell cellWithActionBlock:^{
+        [self cellPicker:bussinessInfoComeFromTypeCell withDataSource:[ZYForeclosureHouseValueModel foreclosureHouseBussinessInfoComeFromArr] showKey:nil];
+    }];
+    bussinessInfoComeFromTypeCell.showKey = @"name";
     bussinessInfoComeFromTypeCell.cellTitle = @"业务来源";
     
     @weakify(self)
     bussinessInfoComeFromTypeSubCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
-        switch (bussinessInfoComeFromTypeCell.cellSegmentedSelecedIndex) {
+        switch (bussinessInfoComeFromTypeCell.selecedIndex) {
             case ZYForeclosureHouseBussinessInfoComeFromBank:
             {
-                [self cellSearch:bussinessInfoComeFromTypeCell withDataSourceSignal:[ZYForeclosureHouseValueModel bankSearchSignal] showKey:@"name"];///银行数据较多 跳转可搜索页面
+                bussinessInfoComeFromTypeSubCell.showKey = @"name";
+                [self cellSearch:bussinessInfoComeFromTypeSubCell withDataSourceSignal:[ZYForeclosureHouseValueModel bankSearchSignal] showKey:@"name"];///银行数据较多 跳转可搜索页面
             }
                 break;
             case ZYForeclosureHouseBussinessInfoComeFromCooperativeOrganization:
             {
-                [self cellPicker:bussinessInfoComeFromTypeCell withDataSourceSignal:[ZYForeclosureHouseValueModel cooperativeOrganizationArrSignal] showKey:@"name"];
+                bussinessInfoComeFromTypeSubCell.showKey = @"name";
+                [self cellPicker:bussinessInfoComeFromTypeSubCell withDataSourceSignal:[ZYForeclosureHouseValueModel cooperativeOrganizationArrSignal] showKey:@"name"];
             }
                 break;
             case ZYForeclosureHouseBussinessInfoComeFromIntermediary:
             {
-                [self cellPicker:bussinessInfoComeFromTypeCell withDataSourceSignal:[ZYForeclosureHouseValueModel intermediaryArrSignal] showKey:@"name"];
+                bussinessInfoComeFromTypeSubCell.showKey = @"name";
+                [self cellPicker:bussinessInfoComeFromTypeSubCell withDataSourceSignal:[ZYForeclosureHouseValueModel intermediaryArrSignal] showKey:@"name"];
             }
                 break;
             default:
                 break;
         }
     }];
+    RACChannelTo_(bussinessInfoComeFromTypeSubCell,cellTitle,@"") = RACChannelTo_(bussinessInfoComeFromTypeCell,cellText,@"");
     
     ZYSection *comeFromTypeSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeCell]];//单独一个section 便于折叠
     ZYSection *comeFromTypeSubSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeSubCell]];
@@ -85,7 +93,7 @@
     
     bussinessInfoDateCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
-        [self cellDatePicker:bussinessInfoDateCell];
+        [self cellDatePicker:bussinessInfoDateCell onlyFutura:YES];
     }];
     bussinessInfoDateCell.cellTitle = @"计划放款日期";
     
@@ -121,7 +129,7 @@
     
     ZYSingleButtonCell *buttonCell = [ZYSingleButtonCell cellWithActionBlock:nil];
     [buttonCell.buttonPressedSignal subscribeNext:^(id x) {
-        [self cellNextStep];
+        [self cellNextStep:[self error]];
     }];
     
     ZYSection *section = [ZYSection sectionWithCells:@[bussinessInfoAreaCell,bussinessInfoLoanMoneyCell,bussinessInfoDaysCell,bussinessInfoDateCell,bussinessInfoAccountCell,bussinessInfoUsernameCell,bussinessInfoLinkmanCell,bussinessInfoTelephoneCell,bussinessInfoOrderTypeCell,bussinessInfoTransactionTypeCell,buttonCell]];
@@ -130,6 +138,116 @@
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    RACChannelTo(model,bussinessInfoComeFromType) = RACChannelTo(bussinessInfoComeFromTypeCell,selecedIndex);
+    bussinessInfoComeFromTypeCell.hiddenSelecedObj = YES;//手动让选择项显示在cell上 便于初始化
+    [[RACObserve(model,bussinessInfoComeFromType) skip:1] subscribeNext:^(NSNumber *index) {
+        bussinessInfoComeFromTypeCell.cellText = [ZYForeclosureHouseValueModel foreclosureHouseBussinessInfoComeFromArr][index.longLongValue];
+        switch (bussinessInfoComeFromTypeCell.selecedIndex) {
+            case ZYForeclosureHouseBussinessInfoComeFromBank:
+                bussinessInfoComeFromTypeSubCell.selecedIndex = bankIndex;
+                bussinessInfoComeFromTypeSubCell.selecedObj = model.bussinessInfoComeFromBank;
+                break;
+            case ZYForeclosureHouseBussinessInfoComeFromCooperativeOrganization:
+                bussinessInfoComeFromTypeSubCell.selecedIndex = cooperativeOrganizationIndex;
+                bussinessInfoComeFromTypeSubCell.selecedObj = model.bussinessInfoComeFromCooperativeOrganization;
+                break;
+            case ZYForeclosureHouseBussinessInfoComeFromIntermediary:
+                bussinessInfoComeFromTypeSubCell.selecedIndex = intermediaryIndex;
+                bussinessInfoComeFromTypeSubCell.selecedObj = model.bussinessInfoComeFromIntermediary;
+                break;
+            default:
+                break;
+        }
+        
+    }];
     
+    RACChannelTerminal *channelA = RACChannelTo(bussinessInfoComeFromTypeSubCell,selecedObj);
+    RACChannelTerminal *channelB = RACChannelTo(model,bussinessInfoComeFromBank);
+    [[channelA filter:^BOOL(id value) {
+        if(model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromBank)
+        {
+            bankIndex = bussinessInfoComeFromTypeSubCell.selecedIndex;
+            return YES;
+        }
+        return NO;
+    }] subscribe:channelB];
+    [channelB subscribe:channelA];
+    
+    channelA = RACChannelTo(bussinessInfoComeFromTypeSubCell,selecedObj);
+    channelB = RACChannelTo(model,bussinessInfoComeFromCooperativeOrganization);
+    [[channelA filter:^BOOL(id value) {
+        if(model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromCooperativeOrganization)
+        {
+            cooperativeOrganizationIndex = bussinessInfoComeFromTypeSubCell.selecedIndex;
+            return YES;
+        }
+        return NO;
+    }] subscribe:channelB];
+    [channelB subscribe:channelA];
+    
+    channelA = RACChannelTo(bussinessInfoComeFromTypeSubCell,selecedObj);
+    channelB = RACChannelTo(model,bussinessInfoComeFromIntermediary);
+    [[channelA filter:^BOOL(id value) {
+        if(model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromIntermediary)
+        {
+            intermediaryIndex = bussinessInfoComeFromTypeSubCell.selecedIndex;
+            return YES;
+        }
+        return NO;
+    }] subscribe:channelB];
+    [channelB subscribe:channelA];
+    
+    [RACObserve(model, bussinessInfoComeFromType) subscribeNext:^(id x) {
+        if(model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromBank||model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromCooperativeOrganization||model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromIntermediary)
+        {
+            [self showSection:YES sectionIndex:1];
+        }
+        else
+        {
+            [self showSection:NO sectionIndex:1];
+        }
+    }];
+    
+    RACChannelTo(model,bussinessInfoArea) = RACChannelTo(bussinessInfoAreaCell,cellText);
+    RACChannelTo(model,bussinessInfoLoanMoney) = RACChannelTo(bussinessInfoLoanMoneyCell,cellText);
+    RACChannelTo(model,bussinessInfoDays) = RACChannelTo(bussinessInfoDaysCell,cellText);
+    RACChannelTo(model,bussinessInfoDate) = RACChannelTo(bussinessInfoDateCell,selecedObj);
+    RACChannelTo(model,bussinessInfoAccount) = RACChannelTo(bussinessInfoAccountCell,cellText);
+    RACChannelTo(model,bussinessInfoUsername) = RACChannelTo(bussinessInfoUsernameCell,cellText);
+    RACChannelTo(model,bussinessInfoLinkman) = RACChannelTo(bussinessInfoLinkmanCell,cellText);
+    RACChannelTo(model,bussinessInfoTelephone) = RACChannelTo(bussinessInfoTelephoneCell,cellText);
+    RACChannelTo(model,bussinessInfoOrderType) = RACChannelTo(bussinessInfoOrderTypeCell,cellSegmentedSelecedIndex);
+    RACChannelTo(model,bussinessInfoTransactionType) = RACChannelTo(bussinessInfoTransactionTypeCell,cellSegmentedSelecedIndex);
+
+    
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[bussinessInfoComeFromTypeSubCell,
+                          bussinessInfoAreaCell,
+                          bussinessInfoLoanMoneyCell,
+                          bussinessInfoDaysCell,
+                          bussinessInfoAccountCell,
+                          bussinessInfoUsernameCell,
+                          bussinessInfoLinkmanCell,
+                          bussinessInfoTelephoneCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

@@ -11,5 +11,5 @@
 
 
 @interface ZYApplyInfoSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
 @end

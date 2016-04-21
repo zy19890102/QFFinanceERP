@@ -19,7 +19,24 @@
 
 
 #pragma mark - set method
-
+- (void)awakeFromNib
+{
+    @weakify(self)
+    [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+        @strongify(self)
+        if(!self.hiddenSelecedObj)
+        {
+            if([x isKindOfClass:[NSString class]])
+            {
+                self.cellDetail = x;
+            }
+            else if (self.showKey.length!=0)
+            {
+                self.cellDetail = [x valueForKey:self.showKey];
+            }
+        }
+    }];
+}
 - (void)setCellTitle:(NSString *)cellTitle
 {
     _cellTitle = cellTitle;

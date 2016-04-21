@@ -43,12 +43,13 @@
         @strongify(self)
         [self cellSearch:newBankCell withDataSourceSignal:[ZYForeclosureHouseValueModel bankSearchSignal] showKey:@"name"];
     }];
+    newBankCell.showKey = @"name";
     newBankCell.cellTitle = @"新贷款银行";
     
     newBankLoanMoneyCell = [ZYInputCell cellWithActionBlock:nil];
     newBankLoanMoneyCell.cellTitle = @"新贷款金额";
-    newBankLoanMoneyCell.onlyInt = YES;
-    newBankLoanMoneyCell.maxLength = 20;
+    newBankLoanMoneyCell.onlyFloat = YES;
+    newBankLoanMoneyCell.maxLength = 11;
     newBankLoanMoneyCell.cellTailText = @"元";
     newBankLoanMoneyCell.cellPlaceHolder = @"请输入新贷款金额";
     
@@ -60,6 +61,7 @@
     newBankTelephoneCell = [ZYInputCell cellWithActionBlock:nil];
     newBankTelephoneCell.cellTitle = @"联系电话";
     newBankTelephoneCell.maxLength = 11;
+    newBankTelephoneCell.cellRegular = [NSString checkTelephone];
     newBankTelephoneCell.cellNullable = YES;
     newBankTelephoneCell.onlyInt = YES;
     newBankTelephoneCell.cellPlaceHolder = @"请输入联系电话";
@@ -70,6 +72,7 @@
     
     newBankForeclosureAccountCell = [ZYInputCell cellWithActionBlock:nil];
     newBankForeclosureAccountCell.cellTitle = @"赎楼账号";
+    newBankForeclosureAccountCell.maxLength = 20;
     newBankForeclosureAccountCell.cellPlaceHolder = @"请输入赎楼账号";
     newBankForeclosureAccountCell.onlyInt = YES;
     
@@ -77,13 +80,14 @@
         @strongify(self)
         [self cellSearch:newBankPublicFundBankCell withDataSourceSignal:[ZYForeclosureHouseValueModel bankSearchSignal] showKey:@"name"];
     }];
+    newBankPublicFundBankCell.showKey = @"name";
     newBankPublicFundBankCell.cellTitle = @"公积金银行";
     newBankPublicFundBankCell.cellNullable = YES;
     
     newBankPublicFundMoneyCell = [ZYInputCell cellWithActionBlock:nil];
     newBankPublicFundMoneyCell.cellTitle = @"公积金贷款额";
     newBankPublicFundMoneyCell.onlyFloat = YES;
-    newBankPublicFundMoneyCell.maxLength = 20;
+    newBankPublicFundMoneyCell.maxLength = 11;
     newBankPublicFundMoneyCell.cellNullable = YES;
     newBankPublicFundMoneyCell.cellPlaceHolder = @"请输入公积金贷款金额";
     
@@ -93,26 +97,32 @@
     
     newBankSuperviseMoneyCell = [ZYInputCell cellWithActionBlock:nil];
     newBankSuperviseMoneyCell.cellTitle = @"资金监管金额";
+    newBankSuperviseMoneyCell.onlyFloat = YES;
+    newBankSuperviseMoneyCell.maxLength = 11;
     newBankSuperviseMoneyCell.cellPlaceHolder = @"请输入资金监管金额";
     
     newBankSuperviseAccountCell = [ZYInputCell cellWithActionBlock:nil];
     newBankSuperviseAccountCell.cellTitle = @"资金监管帐号";
+    newBankSuperviseAccountCell.onlyInt = YES;
+    newBankSuperviseAccountCell.maxLength = 20;
     newBankSuperviseAccountCell.cellPlaceHolder = @"请输入资金监管帐号";
     
     newBankJusticeDateCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
-        [self cellDatePicker:newBankJusticeDateCell];
+        [self cellDatePicker:newBankJusticeDateCell onlyFutura:NO];
     }];
     newBankJusticeDateCell.cellTitle = @"委托公证日期";
     
     newBankContractDateCell = [ZYSelectCell cellWithActionBlock:^{
         @strongify(self)
-        [self cellDatePicker:newBankContractDateCell];
+        [self cellDatePicker:newBankContractDateCell onlyFutura:NO];
     }];
     newBankContractDateCell.cellTitle = @"签署合同日期";
     
     
     ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    footCell.lineHidden = YES;
     
     ZYSection *section = [ZYSection sectionWithCells:@[newBankCell,
                                                        newBankLoanMoneyCell,
@@ -128,5 +138,56 @@
                                                        newBankJusticeDateCell,
                                                        newBankContractDateCell,footCell]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,bank) = RACChannelTo(newBankCell,selecedObj);
+    RACChannelTo(model,bankLoanType) = RACChannelTo(newBankLoanTypeCell,cellSegmentedSelecedIndex);
+    RACChannelTo(model,bankPublicFundBank) = RACChannelTo(newBankPublicFundBankCell,selecedObj);
+    RACChannelTo(model,bankJusticeDate) = RACChannelTo(newBankJusticeDateCell,selecedObj);
+    RACChannelTo(model,bankContractDate) = RACChannelTo(newBankContractDateCell,selecedObj);
+    
+    RACChannelTo(model,bankLoanMoney) = RACChannelTo(newBankLoanMoneyCell,cellText);
+    RACChannelTo(model,bankLinkman) = RACChannelTo(newBankLinkmanCell,cellText);
+    RACChannelTo(model,bankTelephone) = RACChannelTo(newBankTelephoneCell,cellText);
+    RACChannelTo(model,bankForeclosureAccount) = RACChannelTo(newBankForeclosureAccountCell,cellText);
+    RACChannelTo(model,bankPublicFundMoney) = RACChannelTo(newBankPublicFundMoneyCell,cellText);
+    RACChannelTo(model,bankSuperviseOrganization) = RACChannelTo(newBankSuperviseOrganizationCell,cellText);
+    RACChannelTo(model,bankSuperviseMoney) = RACChannelTo(newBankSuperviseMoneyCell,cellText);
+    RACChannelTo(model,bankSuperviseAccount) = RACChannelTo(newBankSuperviseAccountCell,cellText);
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[newBankCell,
+                          newBankLoanMoneyCell,
+                          newBankLinkmanCell,
+                          newBankTelephoneCell,
+                          newBankLoanTypeCell,
+                          newBankForeclosureAccountCell,
+                          newBankPublicFundBankCell,
+                          newBankPublicFundMoneyCell,
+                          newBankSuperviseOrganizationCell,
+                          newBankSuperviseMoneyCell,
+                          newBankSuperviseAccountCell,
+                          newBankJusticeDateCell,
+                          newBankContractDateCell,];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

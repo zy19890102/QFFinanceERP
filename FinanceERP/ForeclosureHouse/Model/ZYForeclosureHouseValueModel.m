@@ -9,7 +9,32 @@
 #import "ZYForeclosureHouseValueModel.h"
 
 @implementation ZYForeclosureHouseValueModel
-
+- (void)reset
+{
+    self.bussinessInfoComeFromType = ZYForeclosureHouseBussinessInfoComeFromBank;
+    self.bussinessInfoOrderType = ZYForeclosureHouseBussinessInfoOrderInside;
+    self.bussinessInfoTransactionType = ZYForeclosureHouseBussinessInfoTransaction;
+    
+    self.bussinessInfoDate = [NSDate date];
+    self.originalBankLoanEndTime = [NSDate date];
+    self.bankLoanType = ZYBankLoanTypeBussiness;
+    self.bankJusticeDate = [NSDate date];
+    self.bankContractDate = [NSDate date];
+    self.costInfoChargeType = ZYCostInfoChargeTypeBeforeLoan;
+    self.orderInfoPowerOfAttorney = 0;
+    self.orderInfoPowerOfAttorneyCopy = 0;
+    self.orderInfoIdentificationCard = 0;
+    self.orderInfoIdentificationCardCopy = 0;
+    self.orderInfoCardForBuilding = 0;
+    self.orderInfoCardForBuildingCopy = 0;
+    self.orderInfoBankbook = 0;
+    self.orderInfoBankbookCopy = 0;
+    self.orderInfoSecurityAgreement = 0;
+    self.orderInfoSecurityAgreementCopy = 0;
+    self.orderInfoMortgageContract = 0;
+    self.orderInfoMortgageContractCopy = 0;
+    self.applicationDate = [NSDate date];
+}
 + (NSArray*)foreclosureHouseBussinessInfoComeFromArr
 {
     return @[@"银行",@"中介",@"朋友",@"合作机构"];

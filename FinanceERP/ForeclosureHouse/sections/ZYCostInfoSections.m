@@ -61,12 +61,57 @@
     costInfoCommissionCell.onlyFloat = YES;
     costInfoCommissionCell.cellTailText = @"元";
     
+    ZYDoubleButtonCell *buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
+    [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
+        [self cellNextStep:[self error]];
+    }];
+    [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
+        [self cellLastStep];
+    }];
+    
     ZYSection *section = [ZYSection sectionWithCells:@[costInfoChargeTypeCell,
                                                        costInfoInterestIncomeCell,
                                                        costInfoPoundageCell,
                                                        costInfoWaitForCostingCell,
                                                        costInfoSubsidyCell,
-                                                       costInfoCommissionCell]];
+                                                       costInfoCommissionCell,
+                                                       buttonCell
+                                                       ]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,costInfoChargeType) = RACChannelTo(costInfoChargeTypeCell,cellSegmentedSelecedIndex);
+    RACChannelTo(model,costInfoInterestIncome) = RACChannelTo(costInfoInterestIncomeCell,cellText);
+    RACChannelTo(model,costInfoPoundage) = RACChannelTo(costInfoPoundageCell,cellText);
+    RACChannelTo(model,costInfoWaitForCosting) = RACChannelTo(costInfoWaitForCostingCell,cellText);
+    RACChannelTo(model,costInfoSubsidy) = RACChannelTo(costInfoSubsidyCell,cellText);
+    RACChannelTo(model,costInfoCommission) = RACChannelTo(costInfoCommissionCell,cellText);
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[costInfoInterestIncomeCell,
+                          costInfoPoundageCell,
+                          costInfoWaitForCostingCell,
+                          costInfoSubsidyCell,
+                          costInfoCommissionCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

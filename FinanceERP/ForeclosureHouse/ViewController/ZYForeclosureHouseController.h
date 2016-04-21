@@ -7,7 +7,8 @@
 //
 
 #import "ZYSliderViewController.h"
+#import "ZYForeclosureHouseViewModel.h"
 
 @interface ZYForeclosureHouseController : ZYSliderViewController
-
+ZY_VIEW_MODEL_PROPERTY(ZYForeclosureHouseViewModel)
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ZYApplicationSections.h"
+
 #import "ZYForeclosureHouseApplicationContentCell.h"
 
 @implementation ZYApplicationSections
@@ -27,16 +28,23 @@
 }
 - (void)initSection
 {
+    @weakify(self)
     applicationDateCell = [ZYSelectCell cellWithActionBlock:^{
+        @strongify(self)
+        [self cellDatePicker:applicationDateCell onlyFutura:YES];
     }];
     applicationDateCell.cellTitle = @"申请日期";
     
     applicationLinkmanCell = [ZYInputCell cellWithActionBlock:nil];
     applicationLinkmanCell.cellTitle = @"联系人";
+    applicationLinkmanCell.maxLength = 5;
     applicationLinkmanCell.cellPlaceHolder = @"请输入联系人";
     
     applicationTelephoneCell = [ZYInputCell cellWithActionBlock:nil];
     applicationTelephoneCell.cellTitle = @"联系电话";
+    applicationTelephoneCell.onlyInt = YES;
+    applicationTelephoneCell.maxLength = 11;
+    applicationTelephoneCell.cellRegular = [NSString checkTelephone];
     applicationTelephoneCell.cellPlaceHolder = @"请输入联系电话";
     
     applicationExplainCell = [ZYForeclosureHouseApplicationContentCell cellWithActionBlock:nil];
@@ -45,11 +53,72 @@
     applicationRemarksCell = [ZYForeclosureHouseApplicationContentCell cellWithActionBlock:nil];
     applicationRemarksCell.cellTitle = @"备注";
     
+    ZYSeveralButtonCell *buttonCell = [ZYSeveralButtonCell cellWithActionBlock:nil];
+    [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
+        [self submit:[self error]];
+    }];
+    [buttonCell.midButtonPressedSignal subscribeNext:^(id x) {
+        [self save:[self error]];
+    }];
+    [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
+        [self cellLastStep];
+    }];
+    
     ZYSection *section = [ZYSection sectionWithCells:@[applicationDateCell,
                                                        applicationLinkmanCell,
                                                        applicationTelephoneCell,
                                                        applicationExplainCell,
-                                                       applicationRemarksCell]];
+                                                       applicationRemarksCell,buttonCell]];
     self.sections = @[section];
+}
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model
+{
+    RACChannelTo(model,applicationDate) = RACChannelTo(applicationDateCell,selecedObj);
+    RACChannelTo(model,applicationLinkman) = RACChannelTo(applicationLinkmanCell,cellText);
+    RACChannelTo(model,applicationTelephone) = RACChannelTo(applicationTelephoneCell,cellText);
+    RACChannelTo(model,applicationExplain) = RACChannelTo(applicationExplainCell,cellContent);
+    RACChannelTo(model,applicationRemarks) = RACChannelTo(applicationRemarksCell,cellContent);
+}
+- (void)save:(NSString*)error{}
+- (RACSignal*)saveSignal
+{
+    if(_saveSignal==nil)
+    {
+        _saveSignal = [self rac_signalForSelector:@selector(save:)];
+    }
+    return _saveSignal;
+}
+- (void)submit:(NSString*)error{}
+- (RACSignal*)submitSignal
+{
+    if(_submitSignal==nil)
+    {
+        _submitSignal = [self rac_signalForSelector:@selector(submit:)];
+    }
+    return _submitSignal;
+}
+- (NSString*)error
+{
+    NSArray *errorArr = @[applicationDateCell,
+                          applicationLinkmanCell,
+                          applicationTelephoneCell];
+    NSString *result = nil;
+    for(id cell in errorArr)
+    {
+        if([cell respondsToSelector:@selector(checkInput:)])
+        {
+            NSString *error  = [cell checkInput:YES];
+            if(error.length>0&&result==nil)
+                result = error;
+            else
+                continue;
+        }
+        else
+        {
+            continue;
+        }
+    }
+    errorArr = nil;
+    return result;
 }
 @end

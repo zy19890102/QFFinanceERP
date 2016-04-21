@@ -7,7 +7,7 @@
 //
 
 #import "ZYViewModel.h"
-
+#import "ZYForeclosureHouseValueModel.h"
 @interface ZYForeclosureHouseViewModel : ZYViewModel
-
+@property(nonatomic,strong)ZYForeclosureHouseValueModel *valueModel;
 @end

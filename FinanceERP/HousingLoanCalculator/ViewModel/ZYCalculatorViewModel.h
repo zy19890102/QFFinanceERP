@@ -36,19 +36,19 @@
 /**
  * Selected于数据model绑定 并且有一个与之对应的string类型绑定 更改seleced 可以更改model 和 对应的string 同时对应的string又与页面展现绑定 从而修改了页面
  */
-@property(nonatomic,strong)NSString *calculatorComputingFormula;
+//@property(nonatomic,strong)NSString *calculatorComputingFormula;
 @property(nonatomic,assign)ZYCalculatorComputingType calculatorComputingFormulaSelected;
 
-@property(nonatomic,strong)NSString *calculatorMonths;
+//@property(nonatomic,strong)NSString *calculatorMonths;
 @property(nonatomic,assign)NSInteger calculatorMonthsSelected;///期数
 
-@property(nonatomic,strong)NSString *calculatorInterest;
+//@property(nonatomic,strong)NSString *calculatorInterest;
 @property(nonatomic,assign)ZYCalculatorInterestType calculatorInterestSelected;///贷款折数
 
-@property(nonatomic,strong)NSString *calculatorPaymentType;
+//@property(nonatomic,strong)NSString *calculatorPaymentType;
 @property(nonatomic,assign)ZYCalculatorPaymentType calculatorPaymentTypeSelected;
 
-@property(nonatomic,strong)NSString *calculatorLoanRate;
+//@property(nonatomic,strong)NSString *calculatorLoanRate;
 @property(nonatomic,assign)NSInteger calculatorLoanRateSelected;///按揭成数 0为7成 － 6为1成
 
 + (ZYCalculatorViewModel*)viewModelWithType:(ZYCalculatorType)type;

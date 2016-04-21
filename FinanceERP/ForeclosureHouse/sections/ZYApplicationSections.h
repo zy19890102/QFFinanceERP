@@ -7,7 +7,10 @@
 //
 
 #import "ZYSections.h"
+#import "ZYForeclosureHouseValueModel.h"
 
 @interface ZYApplicationSections : ZYSections
-
+- (void)blendModel:(ZYForeclosureHouseValueModel*)model;
+@property(nonatomic,strong)RACSignal *saveSignal;
+@property(nonatomic,strong)RACSignal *submitSignal;
 @end

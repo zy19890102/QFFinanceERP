@@ -28,6 +28,22 @@
     [_cellTextField.rac_textSignal subscribeNext:^(NSString *text) {
         self.cellDetail = text;
     }];
+    
+    @weakify(self)
+    [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+        @strongify(self)
+        if(!self.hiddenSelecedObj)
+        {
+            if([x isKindOfClass:[NSString class]])
+            {
+                self.cellDetail = x;
+            }
+            else if (self.showKey.length!=0)
+            {
+                self.cellDetail = [x valueForKey:self.showKey];
+            }
+        }
+    }];
 }
 - (RACSignal*)inputTextSignal
 {

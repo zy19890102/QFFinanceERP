@@ -127,7 +127,26 @@
         return;
     [self.scrollView setContentOffset:CGPointMake(index*width, 0) animated:YES];
 }
-
+- (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex page:(NSInteger)page
+{
+    ZYTableViewController *tableCtl = [tableViewArr objectAtIndex:page];
+    if([tableCtl isKindOfClass:[ZYTableViewController class]])
+    {
+        [tableCtl showSection:show sectionIndex:sectionIndex];
+    }
+}
+- (void)nextPage
+{
+    if(currentPage==totalNumber-1)
+        return;
+    [self changePage:currentPage+1];
+}
+- (void)lastPage
+{
+    if(currentPage==0)
+        return;
+    [self changePage:currentPage-1];
+}
 #pragma mark - 重写以下方法
 
 - (NSInteger)countOfControllerSliderController:(ZYSliderViewController*)controller
