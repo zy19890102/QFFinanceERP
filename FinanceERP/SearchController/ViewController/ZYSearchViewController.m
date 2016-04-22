@@ -9,7 +9,7 @@
 #import "ZYSearchViewController.h"
 #import "ZYTableViewCell.h"
 #import "ZYBankModel.h"
-
+#import "ZYSearchCleanCell.h"
 @interface ZYSearchViewController ()<UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,weak)IBOutlet UITableView *tableView;
@@ -47,6 +47,16 @@
        [_searchBar becomeFirstResponder];
     }
     [self searchBar:_searchBar textDidChange:_searchBar.text];
+    if(_netSearch)
+    {
+        ZYSearchCleanCell *cell = [[ZYSearchCleanCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        [cell.cleanButtonPressedSignal subscribeNext:^(id x) {
+            [self.viewModel cleanButtonPressed];
+            self.viewModel.dataSourceArr = nil;
+            [self.tableView reloadData];
+        }];
+        self.tableView.tableFooterView = cell;
+    }
 }
 - (void)blendViewModel
 {
@@ -172,6 +182,7 @@
         return self.viewModel.initialArr;
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

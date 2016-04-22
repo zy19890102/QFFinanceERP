@@ -36,4 +36,7 @@
  */
 @property(nonatomic,strong)RACSignal *keyboardSearchButtonPressedSignal;
 - (void)keyboardSearchButtonPressed:(NSString*)keyword;
+
+@property(nonatomic,strong)RACSignal *cleanButtonPressedSignal;
+- (void)cleanButtonPressed;
 @end

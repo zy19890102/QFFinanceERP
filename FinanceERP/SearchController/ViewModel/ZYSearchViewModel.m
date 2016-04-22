@@ -107,4 +107,16 @@
     }
     return _keyboardSearchButtonPressedSignal;
 }
+- (void)cleanButtonPressed{}
+- (RACSignal*)cleanButtonPressedSignal
+{
+    if(_cleanButtonPressedSignal==nil)
+    {
+        _cleanButtonPressedSignal = [[self rac_signalForSelector:@selector(cleanButtonPressed)] map:^id(RACTuple *value) {
+            return value.first;
+        }];
+    }
+    return _cleanButtonPressedSignal;
+}
+
 @end
