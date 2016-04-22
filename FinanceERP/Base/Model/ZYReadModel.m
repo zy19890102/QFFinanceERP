@@ -1,23 +1,22 @@
 //
-//  ZYStoreModel.m
+//  ZYReadModel.m
 //  FinanceERP
 //
-//  Created by zhangyu on 16/4/7.
+//  Created by zhangyu on 16/4/22.
 //  Copyright © 2016年 张昱. All rights reserved.
 //
 
-#import "ZYStoreModel.h"
+#import "ZYReadModel.h"
 
-@implementation ZYStoreModel
-
+@implementation ZYReadModel
 + (LKDBHelper*)getUsingLKDBHelper
 {
     static LKDBHelper* helper;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        helper = [[LKDBHelper alloc] init];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"QFDB" ofType:@"db"];
+        helper = [[LKDBHelper alloc] initWithDBPath:path];
     });
     return helper;
 }
-
 @end

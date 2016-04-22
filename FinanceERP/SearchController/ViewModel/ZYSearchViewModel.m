@@ -96,5 +96,15 @@
     }];
     return signal;
 }
-
+- (void)keyboardSearchButtonPressed:(NSString*)keyword{}
+- (RACSignal*)keyboardSearchButtonPressedSignal
+{
+    if(_keyboardSearchButtonPressedSignal==nil)
+    {
+        _keyboardSearchButtonPressedSignal = [[self rac_signalForSelector:@selector(keyboardSearchButtonPressed:)] map:^id(RACTuple *value) {
+            return value.first;
+        }];
+    }
+    return _keyboardSearchButtonPressedSignal;
+}
 @end

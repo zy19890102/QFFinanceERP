@@ -46,7 +46,7 @@
     calculatorComputingFormulaCell.cellTitle = @"计算公式";
     
     calculatorLoanRateCell = [ZYCalculatorSelectCell cellWithXibHeight:[ZYCalculatorSelectCell defaultHeight] actionBlock:^{
-        [self cellPicker:calculatorComputingFormulaCell withDataSource:[ZYCalculatorValueModel calculatorLoanRateArr] showKey:nil];
+        [self cellPicker:calculatorLoanRateCell withDataSource:[ZYCalculatorValueModel calculatorLoanRateArr] showKey:nil];
     }];
     calculatorLoanRateCell.cellTitle = @"按揭成数";
     
@@ -165,7 +165,7 @@
         return [ZYCalculatorValueModel calculatorComputingFormulaArr][value.longLongValue];
     }];
     RAC(calculatorLoanRateCell,selecedObj) = [RACObserve(calculatorLoanRateCell,selecedIndex) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorPaymentTypeArr][value.longLongValue];
+        return [ZYCalculatorValueModel calculatorLoanRateArr][value.longLongValue];
     }];
     RAC(calculatorMonthsCell,selecedObj) = [RACObserve(calculatorMonthsCell,selecedIndex) map:^id(NSNumber *value) {
         return [ZYCalculatorValueModel calculatorMonthsArr][value.longLongValue];
@@ -174,14 +174,14 @@
         return [ZYCalculatorValueModel calculatorInterestArr][value.longLongValue];
     }];
     RAC(calculatorPaymentTypeCell,selecedObj) = [RACObserve(calculatorPaymentTypeCell,selecedIndex) map:^id(NSNumber *value) {
-        return [ZYCalculatorValueModel calculatorLoanRateArr][value.longLongValue];
+        return [ZYCalculatorValueModel calculatorPaymentTypeArr][value.longLongValue];
     }];
     
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self reset];
     }];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
-        [self cellNextStep:nil];
+        [self cellNextStep:viewModel.computeError];
     }];
     [RACObserve(viewModel, calculatorComputingFormulaSelected) subscribeNext:^(id x) {
         [self reloadCells];

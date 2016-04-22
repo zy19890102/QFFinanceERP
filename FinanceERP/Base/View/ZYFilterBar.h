@@ -8,15 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZYFilterBar;
+
 @protocol ZYFilterBarDelegate <NSObject>
 
-- (NSArray*)filterBarTitles;
-
+- (NSArray*)filterBarTitles:(ZYFilterBar*)bar;
+- (NSArray*)filterBar:(ZYFilterBar*)bar itemsWithIndex:(NSInteger)index level:(NSInteger)level;
+- (NSInteger)filterBar:(ZYFilterBar*)bar levelCountWithIndex:(NSInteger)index;
+- (BOOL)filterBar:(ZYFilterBar*)bar selecedWithIndex:(NSInteger)index level:(NSInteger)level row:(NSInteger)row;
 @end
 
 @interface ZYFilterBar : UIView
 
 @property(nonatomic,assign)id<ZYFilterBarDelegate>delegate;
 
-- (instancetype)initWithController:(UIViewController*)ctl frame:(CGRect)frame;
+- (instancetype)initWithController:(UIViewController*)ctl frame:(CGRect)frame delegate:(id)delegate;
+
+- (void)hidden;
+
+- (void)changeTitle:(NSString*)title atIndex:(NSInteger)index;
 @end

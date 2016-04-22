@@ -42,7 +42,10 @@
 }
 - (void)buildUI
 {
-//    [_searchBar becomeFirstResponder];
+    if(_netSearch)
+    {
+       [_searchBar becomeFirstResponder];
+    }
     [self searchBar:_searchBar textDidChange:_searchBar.text];
 }
 - (void)blendViewModel
@@ -77,15 +80,29 @@
 {
     offY = self.tableView.contentOffset.y;
 }
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
+    if(_netSearch)
+    {
+        [self.viewModel keyboardSearchButtonPressed:searchBar.text];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    [[self.viewModel searchWithText:searchText] subscribeNext:^(id x) {
-        [self.tableView reloadData];
-    }];
+    if(_netSearch)
+    {
+        [[self.viewModel searchSignal] subscribeNext:^(id x) {
+            self.viewModel.dataSourceArr = x;
+            [self.tableView reloadData];
+        }];
+    }
+    else
+    {
+        [[self.viewModel searchWithText:searchText] subscribeNext:^(id x) {
+            [self.tableView reloadData];
+        }];
+    }
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -95,37 +112,82 @@
         cell = [[ZYTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[ZYTableViewCell defaultIdentifier]];
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
     }
-    NSString *initial = self.viewModel.initialArr[indexPath.section];
-    NSArray *subArr = self.viewModel.filterDict[initial];
-    cell.textLabel.text = [(ZYBankModel*)subArr[indexPath.row] name];
+    if(_netSearch)
+    {
+        cell.textLabel.text = [self.viewModel.dataSourceArr[indexPath.row] valueForKey:self.viewModel.showPropertyKey];
+    }
+    else
+    {
+        NSString *initial = self.viewModel.initialArr[indexPath.section];
+        NSArray *subArr = self.viewModel.filterDict[initial];
+        cell.textLabel.text = [subArr[indexPath.row] valueForKey:self.viewModel.showPropertyKey];
+    }
+    
     return cell;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *initial = self.viewModel.initialArr[section];
-    NSArray *subArr = self.viewModel.filterDict[initial];
-    return subArr.count;
+    if(_netSearch)
+    {
+        return self.viewModel.dataSourceArr.count;
+    }
+    else
+    {
+        NSString *initial = self.viewModel.initialArr[section];
+        NSArray *subArr = self.viewModel.filterDict[initial];
+        return subArr.count;
+    }
+    
 }
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return self.viewModel.initialArr[section];
+    if(_netSearch)
+    {
+        return nil;
+    }
+    else
+    {
+        return self.viewModel.initialArr[section];
+    }
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.viewModel.initialArr.count;
+    if(_netSearch)
+    {
+        return 1;
+    }
+    else
+    {
+        return self.viewModel.initialArr.count;
+    }
 }
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
-    return self.viewModel.initialArr;
+    if(_netSearch)
+    {
+        return nil;
+    }
+    else
+    {
+        return self.viewModel.initialArr;
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.searchBar resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:^{
+    if(_netSearch)
+    {
+        self.viewModel.searchSelecedObj = self.viewModel.dataSourceArr[indexPath.row];
+    }
+    else
+    {
         NSString *initial = self.viewModel.initialArr[indexPath.section];
         NSArray *subArr = self.viewModel.filterDict[initial];
         self.viewModel.searchSelecedObj = subArr[indexPath.row];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:^{
     }];
 }
 @end

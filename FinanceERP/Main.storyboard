@@ -205,7 +205,7 @@
         <!--业务办理-->
         <scene sceneID="aqs-xC-OYa">
             <objects>
-                <viewController id="Das-o8-RED" customClass="ZYBusinessProcessingController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Das-o8-RED" customClass="ZYBusinessProcessingController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UGs-6k-ksX"/>
                         <viewControllerLayoutGuide type="bottom" id="zfd-rM-Rv0"/>
@@ -216,6 +216,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="业务办理" id="Zah-hB-rn8"/>
+                    <connections>
+                        <segue destination="M2m-ya-TXl" kind="presentation" identifier="search" id="Rj7-wx-Rb0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6HN-EP-bjk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -706,4 +709,7 @@
         <image name="tool-ic4n" width="64" height="64"/>
         <image name="tool-ic5n" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Rj7-wx-Rb0"/>
+    </inferredMetricsTieBreakers>
 </document>

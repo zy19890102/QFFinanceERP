@@ -6,9 +6,9 @@
 //  Copyright © 2016年 ljh. All rights reserved.
 //
 
-#import "ZYStoreModel.h"
+#import "ZYReadModel.h"
 
-@interface ZYBankModel : ZYStoreModel
+@interface ZYBankModel : ZYReadModel
 
 @property(nonatomic,strong)NSString *name;
 

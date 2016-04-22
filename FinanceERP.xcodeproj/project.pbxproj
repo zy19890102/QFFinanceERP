@@ -49,6 +49,8 @@
 		2AB208DD1CC90BFB00DE1EB0 /* ZYBusinessProcessingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208DC1CC90BFB00DE1EB0 /* ZYBusinessProcessingController.m */; };
 		2AB208E01CC90C1100DE1EB0 /* ZYBusinessProcessingViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208DF1CC90C1100DE1EB0 /* ZYBusinessProcessingViewModel.m */; };
 		2AB208E31CC90CD900DE1EB0 /* ZYFilterBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208E21CC90CD900DE1EB0 /* ZYFilterBar.m */; };
+		2AB208E61CCA503E00DE1EB0 /* ZYSearchHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208E51CCA503E00DE1EB0 /* ZYSearchHistoryModel.m */; };
+		2AB208E91CCA5FE000DE1EB0 /* ZYReadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB208E81CCA5FE000DE1EB0 /* ZYReadModel.m */; };
 		2AC6B7481CABB79A00C9EB9B /* ZYCalculatorSliderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B7471CABB79A00C9EB9B /* ZYCalculatorSliderBar.m */; };
 		2AC6B74C1CABC17800C9EB9B /* ZYCalculatorButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AC6B74B1CABC17800C9EB9B /* ZYCalculatorButtonCell.m */; };
 		2AC6B7501CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AC6B74F1CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib */; };
@@ -195,6 +197,10 @@
 		2AB208DF1CC90C1100DE1EB0 /* ZYBusinessProcessingViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZYBusinessProcessingViewModel.m; path = ../../../../../Documents/ZYBusinessProcessingViewModel.m; sourceTree = "<group>"; };
 		2AB208E11CC90CD900DE1EB0 /* ZYFilterBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFilterBar.h; sourceTree = "<group>"; };
 		2AB208E21CC90CD900DE1EB0 /* ZYFilterBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFilterBar.m; sourceTree = "<group>"; };
+		2AB208E41CCA503E00DE1EB0 /* ZYSearchHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYSearchHistoryModel.h; sourceTree = "<group>"; };
+		2AB208E51CCA503E00DE1EB0 /* ZYSearchHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYSearchHistoryModel.m; sourceTree = "<group>"; };
+		2AB208E71CCA5FE000DE1EB0 /* ZYReadModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYReadModel.h; sourceTree = "<group>"; };
+		2AB208E81CCA5FE000DE1EB0 /* ZYReadModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYReadModel.m; sourceTree = "<group>"; };
 		2AC6B7461CABB79A00C9EB9B /* ZYCalculatorSliderBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorSliderBar.h; sourceTree = "<group>"; };
 		2AC6B7471CABB79A00C9EB9B /* ZYCalculatorSliderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorSliderBar.m; sourceTree = "<group>"; };
 		2AC6B74A1CABC17800C9EB9B /* ZYCalculatorButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorButtonCell.h; sourceTree = "<group>"; };
@@ -333,6 +339,8 @@
 			children = (
 				2AC6B8241CB5F44700C9EB9B /* ZYStoreModel.h */,
 				2AC6B8251CB5F44700C9EB9B /* ZYStoreModel.m */,
+				2AB208E71CCA5FE000DE1EB0 /* ZYReadModel.h */,
+				2AB208E81CCA5FE000DE1EB0 /* ZYReadModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -521,6 +529,8 @@
 		2AB208D71CC90B5D00DE1EB0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2AB208E41CCA503E00DE1EB0 /* ZYSearchHistoryModel.h */,
+				2AB208E51CCA503E00DE1EB0 /* ZYSearchHistoryModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1265,6 +1275,8 @@
 				2AD2E4F51CA92B6D00908FB8 /* UIButton+custom.m in Sources */,
 				2AD2E51E1CAA19B500908FB8 /* ZYSliderViewController.m in Sources */,
 				2AB2089A1CC76E7B00DE1EB0 /* ZYApplyInfoSections.m in Sources */,
+				2AB208E91CCA5FE000DE1EB0 /* ZYReadModel.m in Sources */,
+				2AB208E61CCA503E00DE1EB0 /* ZYSearchHistoryModel.m in Sources */,
 				2AB208C51CC788C200DE1EB0 /* ZYTopTabBar.m in Sources */,
 				2AB2087F1CC7488400DE1EB0 /* ZYForeclosureHouseValueModel.m in Sources */,
 				2AB208AA1CC771D900DE1EB0 /* ZYCurrentBankSections.m in Sources */,

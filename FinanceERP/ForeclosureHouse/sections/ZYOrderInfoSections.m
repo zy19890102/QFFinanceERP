@@ -46,6 +46,7 @@
     orderInfoPowerOfAttorney.cellTitle = @"公正委托书";
     
     orderInfoPowerOfAttorneyContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoPowerOfAttorneyContent.cellTitle = @"备注:";
     
     ZYSection *section1 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorney]];
     ZYSection *section2 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorneyContent]];
@@ -67,6 +68,7 @@
     orderInfoIdentificationCard.cellTitle = @"业主及借款人身份证";
     
     orderInfoIdentificationCardContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoIdentificationCardContent.cellTitle = @"备注:";
     
     ZYSection *section3 = [ZYSection sectionWithCells:@[orderInfoIdentificationCard]];
     ZYSection *section4 = [ZYSection sectionWithCells:@[orderInfoIdentificationCardContent]];
@@ -88,6 +90,7 @@
     orderInfoCardForBuilding.cellTitle = @"供楼卡";
     
     orderInfoCardForBuildingContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoCardForBuildingContent.cellTitle = @"备注:";
     
     ZYSection *section5 = [ZYSection sectionWithCells:@[orderInfoCardForBuilding]];
     ZYSection *section6 = [ZYSection sectionWithCells:@[orderInfoCardForBuildingContent]];
@@ -109,6 +112,7 @@
     orderInfoBankbook.cellTitle = @"存折";
     
     orderInfoBankbookContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoBankbookContent.cellTitle = @"备注:";
     
     ZYSection *section7 = [ZYSection sectionWithCells:@[orderInfoBankbook]];
     ZYSection *section8 = [ZYSection sectionWithCells:@[orderInfoBankbookContent]];
@@ -130,6 +134,7 @@
     orderInfoSecurityAgreement.cellTitle = @"担保服务协议";
     
     orderInfoSecurityAgreementContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoSecurityAgreementContent.cellTitle = @"备注:";
     
     ZYSection *section9 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreement]];
     ZYSection *section10 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreementContent]];
@@ -151,6 +156,7 @@
     orderInfoMortgageContract.cellTitle = @"原借款抵押合同";
     
     orderInfoMortgageContractContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
+    orderInfoMortgageContractContent.cellTitle = @"备注:";
     
     ZYSection *section11 = [ZYSection sectionWithCells:@[orderInfoMortgageContract]];
     ZYSection *section12 = [ZYSection sectionWithCells:@[orderInfoMortgageContractContent]];

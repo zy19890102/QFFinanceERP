@@ -122,7 +122,7 @@ static BOOL LKDBLogErrorEnable = NO;
 
 - (instancetype)init
 {
-    return [self initWithDBName:@"LKDB"];
+    return [self initWithDBName:@"QFDB"];
 }
 
 - (instancetype)initWithDBName:(NSString*)dbname

@@ -11,6 +11,8 @@
 @interface ZYForeclosureHouseOrderInfoTextCell()<UITextViewDelegate>
 //@property (weak, nonatomic) IBOutlet UITextView *cellTextView;
 @property (strong, nonatomic) UITextView *cellTextView;
+@property (strong, nonatomic) UILabel *titleLabel;
+
 @end
 
 @implementation ZYForeclosureHouseOrderInfoTextCell
@@ -19,7 +21,15 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _cellTextView = [[UITextView alloc] initWithFrame:CGRectMake(GAP, GAP, FUll_SCREEN_WIDTH-2*GAP, [ZYForeclosureHouseOrderInfoTextCell defaultHeight]-2*GAP)];
+        CGFloat titleHeight = 12;
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(GAP, GAP, FUll_SCREEN_WIDTH-2*GAP, titleHeight)];
+        _titleLabel.font = FONT(12);
+        _titleLabel.numberOfLines = 1;
+        _titleLabel.textColor = TITLE_COLOR;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        [self addSubview:_titleLabel];
+        
+        _cellTextView = [[UITextView alloc] initWithFrame:CGRectMake(GAP, titleHeight+2*GAP, FUll_SCREEN_WIDTH-2*GAP, [ZYForeclosureHouseOrderInfoTextCell defaultHeight]-3*GAP-titleHeight)];
         _cellTextView.delegate = self;
         RACChannelTo(_cellTextView,text) = RACChannelTo(self,cellText);
         [self addSubview:_cellTextView];
@@ -40,12 +50,17 @@
 }
 + (CGFloat)defaultHeight
 {
-    return 80;
+    return 100;
 }
 - (BOOL)becomeFirstResponder
 {
     [super becomeFirstResponder];
     [_cellTextView becomeFirstResponder];
     return YES;
+}
+- (void)setCellTitle:(NSString *)cellTitle
+{
+    _titleLabel.text = cellTitle;
+    _cellTitle = cellTitle;
 }
 @end

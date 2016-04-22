@@ -91,56 +91,27 @@
         [self changePage:[value longLongValue]];
     }];
     
-    [[bussinessSections rac_signalForSelector:@selector(cellPicker:withDataSource:showKey:)] subscribeNext:^(RACTuple *value) {
+    [[RACSignal merge:@[bussinessSections.pickerByDataSourceSignal,publicFundSections.pickerByDataSourceSignal,admixtureSections.pickerByDataSourceSignal]] subscribeNext:^(RACTuple *value) {
         firstResponderCell = value.first;
         NSArray *dataSource = value.second;
         self.components = @[dataSource];//二维数组 可以多列
+        if([firstResponderCell isKindOfClass:[ZYCalculatorSelectCell class]])
+        {
+            self.selecedRow = [(ZYCalculatorSelectCell*)firstResponderCell selecedIndex];
+        }
         [self showPickerView:YES];
     }];
-    [[[bussinessSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
-        if(bussinessViewModel.computeError!=nil)
+    [[[RACSignal merge:@[bussinessSections.nextStepSignal,publicFundSections.nextStepSignal,admixtureSections.nextStepSignal]] filter:^BOOL(RACTuple *value) {
+        NSString *error = value.first;
+        if(error.length>0)
         {
-            [self tip:bussinessViewModel.computeError];
+            [self tip:error];
             return NO;
         }
         return YES;
     }] subscribeNext:^(RACTuple *value) {
         [self performSegueWithIdentifier:@"result" sender:bussinessViewModel.valueModel];
     }];
-    [[[publicFundSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
-        if(publicFundViewModel.computeError!=nil)
-        {
-            [self tip:publicFundViewModel.computeError];
-            return NO;
-        }
-        return YES;
-    }] subscribeNext:^(RACTuple *value) {
-        [self performSegueWithIdentifier:@"result" sender:publicFundViewModel.valueModel];
-    }];
-    [[[admixtureSections rac_signalForSelector:@selector(cellNextStep:)] filter:^BOOL(id value) {
-        if(admixtureViewModel.computeError!=nil)
-        {
-            [self tip:admixtureViewModel.computeError];
-            return NO;
-        }
-        return YES;
-    }] subscribeNext:^(RACTuple *value) {
-        [self performSegueWithIdentifier:@"result" sender:admixtureViewModel.valueModel];
-    }];
-    
-    [[publicFundSections rac_signalForSelector:@selector(cellPicker:withDataSource:showKey:)] subscribeNext:^(RACTuple *value) {
-        firstResponderCell = value.first;
-        NSArray *dataSource = value.second;
-        self.components = @[dataSource];//二维数组 可以多列
-        [self showPickerView:YES];
-    }];
-    [[admixtureSections rac_signalForSelector:@selector(cellPicker:withDataSource:showKey:)] subscribeNext:^(RACTuple *value) {
-        firstResponderCell = value.first;
-        NSArray *dataSource = value.second;
-        self.components = @[dataSource];//二维数组 可以多列
-        [self showPickerView:YES];
-    }];
-    
     
     [RACObserve(self, selecedRow) subscribeNext:^(id x) {
         if([firstResponderCell isKindOfClass:[ZYCalculatorSelectCell class]])

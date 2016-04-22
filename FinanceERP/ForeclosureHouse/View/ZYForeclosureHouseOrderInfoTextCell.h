@@ -11,6 +11,6 @@
 @interface ZYForeclosureHouseOrderInfoTextCell : ZYTableViewCell
 
 @property(nonatomic,strong)NSString *cellText;
-
+@property(nonatomic,strong)NSString *cellTitle;
 @property(nonatomic,assign)NSInteger maxLength;
 @end

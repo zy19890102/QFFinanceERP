@@ -13,5 +13,9 @@
 @interface ZYSearchViewController : ZYViewController
 
 ZY_VIEW_MODEL_PROPERTY(ZYSearchViewModel)
+/**
+ *  联网 搜索
+ */
+@property(nonatomic,assign)BOOL netSearch;
 
 @end

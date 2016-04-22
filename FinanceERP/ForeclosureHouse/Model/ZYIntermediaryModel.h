@@ -6,9 +6,9 @@
 //  Copyright © 2016年 张昱. All rights reserved.
 //
 
-#import "ZYStoreModel.h"
+#import "ZYReadModel.h"
 
-@interface ZYIntermediaryModel : ZYStoreModel
+@interface ZYIntermediaryModel : ZYReadModel
 
 @property(nonatomic,strong)NSString *name;
 
