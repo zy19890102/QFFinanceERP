@@ -11,7 +11,5 @@
 #import "ZYTableViewController.h"
 
 @interface ZYHomePageViewController : ZYTableViewController
-
 ZY_VIEW_MODEL_PROPERTY(ZYHomePageViewModel)
-
 @end

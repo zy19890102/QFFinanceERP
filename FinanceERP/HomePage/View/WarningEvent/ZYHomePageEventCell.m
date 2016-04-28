@@ -23,7 +23,7 @@
         _eventLabel = [[UILabel alloc] initWithFrame:CGRectMake(GAP, 0, FUll_SCREEN_WIDTH-2*GAP, [ZYHomePageEventCell defaultHeight])];
         _eventLabel.font = FONT(12);
         _eventLabel.textColor = ORANGE;
-        _eventLabel.text = _event.eventTitle;
+        _eventLabel.text = _event.project_name;
         [self addSubview:_eventLabel];
     }
     return self;
@@ -36,6 +36,6 @@
 - (void)loadDataSource:(ZYWarningEvent*)event
 {
     _event = event;
-    _eventLabel.text = event.eventTitle;
+    _eventLabel.text = event.project_name;
 }
 @end

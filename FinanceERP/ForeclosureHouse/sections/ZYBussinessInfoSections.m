@@ -24,6 +24,11 @@
     ZYSegmentedCell *bussinessInfoOrderTypeCell;
     ZYSegmentedCell *bussinessInfoTransactionTypeCell;
     
+    ZYSingleButtonCell *buttonCell;
+    
+    ZYSection *comeFromTypeSection;
+    ZYSection *comeFromTypeSubSection;
+    
     NSInteger bankIndex;
     NSInteger cooperativeOrganizationIndex;
     NSInteger intermediaryIndex;
@@ -73,8 +78,8 @@
     }];
     RACChannelTo_(bussinessInfoComeFromTypeSubCell,cellTitle,@"") = RACChannelTo_(bussinessInfoComeFromTypeCell,cellText,@"");
     
-    ZYSection *comeFromTypeSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeCell]];//单独一个section 便于折叠
-    ZYSection *comeFromTypeSubSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeSubCell]];
+    comeFromTypeSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeCell]];//单独一个section 便于折叠
+    comeFromTypeSubSection = [ZYSection sectionWithCells:@[bussinessInfoComeFromTypeSubCell]];
     
     bussinessInfoAreaCell = [ZYInputCell cellWithActionBlock:nil];
     bussinessInfoAreaCell.cellTitle = @"区域";
@@ -127,14 +132,10 @@
     bussinessInfoTransactionTypeCell.cellSegmentedTitles = [ZYForeclosureHouseValueModel foreclosureHouseBussinessInfoTransactionArr];
     bussinessInfoTransactionTypeCell.cellTitle = @"交易类型";
     
-    ZYSingleButtonCell *buttonCell = [ZYSingleButtonCell cellWithActionBlock:nil];
+    buttonCell = [ZYSingleButtonCell cellWithActionBlock:nil];
     [buttonCell.buttonPressedSignal subscribeNext:^(id x) {
         [self cellNextStep:[self error]];
     }];
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[bussinessInfoAreaCell,bussinessInfoLoanMoneyCell,bussinessInfoDaysCell,bussinessInfoDateCell,bussinessInfoAccountCell,bussinessInfoUsernameCell,bussinessInfoLinkmanCell,bussinessInfoTelephoneCell,bussinessInfoOrderTypeCell,bussinessInfoTransactionTypeCell,buttonCell]];
-    
-    self.sections = @[comeFromTypeSection,comeFromTypeSubSection,section];
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
@@ -219,7 +220,32 @@
     RACChannelTo(model,bussinessInfoOrderType) = RACChannelTo(bussinessInfoOrderTypeCell,cellSegmentedSelecedIndex);
     RACChannelTo(model,bussinessInfoTransactionType) = RACChannelTo(bussinessInfoTransactionTypeCell,cellSegmentedSelecedIndex);
 
+    RAC(bussinessInfoComeFromTypeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoComeFromTypeSubCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoAreaCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoLoanMoneyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoDaysCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoDateCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoAccountCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoUsernameCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoLinkmanCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoOrderTypeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bussinessInfoTransactionTypeCell,userInteractionEnabled) = RACObserve(self, edit);
     
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[bussinessInfoAreaCell,bussinessInfoLoanMoneyCell,bussinessInfoDaysCell,bussinessInfoDateCell,bussinessInfoAccountCell,bussinessInfoUsernameCell,bussinessInfoLinkmanCell,bussinessInfoTelephoneCell,bussinessInfoOrderTypeCell,bussinessInfoTransactionTypeCell,buttonCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[bussinessInfoAreaCell,bussinessInfoLoanMoneyCell,bussinessInfoDaysCell,bussinessInfoDateCell,bussinessInfoAccountCell,bussinessInfoUsernameCell,bussinessInfoLinkmanCell,bussinessInfoTelephoneCell,bussinessInfoOrderTypeCell,bussinessInfoTransactionTypeCell]];
+        }
+        
+        self.sections = @[comeFromTypeSection,comeFromTypeSubSection,section];
+    }];
 }
 - (NSString*)error
 {
@@ -250,4 +276,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

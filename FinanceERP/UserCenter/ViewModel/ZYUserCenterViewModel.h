@@ -12,8 +12,6 @@
 
 @interface ZYUserCenterViewModel : ZYViewModel
 
-@property(nonatomic,strong)ZYUser *user;
-
 - (NSString*)imageForIndex:(NSInteger)index;
 - (NSString*)contentForIndex:(NSInteger)index;
 

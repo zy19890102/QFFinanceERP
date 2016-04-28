@@ -25,4 +25,6 @@
 - (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex;
 
 @property(nonatomic,assign)CGRect frame;
+
+- (void)reloadData;
 @end

@@ -57,4 +57,16 @@
 }
 - (void)segmentedPressed:(UISegmentedControl*)sender {
 }
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    super.userInteractionEnabled = userInteractionEnabled;
+    if(userInteractionEnabled)
+    {
+        _cellSegmentedControl.tintColor = BLUE;
+    }
+    else
+    {
+        _cellSegmentedControl.tintColor = TEXT_COLOR;
+    }
+}
 @end

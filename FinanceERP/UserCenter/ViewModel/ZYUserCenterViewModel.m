@@ -25,24 +25,6 @@
     }
     return self;
 }
-- (void)reloadDataSource
-{
-    @try {
-        [self defaultUserInfo];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"用户中心读取默认数据错误");
-    }
-    @finally {
-    }
-}
-- (void)defaultUserInfo
-{
-    ZYUser *user = [[ZYUser alloc] init];
-    user.userName = @"你好";
-    user.userInfo = @"市场部 经理";
-    self.user = user;
-}
 - (NSString*)imageForIndex:(NSInteger)index
 {
     return self.imageArr[index];
@@ -51,5 +33,4 @@
 {
     return self.dataSource[index];
 }
-
 @end

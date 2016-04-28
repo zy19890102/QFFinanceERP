@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFDownloadRequestOperation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,7 +49,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SDWebImage.xcscheme</key>
+		<key>YTKNetwork.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,12 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3528FA1DBE3E5C6AB799FC7BEA473755</key>
+		<key>24394EB643A8FD902795D4CB09311F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44AA67BCC33D23ED792EA6083B0DA2D8</key>
+		<key>28EDA0AC3272A77B0575F728B99261BC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3528FA1DBE3E5C6AB799FC7BEA473755</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88DDD72F05A560D47AF2DC477873974F</key>
+		<key>63A0C91B4E1B7EE05366426AE2C64646</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -67,7 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B887BA5EA32FD31EF71D515C76A11409</key>
+		<key>B17F2C40BFDF0082AC88FA09CA14E4B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B3C760711B585710870482548EF04B3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

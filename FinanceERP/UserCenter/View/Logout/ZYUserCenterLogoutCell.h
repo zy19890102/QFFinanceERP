@@ -10,4 +10,6 @@
 
 @interface ZYUserCenterLogoutCell : ZYTableViewCell
 
+@property(nonatomic,strong)RACSignal *logoutSignal;
+
 @end

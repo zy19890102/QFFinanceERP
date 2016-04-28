@@ -11,4 +11,8 @@
 
 @interface ZYForeclosureHouseController : ZYSliderViewController
 ZY_VIEW_MODEL_PROPERTY(ZYForeclosureHouseViewModel)
+/**
+ *  是否可以编辑
+ */
+@property(nonatomic,assign)BOOL edit;
 @end

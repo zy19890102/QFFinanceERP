@@ -11,4 +11,5 @@
 
 @interface ZYCostInfoSections : ZYSections
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model;
+@property(nonatomic,assign)BOOL edit;
 @end

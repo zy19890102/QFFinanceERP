@@ -27,12 +27,13 @@
     ZYSelectCell *newBankJusticeDateCell;
     ZYSelectCell *newBankContractDateCell;
     
+    ZYTableViewCell *footCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -120,33 +121,19 @@
     newBankContractDateCell.cellTitle = @"签署合同日期";
     
     
-    ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
     footCell.selectionStyle = UITableViewCellSelectionStyleNone;
     footCell.lineHidden = YES;
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[newBankCell,
-                                                       newBankLoanMoneyCell,
-                                                       newBankLinkmanCell,
-                                                       newBankTelephoneCell,
-                                                       newBankLoanTypeCell,
-                                                       newBankForeclosureAccountCell,
-                                                       newBankPublicFundBankCell,
-                                                       newBankPublicFundMoneyCell,
-                                                       newBankSuperviseOrganizationCell,
-                                                       newBankSuperviseMoneyCell,
-                                                       newBankSuperviseAccountCell,
-                                                       newBankJusticeDateCell,
-                                                       newBankContractDateCell,footCell]];
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,bank) = RACChannelTo(newBankCell,selecedObj);
     RACChannelTo(model,bankLoanType) = RACChannelTo(newBankLoanTypeCell,cellSegmentedSelecedIndex);
     RACChannelTo(model,bankPublicFundBank) = RACChannelTo(newBankPublicFundBankCell,selecedObj);
     RACChannelTo(model,bankJusticeDate) = RACChannelTo(newBankJusticeDateCell,selecedObj);
     RACChannelTo(model,bankContractDate) = RACChannelTo(newBankContractDateCell,selecedObj);
-    
     RACChannelTo(model,bankLoanMoney) = RACChannelTo(newBankLoanMoneyCell,cellText);
     RACChannelTo(model,bankLinkman) = RACChannelTo(newBankLinkmanCell,cellText);
     RACChannelTo(model,bankTelephone) = RACChannelTo(newBankTelephoneCell,cellText);
@@ -155,6 +142,57 @@
     RACChannelTo(model,bankSuperviseOrganization) = RACChannelTo(newBankSuperviseOrganizationCell,cellText);
     RACChannelTo(model,bankSuperviseMoney) = RACChannelTo(newBankSuperviseMoneyCell,cellText);
     RACChannelTo(model,bankSuperviseAccount) = RACChannelTo(newBankSuperviseAccountCell,cellText);
+    
+    RAC(newBankCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankLoanTypeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankPublicFundBankCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankJusticeDateCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankContractDateCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankLinkmanCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankLoanMoneyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankForeclosureAccountCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankPublicFundMoneyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankSuperviseOrganizationCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankSuperviseMoneyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(newBankSuperviseAccountCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[newBankCell,
+                                                    newBankLoanMoneyCell,
+                                                    newBankLinkmanCell,
+                                                    newBankTelephoneCell,
+                                                    newBankLoanTypeCell,
+                                                    newBankForeclosureAccountCell,
+                                                    newBankPublicFundBankCell,
+                                                    newBankPublicFundMoneyCell,
+                                                    newBankSuperviseOrganizationCell,
+                                                    newBankSuperviseMoneyCell,
+                                                    newBankSuperviseAccountCell,
+                                                    newBankJusticeDateCell,
+                                                    newBankContractDateCell,footCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[newBankCell,
+                                                    newBankLoanMoneyCell,
+                                                    newBankLinkmanCell,
+                                                    newBankTelephoneCell,
+                                                    newBankLoanTypeCell,
+                                                    newBankForeclosureAccountCell,
+                                                    newBankPublicFundBankCell,
+                                                    newBankPublicFundMoneyCell,
+                                                    newBankSuperviseOrganizationCell,
+                                                    newBankSuperviseMoneyCell,
+                                                    newBankSuperviseAccountCell,
+                                                    newBankJusticeDateCell,
+                                                    newBankContractDateCell]];
+        }
+        self.sections = @[section];
+    }];
 }
 - (NSString*)error
 {
@@ -190,4 +228,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

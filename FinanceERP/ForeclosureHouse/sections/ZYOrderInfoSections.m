@@ -27,12 +27,27 @@
     ZYForeclosureHouseOrderInfoTextCell *orderInfoSecurityAgreementContent;
     ZYForeclosureHouseOrderInfoCell *orderInfoMortgageContract;
     ZYForeclosureHouseOrderInfoTextCell *orderInfoMortgageContractContent;
+    
+    ZYSection *headerSection;
+    ZYSection *section1;
+    ZYSection *section2;
+    ZYSection *section3;
+    ZYSection *section4;
+    ZYSection *section5;
+    ZYSection *section6;
+    ZYSection *section7;
+    ZYSection *section8;
+    ZYSection *section9;
+    ZYSection *section10;
+    ZYSection *section11;
+    ZYSection *section12;
+    ZYSection *buttonSection;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -40,7 +55,7 @@
 {
     header = [ZYForeclosureHouseOrderInfoHeader cellWithActionBlock:nil];
     header.frame = CGRectMake(0, 0, FUll_SCREEN_WIDTH, [ZYForeclosureHouseOrderInfoHeader defaultHeight]);
-    ZYSection *headerSection = [ZYSection sectionWithCells:@[header]];
+    headerSection = [ZYSection sectionWithCells:@[header]];
     
     orderInfoPowerOfAttorney = [ZYForeclosureHouseOrderInfoCell cellWithActionBlock:nil];
     orderInfoPowerOfAttorney.cellTitle = @"公正委托书";
@@ -48,8 +63,8 @@
     orderInfoPowerOfAttorneyContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoPowerOfAttorneyContent.cellTitle = @"备注:";
     
-    ZYSection *section1 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorney]];
-    ZYSection *section2 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorneyContent]];
+    section1 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorney]];
+    section2 = [ZYSection sectionWithCells:@[orderInfoPowerOfAttorneyContent]];
     section2.hasFold = YES;
     [orderInfoPowerOfAttorney.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoPowerOfAttorney.buttonRotate = section2.hasFold;
@@ -70,8 +85,8 @@
     orderInfoIdentificationCardContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoIdentificationCardContent.cellTitle = @"备注:";
     
-    ZYSection *section3 = [ZYSection sectionWithCells:@[orderInfoIdentificationCard]];
-    ZYSection *section4 = [ZYSection sectionWithCells:@[orderInfoIdentificationCardContent]];
+    section3 = [ZYSection sectionWithCells:@[orderInfoIdentificationCard]];
+    section4 = [ZYSection sectionWithCells:@[orderInfoIdentificationCardContent]];
     section4.hasFold = YES;
     [orderInfoIdentificationCard.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoIdentificationCard.buttonRotate = section4.hasFold;
@@ -92,8 +107,8 @@
     orderInfoCardForBuildingContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoCardForBuildingContent.cellTitle = @"备注:";
     
-    ZYSection *section5 = [ZYSection sectionWithCells:@[orderInfoCardForBuilding]];
-    ZYSection *section6 = [ZYSection sectionWithCells:@[orderInfoCardForBuildingContent]];
+    section5 = [ZYSection sectionWithCells:@[orderInfoCardForBuilding]];
+    section6 = [ZYSection sectionWithCells:@[orderInfoCardForBuildingContent]];
     section6.hasFold = YES;
     [orderInfoCardForBuilding.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoCardForBuilding.buttonRotate = section6.hasFold;
@@ -114,8 +129,8 @@
     orderInfoBankbookContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoBankbookContent.cellTitle = @"备注:";
     
-    ZYSection *section7 = [ZYSection sectionWithCells:@[orderInfoBankbook]];
-    ZYSection *section8 = [ZYSection sectionWithCells:@[orderInfoBankbookContent]];
+    section7 = [ZYSection sectionWithCells:@[orderInfoBankbook]];
+    section8 = [ZYSection sectionWithCells:@[orderInfoBankbookContent]];
     section8.hasFold = YES;
     [orderInfoBankbook.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoBankbook.buttonRotate = section8.hasFold;
@@ -136,8 +151,8 @@
     orderInfoSecurityAgreementContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoSecurityAgreementContent.cellTitle = @"备注:";
     
-    ZYSection *section9 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreement]];
-    ZYSection *section10 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreementContent]];
+    section9 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreement]];
+    section10 = [ZYSection sectionWithCells:@[orderInfoSecurityAgreementContent]];
     section10.hasFold = YES;
     [orderInfoSecurityAgreement.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoSecurityAgreement.buttonRotate = section10.hasFold;
@@ -158,8 +173,8 @@
     orderInfoMortgageContractContent = [ZYForeclosureHouseOrderInfoTextCell cellWithActionBlock:nil];
     orderInfoMortgageContractContent.cellTitle = @"备注:";
     
-    ZYSection *section11 = [ZYSection sectionWithCells:@[orderInfoMortgageContract]];
-    ZYSection *section12 = [ZYSection sectionWithCells:@[orderInfoMortgageContractContent]];
+    section11 = [ZYSection sectionWithCells:@[orderInfoMortgageContract]];
+    section12 = [ZYSection sectionWithCells:@[orderInfoMortgageContractContent]];
     section12.hasFold = YES;
     [orderInfoMortgageContract.buttonPressedSignal subscribeNext:^(id x) {
         orderInfoMortgageContract.buttonRotate = section12.hasFold;
@@ -180,24 +195,12 @@
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self cellLastStep];
     }];
-    ZYSection *buttonSection = [ZYSection sectionWithCells:@[buttonCell]];
-    
-    self.sections = @[headerSection,
-                      section1,
-                      section2,
-                      section3,
-                      section4,
-                      section5,
-                      section6,
-                      section7,
-                      section8,
-                      section9,
-                      section10,
-                      section11,
-                      section12,buttonSection];
+    buttonSection = [ZYSection sectionWithCells:@[buttonCell]];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,orderInfoPowerOfAttorneyContent) = RACChannelTo(orderInfoPowerOfAttorneyContent,cellText);
     RACChannelTo(model,orderInfoIdentificationCardContent) = RACChannelTo(orderInfoIdentificationCardContent,cellText);
     RACChannelTo(model,orderInfoCardForBuildingContent) = RACChannelTo(orderInfoCardForBuildingContent,cellText);
@@ -218,9 +221,59 @@
     RACChannelTo(model,orderInfoBankbookCopy) = RACChannelTo(orderInfoBankbook,cellRightSteps);
     RACChannelTo(model,orderInfoSecurityAgreementCopy) = RACChannelTo(orderInfoSecurityAgreement,cellRightSteps);
     RACChannelTo(model,orderInfoMortgageContractCopy) = RACChannelTo(orderInfoMortgageContract,cellRightSteps);
+    
+    RAC(orderInfoPowerOfAttorney,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoIdentificationCard,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoCardForBuilding,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoBankbook,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoSecurityAgreement,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoMortgageContract,userInteractionEnabled) = RACObserve(self, edit);
+    
+    RAC(orderInfoPowerOfAttorneyContent,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoIdentificationCardContent,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoCardForBuildingContent,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoBankbookContent,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoSecurityAgreementContent,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(orderInfoMortgageContractContent,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        if(self.edit)
+        {
+            self.sections = @[headerSection,
+                              section1,
+                              section2,
+                              section3,
+                              section4,
+                              section5,
+                              section6,
+                              section7,
+                              section8,
+                              section9,
+                              section10,
+                              section11,
+                              section12,buttonSection];
+        }
+        else
+        {
+            self.sections = @[headerSection,
+                              section1,
+                              section2,
+                              section3,
+                              section4,
+                              section5,
+                              section6,
+                              section7,
+                              section8,
+                              section9,
+                              section10,
+                              section11,
+                              section12];
+        }
+    }];
 }
 - (NSString*)error
 {
     return nil;//全部都非必填
 }
+
 @end

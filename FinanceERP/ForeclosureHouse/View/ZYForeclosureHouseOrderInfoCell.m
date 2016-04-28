@@ -126,4 +126,28 @@
         }];
     }
 }
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+//    [super setUserInteractionEnabled:userInteractionEnabled];
+    if(userInteractionEnabled)
+    {
+        _leftSteper.hidden = NO;
+        _rightSteper.hidden = NO;
+        _rightLabel.frame = CGRectMake(FUll_SCREEN_WIDTH-_dropButton.width-_rightSteper.width-2*GAP, GAP+_rightSteper.height, _rightSteper.width, [ZYForeclosureHouseOrderInfoCell defaultHeight]-GAP-_rightSteper.height);
+        _leftLabel.frame = CGRectMake(FUll_SCREEN_WIDTH-_dropButton.width-2*_leftSteper.width-3*GAP, GAP+_leftSteper.height, _leftSteper.width, _leftSteper.height);
+        _rightLabel.font = FONT(12);
+        _leftLabel.font = FONT(12);
+    }
+    else
+    {
+        _leftSteper.hidden = YES;
+        _rightSteper.hidden = YES;
+        _rightLabel.Y = 0;
+        _rightLabel.font = FONT(14);
+        _leftLabel.font = FONT(14);
+        _leftLabel.Y = 0;
+        _leftLabel.height = [ZYForeclosureHouseOrderInfoCell defaultHeight];
+        _rightLabel.height = [ZYForeclosureHouseOrderInfoCell defaultHeight];
+    }
+}
 @end

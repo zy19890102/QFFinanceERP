@@ -16,12 +16,14 @@
     ZYInputCell *costInfoWaitForCostingCell;//待收费用
     ZYInputCell *costInfoSubsidyCell;//补贴
     ZYInputCell *costInfoCommissionCell;//应付佣金
+    
+    ZYDoubleButtonCell *buttonCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -61,32 +63,57 @@
     costInfoCommissionCell.onlyFloat = YES;
     costInfoCommissionCell.cellTailText = @"元";
     
-    ZYDoubleButtonCell *buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
+    buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
         [self cellNextStep:[self error]];
     }];
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self cellLastStep];
     }];
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[costInfoChargeTypeCell,
-                                                       costInfoInterestIncomeCell,
-                                                       costInfoPoundageCell,
-                                                       costInfoWaitForCostingCell,
-                                                       costInfoSubsidyCell,
-                                                       costInfoCommissionCell,
-                                                       buttonCell
-                                                       ]];
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,costInfoChargeType) = RACChannelTo(costInfoChargeTypeCell,cellSegmentedSelecedIndex);
     RACChannelTo(model,costInfoInterestIncome) = RACChannelTo(costInfoInterestIncomeCell,cellText);
     RACChannelTo(model,costInfoPoundage) = RACChannelTo(costInfoPoundageCell,cellText);
     RACChannelTo(model,costInfoWaitForCosting) = RACChannelTo(costInfoWaitForCostingCell,cellText);
     RACChannelTo(model,costInfoSubsidy) = RACChannelTo(costInfoSubsidyCell,cellText);
     RACChannelTo(model,costInfoCommission) = RACChannelTo(costInfoCommissionCell,cellText);
+    
+    RAC(costInfoChargeTypeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(costInfoInterestIncomeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(costInfoPoundageCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(costInfoWaitForCostingCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(costInfoSubsidyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(costInfoCommissionCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[costInfoChargeTypeCell,
+                                                    costInfoInterestIncomeCell,
+                                                    costInfoPoundageCell,
+                                                    costInfoWaitForCostingCell,
+                                                    costInfoSubsidyCell,
+                                                    costInfoCommissionCell,
+                                                    buttonCell
+                                                    ]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[costInfoChargeTypeCell,
+                                                    costInfoInterestIncomeCell,
+                                                    costInfoPoundageCell,
+                                                    costInfoWaitForCostingCell,
+                                                    costInfoSubsidyCell,
+                                                    costInfoCommissionCell,
+                                                    ]];
+        }
+        self.sections = @[section];
+    }];
 }
 - (NSString*)error
 {
@@ -114,4 +141,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

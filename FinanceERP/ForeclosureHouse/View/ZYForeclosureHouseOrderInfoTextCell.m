@@ -55,7 +55,10 @@
 - (BOOL)becomeFirstResponder
 {
     [super becomeFirstResponder];
-    [_cellTextView becomeFirstResponder];
+    if(self.userInteractionEnabled)
+    {
+        [_cellTextView becomeFirstResponder];
+    }
     return YES;
 }
 - (void)setCellTitle:(NSString *)cellTitle
@@ -63,4 +66,5 @@
     _titleLabel.text = cellTitle;
     _cellTitle = cellTitle;
 }
+
 @end

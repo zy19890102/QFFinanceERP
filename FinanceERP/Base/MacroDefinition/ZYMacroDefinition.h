@@ -9,6 +9,9 @@
 #ifndef ZYMacroDefinition_h
 #define ZYMacroDefinition_h
 
+#define HOST @"http://192.168.0.212:8088/"
+//#define HOST @"http://172.16.63.68:8080/"
+
 #define FUll_SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define FUll_SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 
@@ -26,5 +29,8 @@
  *  圆角比例 对照目标layer 高度
  */
 #define ROUND_RECT_HEIGHT_RATE 0.2
+
+#define LOGIN_NOTIFICATION @"loginNotification"
+#define LOGOUT_NOTIFICATION @"logoutNotification"
 
 #endif /* ZYMacroDefinition_h */

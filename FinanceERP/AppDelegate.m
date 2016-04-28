@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ZYHomePageViewController.h"
-
+#import <YTKNetworkConfig.h>
 
 @interface AppDelegate ()
 
@@ -33,5 +33,7 @@
     [[IQKeyboardManager sharedManager] setKeyboardDistanceFromTextField:88.f];
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:NO];
     [[IQKeyboardManager sharedManager] setShouldResignOnTouchOutside:YES];
+    //基础路径
+    [YTKNetworkConfig sharedInstance].baseUrl = [NSString stringWithFormat:@"%@BMS/mobileApi",HOST];
 }
 @end

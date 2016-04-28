@@ -17,12 +17,14 @@
     ZYInputCell *applicationTelephoneCell;
     ZYForeclosureHouseApplicationContentCell *applicationExplainCell;
     ZYForeclosureHouseApplicationContentCell *applicationRemarksCell;
+    
+    ZYSeveralButtonCell *buttonCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -53,7 +55,7 @@
     applicationRemarksCell = [ZYForeclosureHouseApplicationContentCell cellWithActionBlock:nil];
     applicationRemarksCell.cellTitle = @"备注";
     
-    ZYSeveralButtonCell *buttonCell = [ZYSeveralButtonCell cellWithActionBlock:nil];
+    buttonCell = [ZYSeveralButtonCell cellWithActionBlock:nil];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
         [self submit:[self error]];
     }];
@@ -63,21 +65,43 @@
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self cellLastStep];
     }];
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[applicationDateCell,
-                                                       applicationLinkmanCell,
-                                                       applicationTelephoneCell,
-                                                       applicationExplainCell,
-                                                       applicationRemarksCell,buttonCell]];
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,applicationDate) = RACChannelTo(applicationDateCell,selecedObj);
     RACChannelTo(model,applicationLinkman) = RACChannelTo(applicationLinkmanCell,cellText);
     RACChannelTo(model,applicationTelephone) = RACChannelTo(applicationTelephoneCell,cellText);
     RACChannelTo(model,applicationExplain) = RACChannelTo(applicationExplainCell,cellContent);
     RACChannelTo(model,applicationRemarks) = RACChannelTo(applicationRemarksCell,cellContent);
+    
+    RAC(applicationDateCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applicationLinkmanCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applicationTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applicationExplainCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applicationRemarksCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[applicationDateCell,
+                                                    applicationLinkmanCell,
+                                                    applicationTelephoneCell,
+                                                    applicationExplainCell,
+                                                    applicationRemarksCell,buttonCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[applicationDateCell,
+                                                    applicationLinkmanCell,
+                                                    applicationTelephoneCell,
+                                                    applicationExplainCell,
+                                                    applicationRemarksCell]];
+        }
+        self.sections = @[section];
+    }];
 }
 - (void)save:(NSString*)error{}
 - (RACSignal*)saveSignal
@@ -121,4 +145,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

@@ -20,7 +20,6 @@
         clearButton.frame = CGRectMake(2*GAP, GAP, FUll_SCREEN_WIDTH-4*GAP, [ZYSearchCleanCell defaultHeight]-2*GAP);
         [clearButton setTitle:@"清除搜索历史" forState:UIControlStateNormal];
         clearButton.titleLabel.font = FONT(14);
-//        [clearButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
         [clearButton setTitleColor:TEXT_COLOR forState:UIControlStateNormal];
         [self addSubview:clearButton];
         

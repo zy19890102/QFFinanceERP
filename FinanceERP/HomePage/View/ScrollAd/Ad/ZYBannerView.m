@@ -7,12 +7,11 @@
 //
 
 #import "ZYBannerView.h"
-#import <UIImageView+WebCache.h>
-
-
+#import <YTKNetworkConfig.h>
+#import <UIImageView+AFNetworking.h>
 
 @implementation ZYBannerItem
-
+MJCodingImplementation
 @end
 
 @interface ZYBannerView ()<UIScrollViewDelegate>
@@ -108,7 +107,10 @@
             if (item.source == ZYBannerSourceOnlyLocalSource) {
                 bannerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",item.imageName]];
             }else if (item.source == ZYBannerSourceOnlyWebSource) {
-                [bannerImageView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl]];
+                if(item.picture_url.length>0)
+                {
+                    [bannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HOST,item.picture_url]] placeholderImage:nil];
+                }
             }else if (item.source == ZYBannerSourceOnlyTextSource) {
                 loopLabel.text = item.title;
             }
@@ -145,7 +147,10 @@
             if (item.source == ZYBannerSourceOnlyLocalSource) {
                 bannerImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@",item.imageName]];
             }else if (item.source == ZYBannerSourceOnlyWebSource) {
-                [bannerImageView sd_setImageWithURL:[NSURL URLWithString:item.imageUrl]];
+                if(item.picture_url.length>0)
+                {
+                    [bannerImageView setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HOST,item.picture_url]] placeholderImage:nil];
+                }
             }else if (item.source == ZYBannerSourceOnlyTextSource) {
                 loopLabel.text = item.title;
             }

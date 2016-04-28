@@ -7,7 +7,7 @@
 //
 
 #import "ZYUserCenterUserInfoCell.h"
-#import <UIImageView+WebCache.h>
+#import <UIImageView+AFNetworking.h>
 
 @interface ZYUserCenterUserInfoCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -32,8 +32,8 @@
 - (void)setUser:(ZYUser *)user
 {
     _user = user;
-    [_headImageView sd_setImageWithURL:[NSURL URLWithString:user.headImageUrl] placeholderImage:[UIImage imageNamed:@"headImage"]];
-    _userNameLabel.text = user.userName;
-    _userInfoLabel.text = user.userInfo;
+    [_headImageView setImageWithURL:[NSURL URLWithString:user.photo_url] placeholderImage:[UIImage imageNamed:@"headImage"]];
+    _userNameLabel.text = user.real_name;
+    _userInfoLabel.text = [NSString stringWithFormat:@"%@ %@",user.org_name,user.job_title];
 }
 @end

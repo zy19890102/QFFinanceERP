@@ -23,12 +23,14 @@
     ZYInputCell *originalBankThirdPartyCardNumberCell;
     ZYInputCell *originalBankThirdPartyTelephoneCell;
     ZYInputCell *originalBankThirdPartyAddressCell;
+    
+    ZYTableViewCell *footCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -99,25 +101,14 @@
     originalBankThirdPartyAddressCell.cellPlaceHolder = @"请输入家庭地址";
     originalBankThirdPartyAddressCell.cellNullable = YES;
     
-    ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
     footCell.selectionStyle = UITableViewCellSelectionStyleNone;
     footCell.lineHidden = YES;
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[originalBankNameCell,
-                                                       originalBankLoanMoneyCell,
-                                                       originalBankDebtCell,
-                                                       originalBankLoanEndTimeCell,
-                                                       originalBankLinkmanCell,
-                                                       originalBankTelephoneCell,
-                                                       originalBankThirdPartyLoanCell,
-                                                       originalBankThirdPartyCardNumberCell,
-                                                       originalBankThirdPartyTelephoneCell,
-                                                       originalBankThirdPartyAddressCell,
-                                                       footCell]];
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,originalBankName) = RACChannelTo(originalBankNameCell,selecedObj);
     RACChannelTo(model,originalBankLoanMoney) = RACChannelTo(originalBankLoanMoneyCell,cellText);
     RACChannelTo(model,originalBankDebt) = RACChannelTo(originalBankDebtCell,cellText);
@@ -129,6 +120,50 @@
     RACChannelTo(model,originalBankThirdPartyCardNumber) = RACChannelTo(originalBankThirdPartyCardNumberCell,cellText);
     RACChannelTo(model,originalBankThirdPartyTelephone) = RACChannelTo(originalBankThirdPartyTelephoneCell,cellText);
     RACChannelTo(model,originalBankThirdPartyAddress) = RACChannelTo(originalBankThirdPartyAddressCell,cellText);
+    
+    RAC(originalBankNameCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankLoanMoneyCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankDebtCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankLoanEndTimeCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankLinkmanCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankThirdPartyLoanCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankThirdPartyCardNumberCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankThirdPartyTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(originalBankThirdPartyAddressCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[originalBankNameCell,
+                                                    originalBankLoanMoneyCell,
+                                                    originalBankDebtCell,
+                                                    originalBankLoanEndTimeCell,
+                                                    originalBankLinkmanCell,
+                                                    originalBankTelephoneCell,
+                                                    originalBankThirdPartyLoanCell,
+                                                    originalBankThirdPartyCardNumberCell,
+                                                    originalBankThirdPartyTelephoneCell,
+                                                    originalBankThirdPartyAddressCell,
+                                                    footCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[originalBankNameCell,
+                                                    originalBankLoanMoneyCell,
+                                                    originalBankDebtCell,
+                                                    originalBankLoanEndTimeCell,
+                                                    originalBankLinkmanCell,
+                                                    originalBankTelephoneCell,
+                                                    originalBankThirdPartyLoanCell,
+                                                    originalBankThirdPartyCardNumberCell,
+                                                    originalBankThirdPartyTelephoneCell,
+                                                    originalBankThirdPartyAddressCell,
+                                                    ]];
+        }
+        self.sections = @[section];
+    }];
 }
 - (NSString*)error
 {
@@ -161,4 +196,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

@@ -10,6 +10,16 @@
 
 @interface ZYWarningEvent : NSObject
 
-@property(nonatomic,strong)NSString *eventTitle;
+@property (nonatomic, copy) NSString *flow_name;
+
+@property (nonatomic, copy) NSString *project_name;
+
+@property (nonatomic, copy) NSString *create_date;
+
+@property (nonatomic, assign) NSInteger differ;
+
+@property (nonatomic, assign) NSInteger pid;
+
+@property (nonatomic, assign) NSInteger project_id;
 
 @end

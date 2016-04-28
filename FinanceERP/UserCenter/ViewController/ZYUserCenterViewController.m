@@ -35,6 +35,11 @@ ZY_VIEW_MODEL_GET(ZYUserCenterViewModel)
 {
     ZYUserCenterViewModel *viewModel = self.viewModel;
     userInfoCell = [ZYUserCenterUserInfoCell cellWithXibHeight:[ZYUserCenterUserInfoCell defaultHeight] actionBlock:^{
+        if(![ZYTools checkLogin])
+        {
+            [self tip:@"登陆中,请稍后"];
+            return;
+        }
         
     }];
     ZYSection *userInfoSection = [ZYSection sectionWithCells:@[userInfoCell]];
@@ -50,24 +55,42 @@ ZY_VIEW_MODEL_GET(ZYUserCenterViewModel)
         cell.cellTitle = [viewModel contentForIndex:row];
         return cell;
     } actionBlock:^(UITableView *tableView, NSInteger row) {
-        
+        if(![ZYTools checkLogin])
+        {
+            [self tip:@"登陆中,请稍后"];
+            return;
+        }
     }];
     
-    ZYUserCenterLogoutCell *logoutCell = [ZYUserCenterLogoutCell cellWithXibHeight:[ZYUserCenterLogoutCell defaultHeight] actionBlock:^{
-    }];
+    ZYUserCenterLogoutCell *logoutCell = [ZYUserCenterLogoutCell cellWithXibHeight:[ZYUserCenterLogoutCell defaultHeight] actionBlock:nil];
     [logoutCell setLineHidden:YES];
+    [[logoutCell logoutSignal] subscribeNext:^(id x) {
+        if(![ZYTools checkLogin])
+        {
+            [self tip:@"登陆中,请稍后"];
+            return;
+        }
+        
+        NSMutableDictionary *usernamepasswordKVPairs = [NSMutableDictionary dictionary];
+        [ZYTools saveKeychain:[ZYTools appVersionToken] data:usernamepasswordKVPairs];//清除账号信息
+        [ZYTools clearCache];//清除缓存
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:LOGOUT_NOTIFICATION object:nil];
+    }];
+    
     ZYSection *logoutSection = [ZYSection sectionWithCells:@[logoutCell]];
     
     self.sections = @[userInfoSection,section,logoutSection];
 }
+
 - (void)blendViewModel
 {
-    ZYUserCenterViewModel *viewModel = self.viewModel;
-    RAC(userInfoCell,user) = RACObserve(viewModel, user);
-    [RACObserve(viewModel, dataSource) subscribeNext:^(id x) {
-        [self.myTableView reloadData];
+//    ZYUserCenterViewModel *viewModel = self.viewModel;
+    userInfoCell.user = [ZYUser user];
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:LOGIN_NOTIFICATION object:nil] subscribeNext:^(id x) {
+        userInfoCell.user = [ZYUser user];
     }];
-    [viewModel reloadDataSource];
+    [self.myTableView reloadData];
 }
 
 - (UITableView*)tableView

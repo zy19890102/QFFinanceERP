@@ -23,6 +23,33 @@
     return _viewModel;\
 }\
 
+#define ZY_VIEW_MODEL_GET_DECODE(Class)\
+- (Class*)viewModel\
+{\
+    if(_viewModel==nil)\
+    {\
+        NSData *_data = [[NSData alloc] initWithContentsOfFile:[ZYTools getDirectoryForDocuments:@"model" modelKey:NSStringFromClass([Class class])]];\
+        NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:_data];\
+        _viewModel = [unarchiver decodeObjectForKey:NSStringFromClass([Class class])];\
+        [unarchiver finishDecoding];\
+        if(_viewModel==nil)\
+        {\
+            _viewModel = [[Class alloc] init];\
+        }\
+    }\
+    return _viewModel;\
+}\
+
+#define ZY_VIEW_MODEL_ENCODE(Class)\
+- (void)encode\
+{\
+    NSMutableData *data = [[NSMutableData alloc] init];\
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];\
+    [archiver encodeObject:_viewModel forKey:NSStringFromClass([Class class])];\
+    [archiver finishEncoding];\
+    [data writeToFile:[ZYTools getDirectoryForDocuments:@"model" modelKey:NSStringFromClass([Class class])] atomically:YES];\
+}\
+
 #define ZY_VIEW_MODEL_PROPERTY(Class)\
 @property(nonatomic,strong)Class *viewModel;\
 

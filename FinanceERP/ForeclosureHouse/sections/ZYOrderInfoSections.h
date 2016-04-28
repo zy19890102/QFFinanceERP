@@ -10,4 +10,5 @@
 #import "ZYForeclosureHouseValueModel.h"
 @interface ZYOrderInfoSections : ZYSections
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model;
+@property(nonatomic,assign)BOOL edit;
 @end

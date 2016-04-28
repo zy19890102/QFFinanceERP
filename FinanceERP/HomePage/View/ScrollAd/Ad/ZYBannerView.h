@@ -37,16 +37,19 @@ typedef NS_ENUM(NSInteger, ZYBannerSource) {
 };
 
 @interface ZYBannerItem : NSObject
+
+#pragma mark - 网络获取字段
+
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, copy) NSString *picture_url;
+
+@property (nonatomic, assign) NSInteger order_index;
+
+@property (nonatomic, copy) NSString *adv_url;
+
 /**
- *  标题
- */
-@property(nonatomic,copy)NSString *title;
-/**
- *  加载路径
- */
-@property(nonatomic,copy)NSString *imageUrl;
-/**
- *  本地图片名称
+ *  本地图片名称  用于显示本地图片
  */
 @property(nonatomic,strong)NSURL *imageName;
 /**

@@ -44,6 +44,10 @@
     self.tableView.width = frame.size.width;
     self.tableView.height = frame.size.height;
 }
+- (void)reloadData
+{
+    [self.tableView reloadData];
+}
 #pragma mark - 折叠
 
 - (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex

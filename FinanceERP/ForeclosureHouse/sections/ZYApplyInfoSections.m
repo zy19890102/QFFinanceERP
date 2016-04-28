@@ -15,12 +15,14 @@
     ZYInputCell *applyInfoBorrowerTelphoneCell;
     ZYInputCell *applyInfoHousePropertyCardNumberCell;
     ZYInputCell *applyInfoAddressCell;
+    
+    ZYDoubleButtonCell *buttonCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -56,24 +58,17 @@
     applyInfoAddressCell.cellTitle = @"联系地址";
     applyInfoAddressCell.cellPlaceHolder = @"请输入联系地址";
     
-    ZYDoubleButtonCell *buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
+    buttonCell = [ZYDoubleButtonCell cellWithActionBlock:nil];
     [buttonCell.rightButtonPressedSignal subscribeNext:^(id x) {
         [self cellNextStep:[self error]];
     }];
     [buttonCell.leftButtonPressedSignal subscribeNext:^(id x) {
         [self cellLastStep];
     }];
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[applyInfoBorrowerNameCell,
-                                                       applyInfoBorrowerCardNumberCell,
-                                                       applyInfoBorrowerTelphoneCell,
-                                                       applyInfoHousePropertyCardNumberCell,
-                                                       applyInfoAddressCell,
-                                                       buttonCell]];
-    self.sections = @[section];
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,applyInfoBorrowerName) = RACChannelTo(applyInfoBorrowerNameCell,cellText);
     
     RACChannelTo(model,applyInfoBorrowerCardNumber) = RACChannelTo(applyInfoBorrowerCardNumberCell,cellText);
@@ -87,6 +82,34 @@
            model.applyInfoBorrowerCardNumber = [(ZYBorrowerModel*)x cardNumber];
            model.applyInfoBorrowerTelphone = [(ZYBorrowerModel*)x telephone];
        }
+    }];
+    
+    RAC(applyInfoBorrowerNameCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applyInfoBorrowerCardNumberCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applyInfoBorrowerTelphoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applyInfoHousePropertyCardNumberCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(applyInfoAddressCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[applyInfoBorrowerNameCell,
+                                                    applyInfoBorrowerCardNumberCell,
+                                                    applyInfoBorrowerTelphoneCell,
+                                                    applyInfoHousePropertyCardNumberCell,
+                                                    applyInfoAddressCell,
+                                                    buttonCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[applyInfoBorrowerNameCell,
+                                                    applyInfoBorrowerCardNumberCell,
+                                                    applyInfoBorrowerTelphoneCell,
+                                                    applyInfoHousePropertyCardNumberCell,
+                                                    applyInfoAddressCell]];
+        }
+        self.sections = @[section];
     }];
 }
 - (NSString*)error

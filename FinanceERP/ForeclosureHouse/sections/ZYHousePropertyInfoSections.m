@@ -16,12 +16,13 @@
     ZYInputCell *housePropertyInfoHousePropertyCardNumber;
     ZYInputCell *housePropertyInfoDealPrice;
     ZYInputCell *housePropertyInfoAssessmentPrice;
+    ZYTableViewCell *footCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -60,27 +61,53 @@
     housePropertyInfoAssessmentPrice.onlyFloat = YES;
     housePropertyInfoAssessmentPrice.cellTailText = @"元";
     
-    ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
     footCell.selectionStyle = UITableViewCellSelectionStyleNone;
     footCell.lineHidden = YES;
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[housePropertyInfoName,
-                                                       housePropertyInfoArea,
-                                                       housePropertyInfoOrigePrice,
-                                                       housePropertyInfoHousePropertyCardNumber,
-                                                       housePropertyInfoDealPrice,
-                                                       housePropertyInfoAssessmentPrice,
-                                                       footCell]];
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,housePropertyInfoName) = RACChannelTo(housePropertyInfoName,cellText);
     RACChannelTo(model,housePropertyInfoArea) = RACChannelTo(housePropertyInfoArea,cellText);
     RACChannelTo(model,housePropertyInfoOrigePrice) = RACChannelTo(housePropertyInfoOrigePrice,cellText);
     RACChannelTo(model,housePropertyInfoHousePropertyCardNumber) = RACChannelTo(housePropertyInfoHousePropertyCardNumber,cellText);
     RACChannelTo(model,housePropertyInfoDealPrice) = RACChannelTo(housePropertyInfoDealPrice,cellText);
     RACChannelTo(model,housePropertyInfoAssessmentPrice) = RACChannelTo(housePropertyInfoAssessmentPrice,cellText);
+    
+    RAC(housePropertyInfoName,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(housePropertyInfoArea,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(housePropertyInfoOrigePrice,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(housePropertyInfoHousePropertyCardNumber,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(housePropertyInfoDealPrice,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(housePropertyInfoAssessmentPrice,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[housePropertyInfoName,
+                                                    housePropertyInfoArea,
+                                                    housePropertyInfoOrigePrice,
+                                                    housePropertyInfoHousePropertyCardNumber,
+                                                    housePropertyInfoDealPrice,
+                                                    housePropertyInfoAssessmentPrice,
+                                                    footCell]];
+            
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[housePropertyInfoName,
+                                                    housePropertyInfoArea,
+                                                    housePropertyInfoOrigePrice,
+                                                    housePropertyInfoHousePropertyCardNumber,
+                                                    housePropertyInfoDealPrice,
+                                                    housePropertyInfoAssessmentPrice]];
+        }
+        self.sections = @[section];
+
+    }];
 }
 - (NSString*)error
 {
@@ -109,4 +136,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

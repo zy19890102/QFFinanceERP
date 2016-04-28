@@ -12,4 +12,6 @@
 @interface ZYCurrentBankSections : ZYSections
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model;
 @property(nonatomic,strong)NSString *error;
+
+@property(nonatomic,assign)BOOL edit;
 @end

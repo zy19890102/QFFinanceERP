@@ -13,6 +13,8 @@
 #import "ZYHomePageFunctionButtonCell.h"
 #import "ZYHomePageWarningEventTitleCell.h"
 #import "ZYHomePageEventView.h"
+#import "ZYTools.h"
+#import "ZYNavCenterView.h"
 
 @interface ZYHomePageViewController ()
 
@@ -31,13 +33,18 @@
     ZYHomePageWarningEventTitleCell *eventTitleCell;
     
     ZYHomePageEventView *eventListView;
+    
+    ZYNavCenterView *navCenterView;
 }
 ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
-
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     self.tabBarHidden = NO;
     /**
      *  初始化UI
@@ -48,7 +55,6 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
      */
     [self blendViewModel];
 }
-
 - (UITableView*)tableView
 {
     return _myTableView;
@@ -56,6 +62,8 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
 - (void)buildUI
 {
 #pragma mark- 广告cell
+    navCenterView = [ZYNavCenterView navCenterView];
+    self.navigationItem.titleView = navCenterView;
     
     scrollAdCell = [ZYHomePageScrollAdCell cellWithActionBlock:^{
         
@@ -76,48 +84,102 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
     CGSize size = [ZYHomePageEventView defaultSize];
     eventListView = [[ZYHomePageEventView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
         
-    ZYSection *section = [ZYSection sectionWithCells:@[scrollAdCell,checkInCell,founctionButtonCell,eventTitleCell,eventListView]];
-    self.sections = @[section];
-    
+    [self buildCells];
 }
-
-
+- (void)buildCells
+{
+    ZYHomePageViewModel *viewModel = self.viewModel;
+    if(viewModel.eventArr.count>0)
+    {
+        ZYSection *section = [ZYSection sectionWithCells:@[scrollAdCell,checkInCell,founctionButtonCell,eventTitleCell,eventListView]];
+        self.sections = @[section];
+    }
+    else
+    {
+        ZYSection *section = [ZYSection sectionWithCells:@[scrollAdCell,checkInCell,founctionButtonCell]];
+        self.sections = @[section];
+    }
+}
 - (void)blendViewModel
 {
-//    @weakify(self);
     ZYHomePageViewModel *viewModel = self.viewModel;
+    
+    [RACObserve(viewModel, navState) subscribeNext:^(NSString *state) {
+        navCenterView.statue = state;
+    }];
+    [RACObserve(viewModel, navLoading) subscribeNext:^(NSNumber *navLoading) {
+        navCenterView.loading = navLoading.boolValue;
+    }];
+    
+    //登陆通知
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:LOGIN_NOTIFICATION object:nil] subscribeNext:^(NSNotification *notification) {
+        if([ZYUser user].loginState==ZYUserLoginSuccess)//已经登陆成功 user返回有可能是缓存数据
+        {
+            viewModel.navLoading = NO;//登录成功
+            viewModel.navState = @"首页";
+        }
+        [founctionButtonCell reloadFunctionButton:[ZYUser user]];
+        [viewModel requestBannerArr:[ZYUser user]];
+        [viewModel requestCheckInDays:[ZYUser user]];
+        [viewModel requestWarningEvent:[ZYUser user]];
+    }];
+    
+    //登出通知
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:LOGOUT_NOTIFICATION object:nil] subscribeNext:^(NSNotification *notification) {
+        viewModel.needShowLoginController = YES;
+    }];
+    
+//    @weakify(self);
+    [RACObserve(viewModel, needShowLoginController) subscribeNext:^(NSNumber *needShowLoginController) {
+        if(needShowLoginController.boolValue)
+        {
+            [self.tabBarController performSegueWithIdentifier:@"login" sender:nil];
+        }
+        else
+        {
+            AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+            [manager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+                if(manager.reachable&&![ZYTools checkLogin])
+                {
+                    viewModel.navLoading = YES;//正在登录
+                    viewModel.navState = @"登录中...";
+                    [ZYUser user].loginState = ZYUserLoging;
+                    [viewModel autoLogin];//自动登录
+                }
+            }];
+            [manager startMonitoring];
+        }
+    }];
+    
+    
     RAC(scrollAdCell,bannerArr) = [RACObserve(viewModel, bannerArr) skip:0];
     
     [[scrollAdCell.bannerTapSignal map:^id(NSNumber *index) {
         return viewModel.bannerArr[[index longLongValue]];
     }] subscribeNext:^(ZYBannerItem *item) {
-        NSLog(@"%@",item.imageUrl);
+        
     }];
-    [viewModel requestBannerArr];
+    
     
 #pragma mark - 签到
     
-    RAC(checkInCell,checkInDays) = [RACObserve(viewModel, checkInDays) skip:0];
-    [viewModel requestCheckInDays];
+    RAC(checkInCell,checkInDays) = RACObserve(viewModel, checkInDays);
+    RAC(checkInCell,hasCheckIn) = RACObserve(viewModel, hasCheckIn);
     
-    [[RACObserve(viewModel, hasCheckIn) skip:0] subscribeNext:^(NSNumber *hasCheckIn) {
-        if(hasCheckIn.boolValue)///已签到
-        {
-            checkInCell.hasCheckIn = YES;
-        }
-        else
-        {
-            checkInCell.hasCheckIn = NO;
-        }
+    [[RACObserve(viewModel, error) skip:1] subscribeNext:^(NSString *checkInError) {
+        [self tip:checkInError];
     }];
-    [viewModel requestHasCheckIn];
-    
     [checkInCell.checkInButtonPressedSignal subscribeNext:^(id x) {
-        viewModel.hasCheckIn = YES;
+        [viewModel requestCheckIn:[ZYUser user]];
     }];
     
 #pragma mark - 功能列表
     [founctionButtonCell.functionButtonPressSignal subscribeNext:^(NSNumber *tag) {
+        if(![ZYTools checkLogin])
+        {
+            [self tip:@"登陆中,请稍后"];
+            return;
+        }
         switch (tag.longLongValue) {
             case 0:
                 [self performSegueWithIdentifier:@"applyList" sender:nil];
@@ -130,15 +192,14 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
         }
     }];
     
-    RAC(eventTitleCell,eventCount) = [[RACObserve(viewModel, eventArr) skip:0] map:^id(NSArray *eventArr) {
+    RAC(eventTitleCell,eventCount) = [RACObserve(viewModel, eventArr) map:^id(NSArray *eventArr) {
         return @(eventArr.count);
     }];
-    
-    RAC(eventListView,eventArr) = [RACObserve(viewModel, eventArr) skip:0];
-    
-    [viewModel requestWarningEvent];
+    [RACObserve(eventTitleCell,eventCount) subscribeNext:^(NSNumber *count) {
+        [self buildCells];
+    }];
+    RAC(eventListView,eventArr) = RACObserve(viewModel, eventArr);
 }
-
 /*
 #pragma mark - Navigation
 

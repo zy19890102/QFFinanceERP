@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface ZYFadeTransion : NSObject<UIViewControllerAnimatedTransitioning>
-
+@property(nonatomic,assign)float animation;
+@property(nonatomic,assign)float animationDuration;
 @end

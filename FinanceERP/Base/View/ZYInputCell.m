@@ -261,4 +261,19 @@
         _cellTextField.width = FUll_SCREEN_WIDTH-4*GAP-_cellTitleLabel.width-_tailLabel.width;
     }
 }
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    super.userInteractionEnabled = userInteractionEnabled;
+    if(userInteractionEnabled)
+    {
+        [self setCellNullable:NO];
+        _cellTextField.placeholder = self.cellPlaceHolder;
+    }
+    else
+    {
+        [self setCellNullable:YES];
+        _cellTextField.placeholder = nil;
+        self.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
 @end

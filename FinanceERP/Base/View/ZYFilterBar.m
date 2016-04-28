@@ -108,15 +108,41 @@
 }
 - (void)topButtonPressed:(UIButton*)button
 {
-    [self resetTopButton];
-    [self resetDropImage];
-    [button setTitleColor:BLUE forState:UIControlStateNormal];
-    UIImageView *drop = dropImageArr[button.tag];
-    [UIView animateWithDuration:0.1 animations:^{
-        drop.transform = CGAffineTransformMakeRotation(M_PI);
-    }];
-    currentIndex = button.tag;
-    
+    if(_delegate&&[_delegate respondsToSelector:@selector(filterBarTitles:selecedIndex:)])
+    {
+        [_delegate filterBarTitles:self selecedIndex:button.tag];
+    }
+    if(button.tag==currentIndex||!droped)
+    {
+        [self resetTopButtonWithOut:button.tag];
+        [self resetDropImageWithOut:button.tag];
+        [button setTitleColor:BLUE forState:UIControlStateNormal];
+        UIImageView *drop = dropImageArr[button.tag];
+        [UIView animateWithDuration:0.1 animations:^{
+            drop.transform = CGAffineTransformMakeRotation(M_PI);
+        }];
+        currentIndex = button.tag;
+        [self reloadDataSource];
+        
+        [self dropTableView:!droped];
+    }
+    else
+    {
+        [self resetTopButtonWithOut:button.tag];
+        [self resetDropImageWithOut:button.tag];
+        [button setTitleColor:BLUE forState:UIControlStateNormal];
+        UIImageView *drop = dropImageArr[button.tag];
+        [UIView animateWithDuration:0.1 animations:^{
+            drop.transform = CGAffineTransformMakeRotation(M_PI);
+        }];
+        currentIndex = button.tag;
+        [self reloadDataSource];
+        
+        [self dropTableView:droped];
+    }
+}
+- (void)reloadDataSource
+{
     if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:itemsWithIndex:level:)])
     {
         currentLevel = 0;
@@ -128,12 +154,12 @@
     {
         dataSource = nil;
     }
-    [self dropTableView:!droped];
+    [dropTableView reloadData];
+    [dropSubTableView reloadData];
 }
 - (void)dropTableView:(BOOL)drop
 {
-    [dropTableView reloadData];
-    [dropSubTableView reloadData];
+    
     NSInteger levelCount = 0;
     if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:levelCountWithIndex:)])
     {
@@ -152,7 +178,7 @@
         [controller.view bringSubviewToFront:dropSubTableView];
         [controller.view bringSubviewToFront:dropTableView];
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            dropTableView.height = bottomGap*2.f/3.f;
+            dropTableView.height = MIN(bottomGap*2.f/3.f, dataSource.count*[ZYTableViewCell defaultHeight]);
             if(levelCount==2)
             {
                 dropSubTableView.height = bottomGap*2.f/3.f;
@@ -175,54 +201,68 @@
             bgView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
         } completion:^(BOOL finished) {
             bgView.hidden = YES;
-            [self resetTopButton];
-            [self resetDropImage];
+            [self resetTopButtonWithOut:-1];
+            [self resetDropImageWithOut:-1];
         }];
         droped = NO;
     }
     
 }
-- (void)resetTopButton
+- (void)resetTopButtonWithOut:(NSInteger)index
 {
     [topButtonArr enumerateObjectsUsingBlock:^(UIButton * _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
-        [button setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        if(idx!=index)
+        {
+            [button setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        }
     }];
 }
-- (void)resetDropImage
+- (void)resetDropImageWithOut:(NSInteger)index
 {
     [dropImageArr enumerateObjectsUsingBlock:^(UIImageView*  _Nonnull drop, NSUInteger idx, BOOL * _Nonnull stop) {
-        [UIView animateWithDuration:0.1 animations:^{
-            drop.transform = CGAffineTransformMakeRotation(0);
-        }];
+        if(idx!=index)
+        {
+            [UIView animateWithDuration:0.1 animations:^{
+                drop.transform = CGAffineTransformMakeRotation(0);
+            }];
+        }
     }];
 }
 - (void)hidden
 {
     [self dropTableView:NO];
 }
-- (void)changeTitle:(NSString*)title atIndex:(NSInteger)index
+- (void)changeTitle:(id)title atIndex:(NSInteger)index
 {
     UIButton *button = topButtonArr[index];
-    [button setTitle:title forState:UIControlStateNormal];
+    if([title isKindOfClass:[NSString class]])
+    {
+        [button setTitle:title forState:UIControlStateNormal];
+    }
+    else if (self.showKey.length>0)
+    {
+        [button setTitle:[title valueForKey:_showKey] forState:UIControlStateNormal];
+    }
+    
 }
 - (void)drawRect:(CGRect)rect {
     
-//    CGFloat width = 1/[UIScreen mainScreen].scale;
-//    
-//    CALayer *line = [CALayer layer];
-//    line.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"].CGColor;
-//    line.frame = CGRectMake(0, rect.size.height-width, rect.size.width, width);
-//    [self.layer addSublayer:line];
-//    
-//    for(int i=0;i<topButtonArr.count;i++)
-//    {
-//        CGFloat gap = rect.size.width/topButtonArr.count;
-//        CALayer *line = [CALayer layer];
-//        line.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"].CGColor;
-//        line.frame = CGRectMake(gap+gap*i-width, 10, width, rect.size.height-20.f);
-//        [self.layer addSublayer:line];
-//    }
-//    
+    CGFloat width = 1/[UIScreen mainScreen].scale;
+    
+    CALayer *line = [CALayer layer];
+    line.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"].CGColor;
+    line.frame = CGRectMake(0, rect.size.height-width, rect.size.width, width);
+    [self.layer addSublayer:line];
+    
+    for(int i=0;i<topButtonArr.count;i++)
+    {
+        CGFloat gap = rect.size.width/topButtonArr.count;
+        CALayer *line = [CALayer layer];
+        line.backgroundColor = [UIColor colorWithHexString:@"e2e2e2"].CGColor;
+        line.frame = CGRectMake(gap+gap*i-width, 10, width, rect.size.height-20.f);
+        [self.layer addSublayer:line];
+    }
+    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -243,12 +283,28 @@
     }
     if(tableView==dropTableView)
     {
-        cell.textLabel.text = dataSource[indexPath.row];
+        id value = dataSource[indexPath.row];
+        if([value isKindOfClass:[NSString class]])
+        {
+            cell.textLabel.text = value;
+        }
+        else if (self.showKey.length>0)
+        {
+            cell.textLabel.text = [value valueForKey:_showKey];
+        }
         cell.backgroundColor = [UIColor whiteColor];
     }
     if(tableView==dropSubTableView)
     {
-        cell.textLabel.text = subDataSource[indexPath.row];
+        id value = subDataSource[indexPath.row];
+        if([value isKindOfClass:[NSString class]])
+        {
+            cell.textLabel.text = value;
+        }
+        else if (self.showKey.length>0)
+        {
+            cell.textLabel.text = [value valueForKey:_showKey];
+        }
         cell.backgroundColor = TEXT_COLOR;
     }
     return cell;
@@ -262,10 +318,10 @@
         [tableView reloadData];
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         cell.backgroundColor = TEXT_COLOR;
-        if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:selecedWithIndex:level:row:)])
+        if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:selecedWithIndex:level:row:object:)])
         {
             currentLevel = 0;
-            if(![_delegate filterBar:self selecedWithIndex:currentIndex level:currentLevel row:currentRow])
+            if(![_delegate filterBar:self selecedWithIndex:currentIndex level:currentLevel row:currentRow object:dataSource[currentRow]])
             {
                 dataSource = nil;
                 [dropSubTableView reloadData];
@@ -287,9 +343,9 @@
     if(tableView==dropSubTableView)
     {
         currentLevel = 1;
-        if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:selecedWithIndex:level:row:)])
+        if(_delegate&&[_delegate respondsToSelector:@selector(filterBar:selecedWithIndex:level:row:object:)])
         {
-            if(![_delegate filterBar:self selecedWithIndex:currentIndex level:currentLevel row:currentRow])
+            if(![_delegate filterBar:self selecedWithIndex:currentIndex level:currentLevel row:currentRow object:subDataSource[currentRow]])
             {
                 [self hidden];
                 return;

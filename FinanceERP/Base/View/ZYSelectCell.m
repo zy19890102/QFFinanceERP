@@ -115,4 +115,18 @@
     }
     return self.cellError;
 }
+- (void)setUserInteractionEnabled:(BOOL)userInteractionEnabled
+{
+    super.userInteractionEnabled = userInteractionEnabled;
+    if(userInteractionEnabled)
+    {
+        [self setCellNullable:NO];
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else
+    {
+        [self setCellNullable:YES];
+        self.accessoryType = UITableViewCellAccessoryNone;
+    }
+}
 @end

@@ -63,6 +63,10 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
     // Do any additional setup after loading the view.
     transion = [[ZYFadeTransion alloc] init];
     [self buildUI];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self blendViewModel];
 }
 - (void)viewWillAppear:(BOOL)animated
@@ -88,11 +92,16 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
     self.datePickerViewTapBlankHidden = YES;
     
     bussinessInfoSections = [[ZYBussinessInfoSections alloc] initWithTitle:@"业务信息"];
+    bussinessInfoSections.edit = self.edit;
     applyInfoSections = [[ZYApplyInfoSections alloc] initWithTitle:@"申请信息 "];
+    applyInfoSections.edit = self.edit;
     foreclosureHouseInfoSections = [[ZYSections alloc] initWithTitle:@"赎楼信息"];
     costInfoSections = [[ZYCostInfoSections alloc] initWithTitle:@"费用信息"];
+    costInfoSections.edit = self.edit;
     orderInfoSections = [[ZYOrderInfoSections alloc] initWithTitle:@"赎楼清单"];
+    orderInfoSections.edit = self.edit;
     applicationSections = [[ZYApplicationSections alloc] initWithTitle:@"申请办理"];
+    applicationSections.edit = self.edit;
     
     sectionsArr = @[bussinessInfoSections,
                     applyInfoSections,
@@ -102,6 +111,7 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
                     applicationSections];
     
     subSliderViewCtl = [[ZYForeclosureHouseSubController alloc] initWithModel:self.viewModel.valueModel];
+    subSliderViewCtl.edit = self.edit;
     
     _labelArr = [NSMutableArray arrayWithCapacity:10];
     _viewArr = [NSMutableArray arrayWithCapacity:10];
@@ -133,16 +143,35 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
         self.progressWidth.constant = (self.contentWidth.constant/steps)/2.f;
     
     [self buildTableViewController];
+    
+    [bussinessInfoSections blendModel:self.viewModel.valueModel];//首页优先加载 减少同时加载的应用压力
+    [RACObserve(bussinessInfoSections, sections) subscribeNext:^(id x) {
+        [self reloadTableViewAtIndex:0];
+    }];
+    [self.viewModel.valueModel reset];
 }
 - (void)blendViewModel
 {
     ZYForeclosureHouseViewModel *viewModel = self.viewModel;
-    [bussinessInfoSections blendModel:viewModel.valueModel];
     [applyInfoSections blendModel:viewModel.valueModel];
     [subSliderViewCtl blendSections:foreclosureHouseInfoSections];//这个特殊子页面 需要绑定一个section
     [costInfoSections blendModel:viewModel.valueModel];
     [orderInfoSections blendModel:viewModel.valueModel];
     [applicationSections blendModel:viewModel.valueModel];
+    
+    
+    [RACObserve(applyInfoSections, sections) subscribeNext:^(id x) {
+        [self reloadTableViewAtIndex:1];
+    }];
+    [RACObserve(costInfoSections, sections) subscribeNext:^(id x) {
+        [self reloadTableViewAtIndex:3];
+    }];
+    [RACObserve(orderInfoSections, sections) subscribeNext:^(id x) {
+        [self reloadTableViewAtIndex:4];
+    }];
+    [RACObserve(applicationSections, sections) subscribeNext:^(id x) {
+        [self reloadTableViewAtIndex:5];
+    }];
     
     [bussinessInfoSections.showSectionSignal subscribeNext:^(RACTuple *value) {
         [self showSection:[value.first boolValue] sectionIndex:[value.second longLongValue] page:0];
@@ -257,7 +286,7 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
         }
     }];
     
-    [viewModel.valueModel reset];
+    [self.viewModel.valueModel reset];
 }
 - (ZYSections*)sliderController:(ZYSliderViewController*)controller sectionsWithPage:(NSInteger)page
 {

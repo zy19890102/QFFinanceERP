@@ -122,7 +122,7 @@ static BOOL LKDBLogErrorEnable = NO;
 
 - (instancetype)init
 {
-    return [self initWithDBName:@"QFDB"];
+    return [self initWithDBName:@"LKDB"];
 }
 
 - (instancetype)initWithDBName:(NSString*)dbname
@@ -606,8 +606,11 @@ static BOOL LKDBLogErrorEnable = NO;
 
 - (BOOL)_createTableWithModelClass:(Class)modelClass tableName:(NSString*)tableName
 {
+    if (!tableName.length) {
+        NSAssert(NO, @"none table name");
+        return NO;
+    }
     if ([self getTableCreatedWithTableName:tableName]) {
-
         // 已创建表 就跳过
         [_threadLock lock];
         if ([_createdTableNames containsObject:tableName] == NO) {
@@ -721,13 +724,11 @@ static BOOL LKDBLogErrorEnable = NO;
 
     [self executeDB:^(FMDatabase* db) {
         FMResultSet* set = [db executeQuery:@"select count(name) from sqlite_master where type='table' and name=?", tableName];
-
         if ([set next]) {
             if ([set intForColumnIndex:0] > 0) {
                 isTableCreated = YES;
             }
         }
-
         [set close];
     }];
     return isTableCreated;
@@ -768,12 +769,13 @@ static BOOL LKDBLogErrorEnable = NO;
 
 - (void)rowCount:(Class)modelClass where:(id)where callback:(void (^)(NSInteger))callback
 {
-    if (callback) {
-        LKDBCode_Async_Begin
-        NSInteger result = [sself rowCountWithTableName:[modelClass getTableName] where:where];
-        callback(result);
-        LKDBCode_Async_End
+    if (!callback) {
+        return;
     }
+    LKDBCode_Async_Begin
+    NSInteger result = [sself rowCountWithTableName:[modelClass getTableName] where:where];
+    callback(result);
+    LKDBCode_Async_End
 }
 
 - (NSInteger)rowCountWithTableName:(NSString*)tableName where:(id)where
@@ -812,26 +814,27 @@ static BOOL LKDBLogErrorEnable = NO;
 
 - (void)search:(Class)modelClass where:(id)where orderBy:(NSString*)orderBy offset:(NSInteger)offset count:(NSInteger)count callback:(void (^)(NSMutableArray*))block
 {
-    if (block) {
-        LKDBCode_Async_Begin
-        LKDBQueryParams* params = [[LKDBQueryParams alloc] init];
-        params.toClass = modelClass;
-
-        if ([where isKindOfClass:[NSDictionary class]]) {
-            params.whereDic = where;
-        }
-        else if ([where isKindOfClass:[NSString class]]) {
-            params.where = where;
-        }
-
-        params.orderBy = orderBy;
-        params.offset = offset;
-        params.count = count;
-
-        NSMutableArray* array = [sself searchBaseWithParams:params];
-        block(array);
-        LKDBCode_Async_End
+    if (!block) {
+        return;
     }
+    LKDBCode_Async_Begin
+    LKDBQueryParams* params = [[LKDBQueryParams alloc] init];
+    params.toClass = modelClass;
+    
+    if ([where isKindOfClass:[NSDictionary class]]) {
+        params.whereDic = where;
+    }
+    else if ([where isKindOfClass:[NSString class]]) {
+        params.where = where;
+    }
+    
+    params.orderBy = orderBy;
+    params.offset = offset;
+    params.count = count;
+    
+    NSMutableArray* array = [sself searchBaseWithParams:params];
+    block(array);
+    LKDBCode_Async_End
 }
 
 - (NSMutableArray*)searchBaseWithParams:(LKDBQueryParams*)params
@@ -1068,7 +1071,6 @@ static BOOL LKDBLogErrorEnable = NO;
         if (bindingModel == nil) {
             continue;
         }
-        
         for (int i = 0; i < columnCount; i++) {
             NSString* sqlName = [set columnNameForIndex:i];
             LKDBProperty* property = [infos objectWithSqlColumnName:sqlName];
@@ -1100,7 +1102,6 @@ static BOOL LKDBLogErrorEnable = NO;
                 }
             }
         }
-
         bindingModel.db_tableName = tableName;
         [modelClass dbDidSeleted:bindingModel];
         [array addObject:bindingModel];
@@ -1251,7 +1252,6 @@ static BOOL LKDBLogErrorEnable = NO;
     if (block) {
         block(result);
     }
-
     LKDBCode_Async_End
 }
 
@@ -1574,28 +1574,20 @@ static BOOL LKDBLogErrorEnable = NO;
 @implementation LKDBHelper (Deprecated_Nonfunctional)
 -(void)setEncryptionKey:(NSString *)encryptionKey
 {
-    _encryptionKey = [encryptionKey copy];
-    if (_bindingQueue && (_encryptionKey.length > 0)) {
-        [self executeDB:^(FMDatabase* db) {
-            [db setKey:_encryptionKey];
-        }];
-    }
+    [self setKey:encryptionKey];
 }
 + (LKDBHelper*)sharedDBHelper
 {
     return [LKDBHelper getUsingLKDBHelper];
 }
-
 - (BOOL)createTableWithModelClass:(Class)modelClass
 {
     return [self _createTableWithModelClass:modelClass tableName:[modelClass getTableName]];
 }
-
 + (LKDBHelper*)getUsingLKDBHelper
 {
     return [[LKDBHelper alloc] init];
 }
-
 @end
 
 @implementation LKDBWeakObject

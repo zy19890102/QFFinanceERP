@@ -15,10 +15,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHB-Zr-J4i">
-                        <rect key="frame" x="8" y="42" width="304" height="35"/>
+                        <rect key="frame" x="8" y="40" width="304" height="40"/>
                         <color key="backgroundColor" red="0.0" green="0.52549019610000003" blue="0.81960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="rvp-KZ-O1t"/>
+                            <constraint firstAttribute="height" constant="40" id="rvp-KZ-O1t"/>
                         </constraints>
                         <state key="normal" title="安全退出"/>
                     </button>

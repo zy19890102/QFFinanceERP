@@ -9,5 +9,5 @@
 #import "ZYWarningEvent.h"
 
 @implementation ZYWarningEvent
-
+MJCodingImplementation
 @end

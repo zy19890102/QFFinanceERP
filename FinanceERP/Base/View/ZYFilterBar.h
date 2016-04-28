@@ -13,9 +13,10 @@
 @protocol ZYFilterBarDelegate <NSObject>
 
 - (NSArray*)filterBarTitles:(ZYFilterBar*)bar;
+- (void)filterBarTitles:(ZYFilterBar*)bar selecedIndex:(NSInteger)selecedIndex;
 - (NSArray*)filterBar:(ZYFilterBar*)bar itemsWithIndex:(NSInteger)index level:(NSInteger)level;
 - (NSInteger)filterBar:(ZYFilterBar*)bar levelCountWithIndex:(NSInteger)index;
-- (BOOL)filterBar:(ZYFilterBar*)bar selecedWithIndex:(NSInteger)index level:(NSInteger)level row:(NSInteger)row;
+- (BOOL)filterBar:(ZYFilterBar*)bar selecedWithIndex:(NSInteger)index level:(NSInteger)level row:(NSInteger)row object:(id)object;
 @end
 
 @interface ZYFilterBar : UIView
@@ -27,4 +28,8 @@
 - (void)hidden;
 
 - (void)changeTitle:(NSString*)title atIndex:(NSInteger)index;
+
+@property(nonatomic,strong)NSString *showKey;
+
+- (void)reloadDataSource;
 @end

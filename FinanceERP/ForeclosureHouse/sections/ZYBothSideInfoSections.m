@@ -14,12 +14,14 @@
     ZYInputCell *bothSideInfoSellerCardNumberCell;
     ZYInputCell *bothSideInfoSellerTelephoneCell;
     ZYInputCell *bothSideInfoSellerAddressCell;
+    
+    ZYTableViewCell *footCell;
 }
 - (instancetype)initWithTitle:(NSString *)title
 {
     self = [super initWithTitle:title];
     if (self) {
-        [self initSection];
+        
     }
     return self;
 }
@@ -45,20 +47,36 @@
     bothSideInfoSellerAddressCell.cellTitle = @"家庭住址";
     bothSideInfoSellerAddressCell.cellPlaceHolder = @"请输入家庭住址";
     
-    ZYTableViewCell *footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
+    footCell = [ZYTableViewCell cellWithStyle:UITableViewCellStyleDefault height:[ZYDoubleButtonCell defaultHeight] actionBlock:nil];
     footCell.selectionStyle = UITableViewCellSelectionStyleNone;
     footCell.lineHidden = YES;
-    
-    ZYSection *section = [ZYSection sectionWithCells:@[bothSideInfoSellerNameCell,bothSideInfoSellerCardNumberCell,bothSideInfoSellerTelephoneCell,bothSideInfoSellerAddressCell,footCell]];
-    
-    self.sections = @[section];
+
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
+    [self initSection];
     RACChannelTo(model,bothSideInfoSellerName) = RACChannelTo(bothSideInfoSellerNameCell,cellText);
     RACChannelTo(model,bothSideInfoSellerCardNumber) = RACChannelTo(bothSideInfoSellerCardNumberCell,cellText);
     RACChannelTo(model,bothSideInfoSellerTelephone) = RACChannelTo(bothSideInfoSellerTelephoneCell,cellText);
     RACChannelTo(model,bothSideInfoSellerAddress) = RACChannelTo(bothSideInfoSellerAddressCell,cellText);
+    
+    RAC(bothSideInfoSellerNameCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bothSideInfoSellerCardNumberCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bothSideInfoSellerTelephoneCell,userInteractionEnabled) = RACObserve(self, edit);
+    RAC(bothSideInfoSellerAddressCell,userInteractionEnabled) = RACObserve(self, edit);
+    
+    [RACObserve(self, edit) subscribeNext:^(id x) {
+        ZYSection *section;
+        if(self.edit)
+        {
+            section = [ZYSection sectionWithCells:@[bothSideInfoSellerNameCell,bothSideInfoSellerCardNumberCell,bothSideInfoSellerTelephoneCell,bothSideInfoSellerAddressCell,footCell]];
+        }
+        else
+        {
+            section = [ZYSection sectionWithCells:@[bothSideInfoSellerNameCell,bothSideInfoSellerCardNumberCell,bothSideInfoSellerTelephoneCell,bothSideInfoSellerAddressCell]];
+        }
+        self.sections = @[section];
+    }];
 }
 - (NSString*)error
 {
@@ -85,4 +103,5 @@
     errorArr = nil;
     return result;
 }
+
 @end

@@ -11,5 +11,8 @@
 @interface ZYHomePageFunctionButtonCell : ZYTableViewCell
 
 @property(nonatomic,strong)RACSignal *functionButtonPressSignal;
-
+/**
+ *  根据用户角色来重新加载功能列表
+ */
+- (void)reloadFunctionButton:(ZYUser*)user;
 @end
