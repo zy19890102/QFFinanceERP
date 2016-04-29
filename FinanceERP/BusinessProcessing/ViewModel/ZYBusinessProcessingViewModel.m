@@ -9,7 +9,16 @@
 #import "ZYBusinessProcessingViewModel.h"
 
 @implementation ZYBusinessProcessingViewModel
-
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.pageSize = 20;
+        self.pageNum = 1;
+        self.refreshing = YES;//默认上来刷新一次
+    }
+    return self;
+}
 - (void)requestProduceListWith:(ZYUser*)user
 {
     ZYProductRequest *request = [ZYProductRequest request];
@@ -18,6 +27,44 @@
         NSMutableArray *arr = [NSMutableArray arrayWithObject:@"全部产品"];
         [arr addObjectsFromArray:productArr];
         self.businessProcessingProductArr = arr;
+    }];
+}
+- (void)requestBussinessProcess:(ZYUser*)user loadMore:(BOOL)loadMore
+{
+    self.pageNum = loadMore?self.pageNum+1:0;
+    ZYBusinessProcessRequest *request = [ZYBusinessProcessRequest request];
+    request.user_id = user.pid;
+    request.page = self.pageNum;
+    request.rows = self.pageSize;
+    request.is_my_biz = self.isMyBussiness;
+    _refreshing = YES;
+    [[[ZYRoute route] businessProcessList:request] subscribeNext:^(NSArray *productArr) {
+        if(!loadMore)
+        {
+            [self.businessProcessingArr removeAllObjects];
+        }
+        [self.businessProcessingArr addObjectsFromArray:productArr];
+        if(self.businessProcessingArr.count==0)
+        {
+            self.placeHolderViewType = ZYPlaceHolderViewTypeNoData;
+        }
+        [self reloadDataSource];
+    } error:^(NSError *error) {
+        if(error.code==404)
+        {
+            if(self.businessProcessingArr.count==0)
+            {
+                self.placeHolderViewType = ZYPlaceHolderViewTypeNoNet;
+            }
+            [self reloadDataSource];
+        }
+        else
+        {
+            self.error = error.domain;
+        }
+        self.refreshing = NO;
+    } completed:^{
+        self.refreshing = NO;
     }];
 }
 - (NSArray*)businessProcessingStateArr
@@ -53,5 +100,33 @@
 {
     LKDBHelper *helper = [ZYSearchHistoryModel getUsingLKDBHelper];
     [helper deleteWithClass:[ZYSearchHistoryModel class] where:nil];
+}
+- (NSMutableArray*)businessProcessingArr
+{
+    if(_businessProcessingArr==nil)
+    {
+        _businessProcessingArr = [NSMutableArray arrayWithCapacity:20];
+    }
+    return _businessProcessingArr;
+}
+
+- (void)loadCache:(ZYUser*)user
+{
+    ZYProductRequest *productRequest = [ZYProductRequest request];
+    productRequest.user_id = user.pid;
+    NSArray *productArr = [[ZYRoute route] productListCacheWith:productRequest];
+    NSMutableArray *arr = [NSMutableArray arrayWithObject:@"全部产品"];
+    [arr addObjectsFromArray:productArr];
+    self.businessProcessingProductArr = arr;
+    
+    ZYBusinessProcessRequest *businessProcessRequest = [ZYBusinessProcessRequest request];
+    businessProcessRequest.user_id = user.pid;
+    businessProcessRequest.page = self.pageNum;
+    businessProcessRequest.rows = self.pageSize;
+    businessProcessRequest.is_my_biz = self.isMyBussiness;
+    NSArray *businessProcessArr = [[ZYRoute route] businessProcessListCacheWith:businessProcessRequest];
+    [self.businessProcessingArr removeAllObjects];
+    [self.businessProcessingArr addObjectsFromArray:businessProcessArr];
+    [self reloadDataSource];
 }
 @end

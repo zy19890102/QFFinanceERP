@@ -35,6 +35,7 @@
 + (instancetype)cellWithNib:(NSString*)nibName height:(CGFloat)height actionBlock:(dispatch_block_t)actionBlock;
 + (instancetype)cellWithXibHeight:(CGFloat)height actionBlock:(dispatch_block_t)actionBlock;
 + (instancetype)cellWithActionBlock:(dispatch_block_t)actionBlock;
++ (instancetype)cellWithXib;
 /**
  *  cell高度
  *

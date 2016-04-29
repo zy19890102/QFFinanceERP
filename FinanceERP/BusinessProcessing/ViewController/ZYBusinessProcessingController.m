@@ -57,18 +57,18 @@ ZY_VIEW_MODEL_GET(ZYBusinessProcessingViewModel)
     [self.view addSubview:line];
 
     tableViewCtl = [[ZYTableViewController alloc] init];
+    tableViewCtl.networkSupport = YES;
     tableViewCtl.frame = CGRectMake(0, navHeight+barHeight, FUll_SCREEN_WIDTH, FUll_SCREEN_HEIGHT-navHeight-barHeight);
     [self.view addSubview:tableViewCtl.view];
     [self addChildViewController:tableViewCtl];
     
+    
+    [tableViewCtl.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ZYBusinessProcessCell class]) bundle:nil] forCellReuseIdentifier:[ZYBusinessProcessCell defaultIdentifier]];
     ZYSection *section = [ZYSection sectionSupportingReuseWithTitle:nil cellHeight:[ZYBusinessProcessCell defaultHeight] cellCount:^NSInteger(UITableView *tableView, NSInteger section) {
         return viewModel.businessProcessingArr.count;
     } cellForRowBlock:^UITableViewCell *(UITableView *tableView, NSInteger row) {
-        ZYBusinessProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-        if(cell==nil)
-        {
-            cell = [[ZYBusinessProcessCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        }
+        ZYBusinessProcessCell *cell = [tableView dequeueReusableCellWithIdentifier:[ZYBusinessProcessCell defaultIdentifier]];
+        cell.model = viewModel.businessProcessingArr[row];
         return cell;
     } actionBlock:^(UITableView *tableView, NSInteger row) {
         
@@ -82,6 +82,29 @@ ZY_VIEW_MODEL_GET(ZYBusinessProcessingViewModel)
         [filterBar reloadDataSource];
     }];
     [viewModel requestProduceListWith:[ZYUser user]];
+    
+    [[viewModel rac_signalForSelector:@selector(reloadDataSource)] subscribeNext:^(id x) {
+        [tableViewCtl reloadDataWithType:viewModel.placeHolderViewType];
+    }];
+    [RACObserve(viewModel, refreshing) subscribeNext:^(NSNumber *refreshing) {
+        if(refreshing.boolValue)
+        {
+            [tableViewCtl beginRefresh];
+        }
+        else
+        {
+            [tableViewCtl stopRefresh];
+        }
+    }];
+    [tableViewCtl.refreshSignal subscribeNext:^(id x) {
+        [viewModel requestBussinessProcess:[ZYUser user] loadMore:NO];
+    }];
+    [tableViewCtl.loadmoreSignal subscribeNext:^(id x) {
+        [viewModel requestBussinessProcess:[ZYUser user] loadMore:YES];
+    }];
+    RACChannelTo(viewModel,isMyBussiness) = RACChannelTo(self,isMyBussiness);
+    
+    [viewModel loadCache:[ZYUser user]];
 }
 #pragma mark - searchBar delegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar

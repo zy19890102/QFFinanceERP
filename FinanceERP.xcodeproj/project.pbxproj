@@ -17,6 +17,8 @@
 		2A2091471CD0D4ED001F0EF1 /* ZYProductRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2091461CD0D4ED001F0EF1 /* ZYProductRequest.m */; };
 		2A2091C01CD1DCC9001F0EF1 /* ZYBusinessProcessRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2091BF1CD1DCC9001F0EF1 /* ZYBusinessProcessRequest.m */; };
 		2A2091C21CD1DEBA001F0EF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A2091C11CD1DEBA001F0EF1 /* Assets.xcassets */; };
+		2A2091C41CD1ED22001F0EF1 /* ZYBusinessProcessCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A2091C31CD1ED22001F0EF1 /* ZYBusinessProcessCell.xib */; };
+		2A2091C71CD20B81001F0EF1 /* ZYPlaceHolderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A2091C61CD20B81001F0EF1 /* ZYPlaceHolderView.m */; };
 		2A53FE7B1CAB76E60007E6CD /* ZYCalculatorSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A53FE7A1CAB76E60007E6CD /* ZYCalculatorSelectCell.m */; };
 		2A53FE7E1CAB77030007E6CD /* ZYCalculatorInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A53FE7D1CAB77030007E6CD /* ZYCalculatorInputCell.m */; };
 		2A53FE801CAB77140007E6CD /* ZYCalculatorSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A53FE7F1CAB77140007E6CD /* ZYCalculatorSelectCell.xib */; };
@@ -153,6 +155,9 @@
 		2A2091BE1CD1DCC9001F0EF1 /* ZYBusinessProcessRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYBusinessProcessRequest.h; sourceTree = "<group>"; };
 		2A2091BF1CD1DCC9001F0EF1 /* ZYBusinessProcessRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYBusinessProcessRequest.m; sourceTree = "<group>"; };
 		2A2091C11CD1DEBA001F0EF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2A2091C31CD1ED22001F0EF1 /* ZYBusinessProcessCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZYBusinessProcessCell.xib; sourceTree = "<group>"; };
+		2A2091C51CD20B81001F0EF1 /* ZYPlaceHolderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYPlaceHolderView.h; sourceTree = "<group>"; };
+		2A2091C61CD20B81001F0EF1 /* ZYPlaceHolderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYPlaceHolderView.m; sourceTree = "<group>"; };
 		2A53FE791CAB76E60007E6CD /* ZYCalculatorSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorSelectCell.h; sourceTree = "<group>"; };
 		2A53FE7A1CAB76E60007E6CD /* ZYCalculatorSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYCalculatorSelectCell.m; sourceTree = "<group>"; };
 		2A53FE7C1CAB77030007E6CD /* ZYCalculatorInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYCalculatorInputCell.h; sourceTree = "<group>"; };
@@ -627,6 +632,7 @@
 			children = (
 				2AB208ED1CCDF04500DE1EB0 /* ZYBusinessProcessCell.h */,
 				2AB208EE1CCDF04500DE1EB0 /* ZYBusinessProcessCell.m */,
+				2A2091C31CD1ED22001F0EF1 /* ZYBusinessProcessCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -868,6 +874,8 @@
 				2AB208C41CC788C200DE1EB0 /* ZYTopTabBar.m */,
 				2AB208E11CC90CD900DE1EB0 /* ZYFilterBar.h */,
 				2AB208E21CC90CD900DE1EB0 /* ZYFilterBar.m */,
+				2A2091C51CD20B81001F0EF1 /* ZYPlaceHolderView.h */,
+				2A2091C61CD20B81001F0EF1 /* ZYPlaceHolderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1377,6 +1385,7 @@
 				2AC6B8F71CBC937B00C9EB9B /* InfoPlist.strings in Resources */,
 				2AC6B9351CBDDBAE00C9EB9B /* Info.plist in Resources */,
 				2AC6B8EE1CBC921000C9EB9B /* LaunchScreen.storyboard in Resources */,
+				2A2091C41CD1ED22001F0EF1 /* ZYBusinessProcessCell.xib in Resources */,
 				2AC6B8351CB6179100C9EB9B /* ZYCalculatorResultCell.xib in Resources */,
 				2AC6B7501CABC1A700C9EB9B /* ZYCalculatorButtonCell.xib in Resources */,
 				2AC6B8301CB60FD800C9EB9B /* ZYCalculatorResultHeader.xib in Resources */,
@@ -1511,6 +1520,7 @@
 				2AC6B8B91CB7AAFC00C9EB9B /* ZYSelectCell.m in Sources */,
 				2AD2E55D1CAA630C00908FB8 /* ZYCalculatorViewController.m in Sources */,
 				2AB209111CCE22A700DE1EB0 /* ZYBusinessProcessingViewModel.m in Sources */,
+				2A2091C71CD20B81001F0EF1 /* ZYPlaceHolderView.m in Sources */,
 				2AD2E53C1CAA369300908FB8 /* ZYUserCenterViewModel.m in Sources */,
 				2AB2091A1CCE235000DE1EB0 /* ZYForeclosureHouseSubViewModel.m in Sources */,
 				2AB209321CCF3D3100DE1EB0 /* ZYBannerRequest.m in Sources */,

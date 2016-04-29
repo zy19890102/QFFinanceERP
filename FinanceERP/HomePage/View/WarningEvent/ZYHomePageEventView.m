@@ -48,6 +48,7 @@
     {
         cell = [ZYHomePageEventCell cellWithActionBlock:nil];
         [cell setLineHidden:YES];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     [cell loadDataSource:_eventArr[indexPath.row]];
     return cell;

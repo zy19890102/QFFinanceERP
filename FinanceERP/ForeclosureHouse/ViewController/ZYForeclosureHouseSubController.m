@@ -113,10 +113,15 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseSubViewModel)
         [sections cellNextStep:[self error]];
     }];
     
-    RAC(housePropertyInfoSections,edit) = RACObserve(self, edit);
-    RAC(bothSideInfoSections,edit) = RACObserve(self, edit);
-    RAC(originalBankSections,edit) = RACObserve(self, edit);
-    RAC(currentBankSections,edit) = RACObserve(self, edit);
+    self.edit = _edit;
+}
+- (void)setEdit:(BOOL)edit
+{
+    _edit = edit;
+    housePropertyInfoSections.edit = edit;
+    bothSideInfoSections.edit = edit;
+    originalBankSections.edit = edit;
+    currentBankSections.edit = edit;
 }
 - (NSString*)error
 {

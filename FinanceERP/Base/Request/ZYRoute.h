@@ -19,18 +19,31 @@
 #import "ZYWarningEvent.h"
 #import "ZYProductRequest.h"
 #import "ZYProductModel.h"
+#import "ZYBusinessProcessRequest.h"
+#import "ZYBusinessProcessModel.h"
 
 @interface ZYRoute : NSObject
 
 + (instancetype)route;
 //登陆
 - (RACSignal*)loginWith:(ZYLoginRequest*)myRequest;
+- (id)loginCacheWith:(ZYLoginRequest*)myRequest;
+
 - (RACSignal*)bannersWith:(ZYBannerRequest*)myRequest;
+- (id)bannersCacheWith:(ZYBannerRequest*)myRequest;
 
 - (RACSignal*)checkInWith:(ZYCheckInRequest*)myRequest;
 - (RACSignal*)checkInDaysWith:(ZYCheckInDaysRequest*)myRequest;
 
 - (RACSignal*)warningEventList:(ZYWarningEventRquest*)myRequest;
+- (id)warningEventListCacheWith:(ZYWarningEventRquest*)myRequest;
 
 - (RACSignal*)productList:(ZYProductRequest*)myRequest;
+- (id)productListCacheWith:(ZYProductRequest*)myRequest;
+
+/**
+ *  查询业务办理
+ */
+- (RACSignal*)businessProcessList:(ZYBusinessProcessRequest*)myRequest;
+- (id)businessProcessListCacheWith:(ZYBusinessProcessRequest*)myRequest;
 @end

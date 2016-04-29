@@ -15,6 +15,7 @@
 #import "ZYHomePageEventView.h"
 #import "ZYTools.h"
 #import "ZYNavCenterView.h"
+#import "ZYBusinessProcessingController.h"
 
 @interface ZYHomePageViewController ()
 
@@ -152,7 +153,7 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
     }];
     
     
-    RAC(scrollAdCell,bannerArr) = [RACObserve(viewModel, bannerArr) skip:0];
+    RAC(scrollAdCell,bannerArr) = RACObserve(viewModel, bannerArr);
     
     [[scrollAdCell.bannerTapSignal map:^id(NSNumber *index) {
         return viewModel.bannerArr[[index longLongValue]];
@@ -185,7 +186,10 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
                 [self performSegueWithIdentifier:@"applyList" sender:nil];
                 break;
             case 1:
-                [self performSegueWithIdentifier:@"processing" sender:nil];
+                [self performSegueWithIdentifier:@"processing" sender:@(NO)];
+                break;
+            case 2:
+                [self performSegueWithIdentifier:@"processing" sender:@(YES)];
                 break;
             default:
                 break;
@@ -199,15 +203,23 @@ ZY_VIEW_MODEL_GET(ZYHomePageViewModel)
         [self buildCells];
     }];
     RAC(eventListView,eventArr) = RACObserve(viewModel, eventArr);
+    
+    [viewModel loadCache];///加载缓存
+    [founctionButtonCell reloadFunctionButton:[ZYUser user]];
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"processing"])
+    {
+        ZYBusinessProcessingController *controller = [segue destinationViewController];
+        controller.isMyBussiness = [sender boolValue];
+    }
 }
-*/
+
 
 @end

@@ -8,15 +8,20 @@
 
 #import "ZYTableViewController.h"
 #import "ZYSearchViewController.h"
+#import <MJRefresh.h>
+#import <CYLTableViewPlaceHolder.h>
 
-@interface ZYTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong)UITableView *tableView;
+@interface ZYTableViewController ()<UITableViewDataSource,UITableViewDelegate,CYLTableViewPlaceHolderDelegate>
+
+
 
 @end
 
 @implementation ZYTableViewController
-
+{
+    ZYPlaceHolderViewType tablePlaceHolderType;
+}
 #pragma mark - Setting sections
 - (void)viewDidLoad
 {
@@ -28,8 +33,20 @@
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    if(_networkSupport)
+    {
+        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self refresh];
+        }];
+        self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+            [self loadmore];
+        }];
+    }
+    else
+    {
+        self.tableView.mj_header = nil;
+        self.tableView.mj_footer = nil;
+    }
     
     _autoReload = YES;///默认自动刷新
     [[RACObserve(self, sections) filter:^BOOL(NSArray *value) {
@@ -44,10 +61,7 @@
     self.tableView.width = frame.size.width;
     self.tableView.height = frame.size.height;
 }
-- (void)reloadData
-{
-    [self.tableView reloadData];
-}
+
 #pragma mark - 折叠
 
 - (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex
@@ -177,11 +191,77 @@
         }
     }
 }
+- (void)setNetworkSupport:(BOOL)networkSupport
+{
+    _networkSupport = networkSupport;
+    if(networkSupport)
+    {
+        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self refresh];
+        }];
+        self.tableView.mj_footer = [MJRefreshAutoFooter footerWithRefreshingBlock:^{
+            [self loadmore];
+        }];
+    }
+    else
+    {
+        self.tableView.mj_header = nil;
+        self.tableView.mj_footer = nil;
+    }
+}
 
-//- (UITableView*)tableView
-//{
-//    NSLog(@"警告，需要重写该方法，传入tableView");
-//    return nil;
-//}
-
+- (void)refresh{}
+- (RACSignal*)refreshSignal
+{
+    if(_refreshSignal==nil)
+    {
+        _refreshSignal = [self rac_signalForSelector:@selector(refresh)];
+    }
+    return _refreshSignal;
+}
+- (void)loadmore{}
+- (RACSignal*)loadmoreSignal
+{
+    if(_loadmoreSignal==nil)
+    {
+        _loadmoreSignal = [self rac_signalForSelector:@selector(loadmore)];
+    }
+    return _loadmoreSignal;
+}
+- (void)beginRefresh
+{
+    [self.tableView.mj_header beginRefreshing];
+}
+- (void)stopRefresh
+{
+    [self.tableView.mj_header endRefreshing];
+}
+- (void)reloadData
+{
+    if(self.networkSupport)
+    {
+        [self.tableView cyl_reloadData];
+    }
+    else
+    {
+        [self.tableView reloadData];
+    }
+}
+- (void)reloadDataWithType:(ZYPlaceHolderViewType)type
+{
+    if(self.networkSupport)
+    {
+        tablePlaceHolderType = type;
+        [self.tableView cyl_reloadData];
+    }
+}
+- (UIView*)makePlaceHolderView
+{
+    ZYPlaceHolderView *view = [[ZYPlaceHolderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, self.tableView.height) type:tablePlaceHolderType];
+    return view;
+}
+- (BOOL)enableScrollWhenPlaceHolderViewShowing
+{
+    return YES;
+}
 @end
