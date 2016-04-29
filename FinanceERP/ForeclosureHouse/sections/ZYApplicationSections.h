@@ -13,5 +13,4 @@
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model;
 @property(nonatomic,strong)RACSignal *saveSignal;
 @property(nonatomic,strong)RACSignal *submitSignal;
-@property(nonatomic,assign)BOOL edit;
 @end

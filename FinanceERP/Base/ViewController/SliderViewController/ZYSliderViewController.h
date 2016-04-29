@@ -47,4 +47,9 @@ typedef enum : NSUInteger {
 - (void)reloadTableViewAtIndex:(NSInteger)index;
 
 - (void)showSection:(BOOL)show sectionIndex:(NSInteger)sectionIndex page:(NSInteger)page;
+/**
+ *  单一加载 页面过多时候 需要一个页面一个页面逐个加载
+ */
+@property(nonatomic,assign)BOOL singleLoad;
+
 @end

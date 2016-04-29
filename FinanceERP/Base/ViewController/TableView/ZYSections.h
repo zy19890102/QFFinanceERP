@@ -17,6 +17,11 @@
 #import "ZYSeveralButtonCell.h"
 @interface ZYSections : NSObject
 
+/**
+ *  是否可以编辑
+ */
+@property(nonatomic,assign)BOOL edit;
+
 @property(nonatomic,strong)NSArray *sections;
 @property(nonatomic,strong)NSString *title;
 

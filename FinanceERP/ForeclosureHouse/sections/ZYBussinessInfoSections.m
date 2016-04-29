@@ -139,9 +139,9 @@
 }
 - (void)blendModel:(ZYForeclosureHouseValueModel*)model
 {
-    RACChannelTo(model,bussinessInfoComeFromType) = RACChannelTo(bussinessInfoComeFromTypeCell,selecedIndex);
+    RACChannelTo(bussinessInfoComeFromTypeCell,selecedIndex) = RACChannelTo(model,bussinessInfoComeFromType);
     bussinessInfoComeFromTypeCell.hiddenSelecedObj = YES;//手动让选择项显示在cell上 便于初始化
-    [[RACObserve(model,bussinessInfoComeFromType) skip:1] subscribeNext:^(NSNumber *index) {
+    [RACObserve(bussinessInfoComeFromTypeCell,selecedIndex) subscribeNext:^(NSNumber *index) {
         bussinessInfoComeFromTypeCell.cellText = [ZYForeclosureHouseValueModel foreclosureHouseBussinessInfoComeFromArr][index.longLongValue];
         switch (bussinessInfoComeFromTypeCell.selecedIndex) {
             case ZYForeclosureHouseBussinessInfoComeFromBank:
@@ -198,6 +198,7 @@
     }] subscribe:channelB];
     [channelB subscribe:channelA];
     
+    
     [RACObserve(model, bussinessInfoComeFromType) subscribeNext:^(id x) {
         if(model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromBank||model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromCooperativeOrganization||model.bussinessInfoComeFromType==ZYForeclosureHouseBussinessInfoComeFromIntermediary)
         {
@@ -209,16 +210,18 @@
         }
     }];
     
-    RACChannelTo(model,bussinessInfoArea) = RACChannelTo(bussinessInfoAreaCell,cellText);
-    RACChannelTo(model,bussinessInfoLoanMoney) = RACChannelTo(bussinessInfoLoanMoneyCell,cellText);
-    RACChannelTo(model,bussinessInfoDays) = RACChannelTo(bussinessInfoDaysCell,cellText);
-    RACChannelTo(model,bussinessInfoDate) = RACChannelTo(bussinessInfoDateCell,selecedObj);
-    RACChannelTo(model,bussinessInfoAccount) = RACChannelTo(bussinessInfoAccountCell,cellText);
-    RACChannelTo(model,bussinessInfoUsername) = RACChannelTo(bussinessInfoUsernameCell,cellText);
-    RACChannelTo(model,bussinessInfoLinkman) = RACChannelTo(bussinessInfoLinkmanCell,cellText);
-    RACChannelTo(model,bussinessInfoTelephone) = RACChannelTo(bussinessInfoTelephoneCell,cellText);
-    RACChannelTo(model,bussinessInfoOrderType) = RACChannelTo(bussinessInfoOrderTypeCell,cellSegmentedSelecedIndex);
-    RACChannelTo(model,bussinessInfoTransactionType) = RACChannelTo(bussinessInfoTransactionTypeCell,cellSegmentedSelecedIndex);
+    RACChannelTo(bussinessInfoAreaCell,cellText) = RACChannelTo(model,bussinessInfoArea);
+    RACChannelTo(bussinessInfoLoanMoneyCell,cellText) = RACChannelTo(model,bussinessInfoLoanMoney);
+    RACChannelTo(bussinessInfoDaysCell,cellText) = RACChannelTo(model,bussinessInfoDays);
+    RACChannelTo(bussinessInfoDateCell,selecedObj) = RACChannelTo(model,bussinessInfoDate);
+    
+    RACChannelTo(bussinessInfoAccountCell,cellText) = RACChannelTo(model,bussinessInfoAccount);
+    
+    RACChannelTo(bussinessInfoUsernameCell,cellText) = RACChannelTo(model,bussinessInfoUsername);
+    RACChannelTo(bussinessInfoLinkmanCell,cellText) = RACChannelTo(model,bussinessInfoLinkman);
+    RACChannelTo(bussinessInfoTelephoneCell,cellText) = RACChannelTo(model,bussinessInfoTelephone);
+    RACChannelTo(bussinessInfoOrderTypeCell,cellSegmentedSelecedIndex) = RACChannelTo(model,bussinessInfoOrderType);
+    RACChannelTo(bussinessInfoTransactionTypeCell,cellSegmentedSelecedIndex) = RACChannelTo(model,bussinessInfoTransactionType);
 
     RAC(bussinessInfoComeFromTypeCell,userInteractionEnabled) = RACObserve(self, edit);
     RAC(bussinessInfoComeFromTypeSubCell,userInteractionEnabled) = RACObserve(self, edit);

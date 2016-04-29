@@ -53,8 +53,19 @@
             CGRect rect = [self sliderController:self frameWithPage:i];
             tableViewCtl.frame = rect;
             [self.scrollView addSubview:tableViewCtl.view];
-            ZYSections *sections = [self sliderController:self sectionsWithPage:i];
-            tableViewCtl.sections = sections.sections;
+            if(!self.singleLoad)
+            {
+                ZYSections *sections = [self sliderController:self sectionsWithPage:i];
+                tableViewCtl.sections = sections.sections;
+            }
+            else
+            {
+                if(i==0)
+                {
+                    ZYSections *sections = [self sliderController:self sectionsWithPage:i];
+                    tableViewCtl.sections = sections.sections;
+                }
+            }
             [tableViewArr addObject:tableViewCtl];
         }
         else
@@ -93,7 +104,6 @@
 }
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
     NSInteger lastPage = currentPage;
     currentPage = (NSInteger)((scrollView.contentOffset.x) / width);
     if(currentPage>lastPage)///向右
@@ -104,22 +114,34 @@
     {
         [self sliderController:self didChangePage:currentPage direction:ZYSliderToLeft];
     }
+    
+    ZYSliderDirection direction;
+    if(scrollView.contentOffset.x>offX)
+    {
+        direction = ZYSliderToRight;
+    }
     else
     {
-        ZYSliderDirection direction;
-        if(scrollView.contentOffset.x>offX)
-        {
-            direction = ZYSliderToRight;
-        }
-        else
-        {
-            direction = ZYSliderToLeft;
-        }
-        CGFloat rate = scrollView.contentOffset.x/(scrollView.contentSize.width-width);
-        [self sliderController:self changingPage:currentPage direction:direction rate:rate];
+        direction = ZYSliderToLeft;
     }
-    
+    CGFloat rate = scrollView.contentOffset.x/(scrollView.contentSize.width-width);
+    [self sliderController:self changingPage:currentPage direction:direction rate:rate];
     offX = scrollView.contentOffset.x;
+}
+-(void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [self loadCells];
+}
+- (void)loadCells
+{
+    if(!self.singleLoad)
+        return;
+
+    ZYSections *sections = [self sliderController:self sectionsWithPage:currentPage];
+    ZYTableViewController *tableViewCtl = tableViewArr[currentPage];
+    if([tableViewCtl isKindOfClass:[ZYTableViewController class]])
+    {
+        tableViewCtl.sections = sections.sections;
+    }
 }
 - (void)changePage:(NSInteger)index
 {
