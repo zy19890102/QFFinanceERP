@@ -17,11 +17,7 @@
 }
 + (NSArray*)mj_allowedPropertyNames
 {
-    return @[@"user_id",
-             @"is_my_biz",
-             @"product_id",
-             @"rows",
-             @"page",];
+    return @[@"user_id"];
 }
 - (NSInteger)cacheTimeInSeconds
 {

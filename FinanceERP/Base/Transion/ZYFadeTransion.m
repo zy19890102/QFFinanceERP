@@ -35,6 +35,7 @@
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toController.view.alpha = 1;
         } completion:^(BOOL finished) {
+            
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
@@ -45,7 +46,7 @@
         
         toController.view.frame = [transitionContext finalFrameForViewController:toController];
         [container addSubview:toController.view];
-
+        
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }
 }

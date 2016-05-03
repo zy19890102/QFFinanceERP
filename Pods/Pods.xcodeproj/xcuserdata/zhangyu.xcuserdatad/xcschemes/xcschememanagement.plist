@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CYLTableViewPlaceHolder.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>FMDB.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -44,11 +39,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MJRefresh.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +57,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>15C667A46BC5824C774CF6E9A2ABD69D</key>
+		<key>24394EB643A8FD902795D4CB09311F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,22 +72,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>435C66C53F317E01EDE3760EA2ACB623</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>55DBDD8B7D446F1D618F303A9FB53209</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8328805E8B43C44FFFCDCD9C3DAC05DE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8F74D9EA91F4C43190670066BAC37D44</key>
+		<key>63A0C91B4E1B7EE05366426AE2C64646</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,12 +92,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B3C760711B585710870482548EF04B3F</key>
+		<key>B17F2C40BFDF0082AC88FA09CA14E4B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D6A74D846F9ACC4FBCCAE7A84F6CD5E6</key>
+		<key>B3C760711B585710870482548EF04B3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

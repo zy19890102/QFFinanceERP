@@ -27,7 +27,6 @@
     NSMutableDictionary *usernamepasswordKVPairs = (NSMutableDictionary *)[ZYTools getKeychain:[ZYTools appVersionToken]];
     request.user_name = [usernamepasswordKVPairs objectForKey:userNameKeychainName];
     request.password = [usernamepasswordKVPairs objectForKey:passwordKeychainName];
-    
     [[[ZYRoute route] loginWith:request] subscribeNext:^(ZYUser *user) {
         [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_NOTIFICATION object:user];
     } error:^(NSError *error) {
@@ -38,11 +37,6 @@
             [usernamepasswordKVPairs setObject:request.user_name forKey:userNameKeychainName];
             [ZYTools saveKeychain:[ZYTools appVersionToken] data:usernamepasswordKVPairs];
             self.needShowLoginController = YES;
-        }
-        else
-        {
-            self.navLoading = YES;//正在登录
-            self.navState = @"未登录";
         }
     } completed:^{
     }];
@@ -95,22 +89,5 @@
     } completed:^{
     }];
 }
-- (void)loadCache
-{
-    if(![ZYTools hasAccountAndPassword])
-        return;
-    ZYLoginRequest *loginRequest = [ZYLoginRequest request];
-    NSMutableDictionary *usernamepasswordKVPairs = (NSMutableDictionary *)[ZYTools getKeychain:[ZYTools appVersionToken]];
-    loginRequest.user_name = [usernamepasswordKVPairs objectForKey:userNameKeychainName];
-    loginRequest.password = [usernamepasswordKVPairs objectForKey:passwordKeychainName];
-    ZYUser *user = [[ZYRoute route] loginCacheWith:loginRequest];
-    
-    ZYBannerRequest *bannerRequest = [[ZYBannerRequest alloc] init];
-    bannerRequest.user_id = user.pid;
-    self.bannerArr = [[ZYRoute route] bannersCacheWith:bannerRequest];
-    
-    ZYWarningEventRquest *warningEventRequest = [[ZYWarningEventRquest alloc] init];
-    warningEventRequest.user_id = user.pid;
-    self.eventArr = [[ZYRoute route] warningEventListCacheWith:warningEventRequest];
-}
+
 @end

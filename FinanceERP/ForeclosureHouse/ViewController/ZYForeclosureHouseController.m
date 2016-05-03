@@ -63,9 +63,12 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
     // Do any additional setup after loading the view.
     transion = [[ZYFadeTransion alloc] init];
     [self buildUI];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self blendViewModel];
 }
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -385,12 +388,10 @@ ZY_VIEW_MODEL_GET(ZYForeclosureHouseViewModel)
 #pragma mark - 转场动画
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
 {
-    transion.animation = YES;
     return transion;
 }
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
-    transion.animation = YES;
     return transion;
 }
 -(id<UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id<UIViewControllerAnimatedTransitioning>)animator

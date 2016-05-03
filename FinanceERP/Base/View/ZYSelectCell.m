@@ -36,29 +36,37 @@
         _cellTextLabel.font = FONT(12);
         _cellTextLabel.textColor = TITLE_COLOR;
         [self addSubview:_cellTextLabel];
+        
+        @weakify(self)
+        [RACObserve(self, cellText) subscribeNext:^(NSString *cellText) {
+            @strongify(self)
+            if(_checkInput)
+            {
+                [self setCellTitle:self.cellTitle];
+            }
+        }];
+        
+        [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+            if(!self.hiddenSelecedObj)
+            {
+                if([x isKindOfClass:[NSString class]])
+                {
+                    self.cellText = x;
+                }
+                else if ([x isKindOfClass:[NSDate class]])
+                {
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    [formatter setDateFormat:@"yyyy-MM-dd"];
+                    self.cellText = [formatter stringFromDate:x];
+                }
+                else if (self.showKey.length!=0)
+                {
+                    self.cellText = [x valueForKey:self.showKey];
+                }
+            }
+        }];
     }
     return self;
-}
-- (void)setSelecedObj:(id)selecedObj
-{
-    _selecedObj = selecedObj;
-    if(!self.hiddenSelecedObj&&selecedObj)
-    {
-        if([selecedObj isKindOfClass:[NSString class]])
-        {
-            self.cellText = selecedObj;
-        }
-        else if ([selecedObj isKindOfClass:[NSDate class]])
-        {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"yyyy-MM-dd"];
-            self.cellText = [formatter stringFromDate:selecedObj];
-        }
-        else if (self.showKey.length!=0)
-        {
-            self.cellText = [selecedObj valueForKey:self.showKey];
-        }
-    }
 }
 
 - (void)setCellTitle:(NSString *)cellTitle
@@ -92,10 +100,6 @@
 {
     _cellText = cellText;
     _cellTextLabel.text = cellText;
-    if(_checkInput)
-    {
-        [self setCellTitle:self.cellTitle];
-    }
 }
 - (void)setCellNullable:(BOOL)cellNullable
 {

@@ -59,23 +59,22 @@
                 [self setCellTitle:self.cellTitle];
             }
         }];
+        
+        [RACObserve(self, selecedObj) subscribeNext:^(id x) {
+            if(!self.hiddenSelecedObj)
+            {
+                if([x isKindOfClass:[NSString class]])
+                {
+                    self.cellText = x;
+                }
+                else if (self.showKey.length!=0)
+                {
+                    self.cellText = [x valueForKey:self.showKey];
+                }
+            }
+        }];
     }
     return self;
-}
-- (void)setSelecedObj:(id)selecedObj
-{
-    _selecedObj = selecedObj;
-    if(!self.hiddenSelecedObj&&selecedObj)
-    {
-        if([selecedObj isKindOfClass:[NSString class]])
-        {
-            self.cellText = selecedObj;
-        }
-        else if (self.showKey.length!=0)
-        {
-            self.cellText = [selecedObj valueForKey:self.showKey];
-        }
-    }
 }
 - (void)setOnlyFloat:(BOOL)onlyFloat
 {

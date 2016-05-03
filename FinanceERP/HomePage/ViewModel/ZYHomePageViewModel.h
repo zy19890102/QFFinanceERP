@@ -57,6 +57,4 @@
 
 
 - (void)autoLogin;
-
-- (void)loadCache;
 @end

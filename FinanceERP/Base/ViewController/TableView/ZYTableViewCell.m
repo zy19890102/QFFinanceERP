@@ -27,10 +27,6 @@
 {
     return [[self class] cellWithNib:NSStringFromClass([self class]) height:height actionBlock:actionBlock];
 }
-+ (instancetype)cellWithXib
-{
-    return [[self class] cellWithNib:NSStringFromClass([self class]) height:[[self class] defaultHeight] actionBlock:nil];
-}
 + (instancetype)cellWithNib:(NSString*)nibName height:(CGFloat)height actionBlock:(dispatch_block_t)actionBlock
 {
     NSArray *nibs = [[NSBundle mainBundle]loadNibNamed:nibName owner:nil options:nil];

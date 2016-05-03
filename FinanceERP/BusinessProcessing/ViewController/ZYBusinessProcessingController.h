@@ -10,5 +10,4 @@
 #import "ZYBusinessProcessingViewModel.h"
 @interface ZYBusinessProcessingController : ZYViewController
 ZY_VIEW_MODEL_PROPERTY(ZYBusinessProcessingViewModel)
-@property(nonatomic,assign)BOOL isMyBussiness;//是否是我的业务
 @end
